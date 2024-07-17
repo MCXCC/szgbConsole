@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: clztoolsConsole
+  datasource:
+    url: jdbc:mysql://localhost:3306/clztools
+    username: root
+    password: clz11053
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:org/example/clztoolsconsole/**/mapper/xml/*.xml
+  type-aliases-package: org.example.clztoolsconsole
