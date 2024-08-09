@@ -2,11 +2,14 @@ package org.example.clztoolsconsole.utils;
 
 import lombok.Data;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serial;
+import java.io.Serializable;
 
 @Data
-public class AjaxJson {
+public class AjaxJson implements Serializable {
+    @Serial
+    private static final long serialVersionUID=1L;
+
     private int code;
 
     private String msg;
@@ -18,12 +21,16 @@ public class AjaxJson {
         this.msg = msg;
     }
 
-    public AjaxJson put(Object value){
-        this.data=value;
+    static public AjaxJson success(String msg) {
+        return new AjaxJson(200, msg);
+    }
+
+    public AjaxJson put(Object value) {
+        this.data = value;
         return this;
     }
 
-    static public AjaxJson success(String msg) {
-        return new AjaxJson(200, msg);
+    static public AjaxJson error(String msg){
+        return new AjaxJson(403, msg);
     }
 }
