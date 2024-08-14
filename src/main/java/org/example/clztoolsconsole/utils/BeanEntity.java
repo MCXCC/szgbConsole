@@ -2,6 +2,7 @@ package org.example.clztoolsconsole.utils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
+import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
@@ -9,11 +10,24 @@ import java.util.Date;
 
 @Data
 public class BeanEntity extends Page implements Serializable {
-    private int id;
+    private Integer id;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date createdTime;
+    private Date createdAt;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-    private Date updatedTime;
+
+    private Date updatedAt;
+
+    private Boolean isDeleted;
+
+    private Integer version;
+
+    private SysUser createdBy;
+
+    private SysUser updatedBy;
+
+    private Integer sortOrder;
 }

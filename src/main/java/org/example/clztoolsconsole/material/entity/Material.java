@@ -14,7 +14,7 @@ public class Material extends BeanEntity {
     private String gang;
     private String name;
     private String specification;
-    private int number;
-    private int pictureId;
+    private Integer number;
+    private Integer pictureId;
     private String remark;
 }

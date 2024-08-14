@@ -33,4 +33,6 @@ public class AjaxJson implements Serializable {
     static public AjaxJson error(String msg){
         return new AjaxJson(403, msg);
     }
+
+    static public AjaxJson loginError(String msg){return new AjaxJson(401, msg);}
 }

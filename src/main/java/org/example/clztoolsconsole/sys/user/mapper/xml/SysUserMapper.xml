@@ -5,12 +5,33 @@
         <id property="id" column="id"/>
         <result property="username" column="username"/>
         <result property="password" column="password"/>
-        <result property="createdTime" column="created_time"/>
-        <result property="updatedTime" column="updated_time"/>
+        <result property="createdAt" column="created_at" javaType="java.util.Date"/>
+        <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="version" column="version"/>
+        <result property="sortOrder" column="sort_order"/>
     </resultMap>
+
+    <sql id="userColumns">
+        a.id,
+        a.username,
+        a.password,
+        a.created_at,
+        a.updated_at,
+        a.is_deleted,
+        a.version,
+        a.created_by AS "createdBy.id",
+		a.updated_by AS "updatedBy.id",
+        a.sort_order
+    </sql>
+
+    <sql id="userJoins">
+    </sql>
+
     <select id="getOfLogin" resultMap="SysUser">
-        SELECT *
-        FROM sys_user
+        SELECT
+            <include refid="userColumns"/>
+        FROM sys_user a
         where username = #{username}
           and password = #{password}
     </select>

@@ -66,6 +66,11 @@
 			<artifactId>gson</artifactId>
 			<version>2.10</version>
 		</dependency>
+		<dependency>
+			<groupId>cn.hutool</groupId>
+			<artifactId>hutool-all</artifactId>
+			<version>5.8.25</version>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -109,7 +114,7 @@
 	</build>
 	<repositories>
 		<repository>
-			<id/>
+			<id>clztools</id>
 			<url>https://repo.maven.apache.org/maven2/</url>
 		</repository>
 	</repositories>

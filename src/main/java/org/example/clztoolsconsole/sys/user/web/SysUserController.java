@@ -5,6 +5,7 @@ import org.example.clztoolsconsole.sys.user.service.SysUserService;
 import org.example.clztoolsconsole.utils.AjaxJson;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -15,7 +16,7 @@ public class SysUserController {
     SysUserService sysUserService;
 
     @PostMapping("/login")
-    public AjaxJson getLogin(SysUser user) {
+    public AjaxJson getLogin(@RequestBody SysUser user) {
         SysUser sysUser = sysUserService.getToken(user);
         if (sysUser == null) {
             return AjaxJson.error("账号或密码错误");
