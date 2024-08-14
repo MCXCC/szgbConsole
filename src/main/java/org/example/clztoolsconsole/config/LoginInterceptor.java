@@ -29,13 +29,12 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if(HttpMethod.OPTIONS.toString().equals(request.getMethod())){
+            return true;
+        }
 //      获取进过拦截器的路径
         String requestURI = request.getRequestURI();
         if (requestURI.contains("login")) {
-            return true;
-        }
-        String method = request.getMethod();
-        if(HttpMethod.OPTIONS.toString().equals(request.getMethod())){
             return true;
         }
         // 登录检查逻辑
