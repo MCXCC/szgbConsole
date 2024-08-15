@@ -4,16 +4,18 @@ import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.service.SysUserService;
 import org.example.clztoolsconsole.utils.AjaxJson;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/sys/user")
 public class SysUserController {
     @Autowired
     SysUserService sysUserService;
+
+    @GetMapping("/list")
+    public AjaxJson getUserList() {
+        return AjaxJson.success("操作成功").put(sysUserService.findList()).page(sysUserService.getCount());
+    }
 
     @PostMapping("/login")
     public AjaxJson getLogin(@RequestBody SysUser user) {
@@ -23,4 +25,6 @@ public class SysUserController {
         }
         return AjaxJson.success("操作成功").put(sysUser);
     }
+
+
 }

@@ -4,6 +4,7 @@
     <resultMap id="SysUser" type="org.example.clztoolsconsole.sys.user.entity.SysUser">
         <id property="id" column="id"/>
         <result property="username" column="username"/>
+        <result property="name" column="name"/>
         <result property="password" column="password"/>
         <result property="createdAt" column="created_at" javaType="java.util.Date"/>
         <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
@@ -15,7 +16,7 @@
     <sql id="userColumns">
         a.id,
         a.username,
-        a.password,
+        a.name,
         a.created_at,
         a.updated_at,
         a.is_deleted,
@@ -27,6 +28,19 @@
 
     <sql id="userJoins">
     </sql>
+
+    <select id="findList" resultMap="SysUser">
+        SELECT
+        <include refid="userColumns"/>
+        FROM sys_user a
+        where is_deleted = false
+    </select>
+    
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM sys_user
+        WHERE is_deleted = false
+    </select>
 
     <select id="getOfLogin" resultMap="SysUser">
         SELECT

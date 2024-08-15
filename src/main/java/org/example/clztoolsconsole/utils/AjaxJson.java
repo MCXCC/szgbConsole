@@ -10,11 +10,16 @@ public class AjaxJson implements Serializable {
     @Serial
     private static final long serialVersionUID=1L;
 
+    @lombok.Data
+    private static class Data{
+        private Object data;
+        private Page page;
+    }
+
     private int code;
-
     private String msg;
-    private Object data;
-
+    private Data data=new Data();
+    private Page page;
 
     public AjaxJson(int code, String msg) {
         this.code = code;
@@ -26,7 +31,12 @@ public class AjaxJson implements Serializable {
     }
 
     public AjaxJson put(Object value) {
-        this.data = value;
+        this.data.data = value;
+        return this;
+    }
+
+    public AjaxJson page(Page page) {
+        this.data.page = page;
         return this;
     }
 

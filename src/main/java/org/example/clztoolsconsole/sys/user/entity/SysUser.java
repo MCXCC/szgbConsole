@@ -11,6 +11,7 @@ public class SysUser extends BeanEntity {
     @Serial
     private static final long serialVersionUID = 1L;
     private String username;
+    private String name;
     private String password;
     private String token;
 
