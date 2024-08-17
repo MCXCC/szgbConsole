@@ -37,13 +37,11 @@ public class SysUserService {
             // 验证 token 的有效性
             if (validate) {
                 // 已登录，放行
-                JWT jwt =JWT.of(token);
-                String id=  jwt.getPayload("uid").toString();
-                SysUser sysUser1 = new SysUser();
-                sysUser1.setId(Integer.parseInt(id));
-                SysUser sysUser2 = sysUserMapper.findById(sysUser1);
-                sysUser2.setToken(token);
-                return sysUser2;
+                SysUser sysUser = new SysUser();
+                sysUser.setId(Integer.parseInt(JWT.of(token).getPayload("uid").toString()));
+                sysUser = sysUserMapper.findById(sysUser);
+                sysUser.setToken(token);
+                return sysUser;
             }
 
         }
