@@ -1,6 +1,8 @@
 package org.example.clztoolsconsole.sys.user.service;
 
+import cn.hutool.jwt.JWT;
 import cn.hutool.jwt.JWTUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.mapper.SysUserMapper;
 import org.example.clztoolsconsole.utils.Page;
@@ -11,6 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Service
 public class SysUserService {
     @Autowired
@@ -27,6 +30,23 @@ public class SysUserService {
     }
 
     public SysUser getToken(SysUser user) {
+        String token = user.getToken();
+        if (token != null) {
+            byte[] key = "clz11053".getBytes();
+            boolean validate = JWT.of(token).setKey(key).validate(0);
+            // 验证 token 的有效性
+            if (validate) {
+                // 已登录，放行
+                JWT jwt =JWT.of(token);
+                String id=  jwt.getPayload("uid").toString();
+                SysUser sysUser1 = new SysUser();
+                sysUser1.setId(Integer.parseInt(id));
+                SysUser sysUser2 = sysUserMapper.findById(sysUser1);
+                sysUser2.setToken(token);
+                return sysUser2;
+            }
+
+        }
         SysUser sysUser = sysUserMapper.getOfLogin(user);
         if (sysUser == null) {
             return null;
@@ -40,9 +60,9 @@ public class SysUserService {
                 }
             };
 
-            String token = JWTUtil.createToken(map, "clz11053".getBytes());
+            String newToken = JWTUtil.createToken(map, "clz11053".getBytes());
 
-            return new SysUser(token);
+            return new SysUser(newToken);
         }
     }
 }
