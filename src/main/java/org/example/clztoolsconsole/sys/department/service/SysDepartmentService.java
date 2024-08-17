@@ -22,7 +22,7 @@ public class SysDepartmentService {
 
     public Page getCount() {
         Page page = new Page();
-//        page.setCount(sysDepartmentMapper.getCount());
+        page.setCount(sysDepartmentMapper.getCount());
         return page;
     }
 }
