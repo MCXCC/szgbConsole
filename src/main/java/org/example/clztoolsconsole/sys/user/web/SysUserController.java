@@ -3,13 +3,11 @@ package org.example.clztoolsconsole.sys.user.web;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.service.SysUserService;
 import org.example.clztoolsconsole.utils.AjaxJson;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/sys/user")
 public class SysUserController {
-    @Autowired
     SysUserService sysUserService;
 
     @GetMapping("/list")

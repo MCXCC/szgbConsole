@@ -6,9 +6,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.mapper.SysUserMapper;
 import org.example.clztoolsconsole.utils.Page;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.io.Serial;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,7 +16,6 @@ import java.util.Map;
 @Slf4j
 @Service
 public class SysUserService {
-    @Autowired
     SysUserMapper sysUserMapper;
 
     public List<SysUser> findList() {
@@ -49,7 +48,8 @@ public class SysUserService {
         if (sysUser == null) {
             return null;
         } else {
-            Map<String, Object> map = new HashMap<String, Object>() {
+            Map<String, Object> map = new HashMap<>() {
+                @Serial
                 private static final long serialVersionUID = 1L;
 
                 {
