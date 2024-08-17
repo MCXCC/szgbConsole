@@ -6,6 +6,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.mapper.SysUserMapper;
 import org.example.clztoolsconsole.utils.Page;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.io.Serial;
@@ -16,7 +17,12 @@ import java.util.Map;
 @Slf4j
 @Service
 public class SysUserService {
-    SysUserMapper sysUserMapper;
+    private final SysUserMapper sysUserMapper;
+
+    @Autowired
+    public SysUserService(SysUserMapper sysUserMapper) {
+        this.sysUserMapper = sysUserMapper;
+    }
 
     public List<SysUser> findList() {
         return sysUserMapper.findList();
@@ -30,6 +36,7 @@ public class SysUserService {
 
     public SysUser getToken(SysUser user) {
         String token = user.getToken();
+        log.info("token:{}", token);
         if (token != null) {
             byte[] key = "clz11053".getBytes();
             boolean validate = JWT.of(token).setKey(key).validate(0);

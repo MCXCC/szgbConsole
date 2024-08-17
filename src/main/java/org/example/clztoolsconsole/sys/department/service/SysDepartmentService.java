@@ -10,8 +10,11 @@ import java.util.List;
 
 @Service
 public class SysDepartmentService {
+    private final SysDepartmentMapper sysDepartmentMapper;
     @Autowired
-    SysDepartmentMapper sysDepartmentMapper;
+    public SysDepartmentService(SysDepartmentMapper sysDepartmentMapper) {
+        this.sysDepartmentMapper = sysDepartmentMapper;
+    }
 
     public List<SysDepartment> findList() {
         return sysDepartmentMapper.findList();

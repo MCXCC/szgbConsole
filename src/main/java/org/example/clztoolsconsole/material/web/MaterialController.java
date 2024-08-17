@@ -10,8 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/material")
 public class MaterialController {
+    private final MaterialService materialService;
+
     @Autowired
-    private MaterialService materialService;
+    public MaterialController(MaterialService materialService) {
+        this.materialService = materialService;
+    }
 
     @GetMapping("/list")
     public AjaxJson getMaterialList() {

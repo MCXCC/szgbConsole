@@ -11,8 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/sys/department")
 public class SysDepartmentController {
+    private final SysDepartmentService sysDepartmentService;
+
     @Autowired
-    SysDepartmentService sysDepartmentService;
+    public SysDepartmentController(SysDepartmentService sysDepartmentService) {
+        this.sysDepartmentService = sysDepartmentService;
+    }
 
     @GetMapping("/list")
     public AjaxJson getDepartmentList() {

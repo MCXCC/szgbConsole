@@ -9,8 +9,12 @@ import java.util.List;
 
 @Service
 public class MaterialService {
+    private final MaterialMapper materialMapper;
+
     @Autowired
-    private MaterialMapper materialMapper;
+    public MaterialService(MaterialMapper materialMapper){
+        this.materialMapper = materialMapper;
+    }
 
     public List<Material> findList(){
         return materialMapper.findList();
