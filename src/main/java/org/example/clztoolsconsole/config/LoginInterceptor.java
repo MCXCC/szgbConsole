@@ -3,6 +3,7 @@ package org.example.clztoolsconsole.config;
 import cn.hutool.jwt.JWT;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.example.clztoolsconsole.utils.TokenUtils;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -41,10 +42,8 @@ public class LoginInterceptor implements HandlerInterceptor {
         String authHeader = request.getHeader("Authorization");
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7); // Remove "Bearer " prefix
-            byte[] key = "clz11053".getBytes();
-            boolean validate = JWT.of(token).setKey(key).validate(0);
             // 验证 token 的有效性
-            if (validate) {
+            if (TokenUtils.verifyToken(token)) {
                 // 已登录，放行
                 return true;
             }

@@ -1,18 +1,14 @@
 package org.example.clztoolsconsole.sys.user.service;
 
-import cn.hutool.jwt.JWT;
-import cn.hutool.jwt.JWTUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.mapper.SysUserMapper;
+import org.example.clztoolsconsole.utils.TokenUtils;
 import org.example.clztoolsconsole.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.Serial;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @Service
@@ -36,38 +32,19 @@ public class SysUserService {
 
     public SysUser getToken(SysUser user) {
         String token = user.getToken();
-        log.info("token:{}", token);
         if (token != null) {
-            byte[] key = "clz11053".getBytes();
-            boolean validate = JWT.of(token).setKey(key).validate(0);
-            // 验证 token 的有效性
-            if (validate) {
-                // 已登录，放行
-                SysUser sysUser = new SysUser();
-                sysUser.setId(Integer.parseInt(JWT.of(token).getPayload("uid").toString()));
-                sysUser = sysUserMapper.findById(sysUser);
-                sysUser.setToken(token);
-                return sysUser;
-            }
-
+            // 已登录，放行
+            SysUser sysUser = new SysUser();
+            sysUser.setId(TokenUtils.getUid(token));
+            sysUser = sysUserMapper.findById(sysUser);
+            sysUser.setToken(token);
+            return sysUser;
         }
         SysUser sysUser = sysUserMapper.getOfLogin(user);
         if (sysUser == null) {
             return null;
         } else {
-            Map<String, Object> map = new HashMap<>() {
-                @Serial
-                private static final long serialVersionUID = 1L;
-
-                {
-                    put("uid", sysUser.getId());
-                    put("expire_time", System.currentTimeMillis() - 100);
-                }
-            };
-
-            String newToken = JWTUtil.createToken(map, "clz11053".getBytes());
-
-            return new SysUser(newToken);
+            return new SysUser(TokenUtils.getToken(sysUser.getId()));
         }
     }
 }
