@@ -3,6 +3,8 @@ package org.example.clztoolsconsole.config;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
+import lombok.extern.java.Log;
+import lombok.extern.slf4j.Slf4j;
 import org.example.clztoolsconsole.utils.TokenUtils;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -16,6 +18,7 @@ import org.springframework.web.servlet.ModelAndView;
  * <p>
  * 实现HandlerInterceptor接口
  */
+@Slf4j
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
     /**
@@ -30,10 +33,12 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
+        System.out.println("request = " + request);
         // 如果是OPTIONS请求，直接放行
         if (HttpMethod.OPTIONS.toString().equals(request.getMethod())) {
             return true;
         }
+        log.info("拦截器拦截到请求：{}", request.getMethod());
         // 获取进过拦截器的路径
         String requestURI = request.getRequestURI();
         // 如果请求路径包含"login"，直接放行
