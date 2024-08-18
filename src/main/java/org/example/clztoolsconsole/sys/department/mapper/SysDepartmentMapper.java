@@ -12,4 +12,6 @@ public interface SysDepartmentMapper {
     List<SysDepartment> findList();
 
     Integer getCount();
+
+    void addDepartment(SysDepartment sysDepartment);
 }

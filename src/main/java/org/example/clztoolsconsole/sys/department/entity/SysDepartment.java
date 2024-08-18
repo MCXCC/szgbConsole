@@ -7,4 +7,8 @@ import org.example.clztoolsconsole.utils.BeanEntity;
 public class SysDepartment extends BeanEntity {
     private String name;
     private SysDepartment parent;
+
+    public SysDepartment() {
+        super();
+    }
 }

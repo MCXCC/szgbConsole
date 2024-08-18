@@ -39,4 +39,16 @@
         FROM sys_department
         WHERE is_deleted = false
     </select>
+
+    <insert id="addDepartment" parameterType="org.example.clztoolsconsole.sys.department.entity.SysDepartment">
+        INSERT INTO sys_department
+        (name,
+         parent,
+         created_by,
+         updated_by)
+        VALUES (#{name},
+                #{parent.id},
+                #{createdBy.id},
+                #{updatedBy.id})
+    </insert>
 </mapper>
