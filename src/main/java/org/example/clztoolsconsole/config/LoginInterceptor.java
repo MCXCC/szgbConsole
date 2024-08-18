@@ -49,6 +49,10 @@ public class LoginInterceptor implements HandlerInterceptor {
             String token = authHeader.substring(7); // 移除"Bearer "前缀
             // 验证token的有效性
             if (TokenUtils.verifyToken(token)) {
+                // 从token中提取uid
+                Integer uid = TokenUtils.getUid(token);
+                // 将uid存储在request中，以便后续处理使用
+                request.setAttribute("uid", uid);
                 // 已登录，放行
                 return true;
             }

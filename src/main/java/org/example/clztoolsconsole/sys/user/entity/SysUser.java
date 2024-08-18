@@ -17,22 +17,4 @@ public class SysUser extends BeanEntity {
 
     public SysUser() {
     }
-
-    public SysUser(String token) {
-        this.token = token;
-    }
-
-    public SysUser(Integer id, String username, String password, Date createdAt,
-                   Date updatedAt, Boolean isDeleted, Integer version, Integer createById, Integer UpdatedById, Integer sortOrder) {
-        this.setId(id);
-        this.username = username;
-        this.password = password;
-        this.setCreatedAt(createdAt);
-        this.setUpdatedAt(updatedAt);
-        this.setIsDeleted(isDeleted);
-        this.setVersion(version);
-        this.getCreatedBy().setId(createById);
-        this.getUpdatedBy().setId(UpdatedById);
-        this.setSortOrder(sortOrder);
-    }
 }

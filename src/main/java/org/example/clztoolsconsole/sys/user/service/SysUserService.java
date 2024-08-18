@@ -3,8 +3,8 @@ package org.example.clztoolsconsole.sys.user.service;
 import lombok.extern.slf4j.Slf4j;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.mapper.SysUserMapper;
-import org.example.clztoolsconsole.utils.TokenUtils;
 import org.example.clztoolsconsole.utils.Page;
+import org.example.clztoolsconsole.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -44,7 +44,8 @@ public class SysUserService {
         if (sysUser == null) {
             return null;
         } else {
-            return new SysUser(TokenUtils.getToken(sysUser.getId()));
+            sysUser.setToken(TokenUtils.getToken((sysUser.getId())));
+            return sysUser;
         }
     }
 }

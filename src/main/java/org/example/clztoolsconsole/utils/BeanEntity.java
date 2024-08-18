@@ -2,7 +2,6 @@ package org.example.clztoolsconsole.utils;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
-import lombok.Setter;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.springframework.format.annotation.DateTimeFormat;
 
