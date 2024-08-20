@@ -21,7 +21,9 @@ public class SysUserService {
     }
 
     public List<SysUser> findList() {
-        return sysUserMapper.findList();
+        List<SysUser> list = sysUserMapper.findList();
+        log.info("findList:{}", list);
+        return list;
     }
 
     public Page getCount() {

@@ -1,6 +1,7 @@
 package org.example.clztoolsconsole.sys.user.entity;
 
 import lombok.Data;
+import org.example.clztoolsconsole.sys.department.entity.SysDepartment;
 import org.example.clztoolsconsole.utils.BeanEntity;
 
 import java.io.Serial;
@@ -14,6 +15,7 @@ public class SysUser extends BeanEntity {
     private String name;
     private String password;
     private String token;
+    private SysDepartment department;
 
     public SysUser() {
     }

@@ -17,44 +17,48 @@
         a.id,
         a.username,
         a.name,
+        a.department_id AS "department.id",
         a.created_at,
         a.updated_at,
         a.is_deleted,
         a.version,
         a.created_by AS "createdBy.id",
 		a.updated_by AS "updatedBy.id",
-        a.sort_order
+        a.sort_order,
+        d.name AS "department.name"
     </sql>
 
     <sql id="userJoins">
+        LEFT JOIN sys_department d ON  d.id = a.department_id
     </sql>
 
     <select id="findList" resultMap="SysUser">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
-        where is_deleted = false
+        <include refid="userJoins"/>
+        where a.is_deleted = false
     </select>
     
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
-        FROM sys_user
-        WHERE is_deleted = false
+        FROM sys_user a
+        WHERE a.is_deleted = false
     </select>
 
     <select id="getOfLogin" resultMap="SysUser">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
-        where is_deleted=false
-        and username = #{username}
-        and password = #{password}
+        where a.is_deleted=false
+        and a.username = #{username}
+        and a.password = #{password}
     </select>
     <select id="findById" resultMap="SysUser">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
-        where is_deleted=false
-        and id = #{id}
+        where a.is_deleted=false
+        and a.id = #{id}
     </select>
 </mapper>
