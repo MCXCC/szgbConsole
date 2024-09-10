@@ -50,6 +50,7 @@
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
+        <include refid="userJoins"/>
         where a.is_deleted=false
         and a.username = #{username}
         and a.password = #{password}
@@ -58,6 +59,7 @@
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
+        <include refid="userJoins"/>
         where a.is_deleted=false
         and a.id = #{id}
     </select>
