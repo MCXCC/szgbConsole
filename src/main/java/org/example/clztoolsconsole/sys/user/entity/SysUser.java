@@ -5,7 +5,6 @@ import org.example.clztoolsconsole.sys.department.entity.SysDepartment;
 import org.example.clztoolsconsole.utils.BeanEntity;
 
 import java.io.Serial;
-import java.util.Date;
 
 @Data
 public class SysUser extends BeanEntity {
