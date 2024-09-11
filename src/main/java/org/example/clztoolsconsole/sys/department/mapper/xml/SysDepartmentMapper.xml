@@ -14,7 +14,7 @@
     <sql id="departmentColumns">
         a.id,
         a.name,
-        a.parent AS "parent.id",
+        a.parent_id AS "parent.id",
         a.created_at,
         a.updated_at,
         a.is_deleted,
@@ -43,7 +43,7 @@
     <insert id="addDepartment" parameterType="org.example.clztoolsconsole.sys.department.entity.SysDepartment">
         INSERT INTO sys_department
         (name,
-         parent,
+         parent_id,
          created_by,
          updated_by)
         VALUES (#{name},
