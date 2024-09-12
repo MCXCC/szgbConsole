@@ -13,8 +13,8 @@ public class SysUserController {
     private final SysUserService sysUserService;
 
     @Autowired
-    public SysUserController(SysUserService sysUserService){
-        this.sysUserService=sysUserService;
+    public SysUserController(SysUserService sysUserService) {
+        this.sysUserService = sysUserService;
     }
 
     @GetMapping("/list")
