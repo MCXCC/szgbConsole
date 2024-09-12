@@ -1,10 +1,12 @@
 package org.example.clztoolsconsole.material.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.example.clztoolsconsole.utils.BeanEntity;
 
 import java.io.Serial;
 
+@EqualsAndHashCode(callSuper = true)
 @Data
 public class Material extends BeanEntity {
     @Serial
