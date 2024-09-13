@@ -39,6 +39,12 @@
         <include refid="userJoins"/>
         <where>
             a.is_deleted = false
+            <if test="username != null and username != ''">
+                AND a.username = #{username}
+            </if>
+            <if test="name != null and name != ''">
+                AND a.name = #{name}
+            </if>
             <if test="department.id != null and department.id != ''">
                 AND a.department_id = #{department.id}
             </if>
