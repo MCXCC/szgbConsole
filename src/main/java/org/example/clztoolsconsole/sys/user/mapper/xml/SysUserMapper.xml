@@ -37,7 +37,12 @@
         <include refid="userColumns"/>
         FROM sys_user a
         <include refid="userJoins"/>
-        where a.is_deleted = false
+        <where>
+            a.is_deleted = false
+            <if test="department.id != null and department.id != ''">
+                AND a.department_id = #{department.id}
+            </if>
+        </where>
     </select>
     
     <select id="getCount" resultType="int">
