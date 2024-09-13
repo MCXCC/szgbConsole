@@ -10,7 +10,7 @@ import java.util.List;
 @Repository
 public interface SysUserMapper {
 
-    List<SysUser> findList();
+    List<SysUser> findList(SysUser user);
 
     SysUser findById(SysUser user);
 

@@ -18,8 +18,8 @@ public class SysUserController {
     }
 
     @GetMapping("/list")
-    public AjaxJson getUserList() {
-        return AjaxJson.success("操作成功").put(sysUserService.findList()).page(sysUserService.getCount());
+    public AjaxJson getUserList(SysUser user) {
+        return AjaxJson.success("操作成功").put(sysUserService.findList(user)).page(sysUserService.getCount());
     }
 
     @PostMapping("/login")

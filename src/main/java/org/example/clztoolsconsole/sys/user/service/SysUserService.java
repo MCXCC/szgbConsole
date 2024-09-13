@@ -20,8 +20,8 @@ public class SysUserService {
         this.sysUserMapper = sysUserMapper;
     }
 
-    public List<SysUser> findList() {
-        List<SysUser> list = sysUserMapper.findList();
+    public List<SysUser> findList(SysUser user) {
+        List<SysUser> list = sysUserMapper.findList(user);
         log.info("findList:{}", list);
         return list;
     }
