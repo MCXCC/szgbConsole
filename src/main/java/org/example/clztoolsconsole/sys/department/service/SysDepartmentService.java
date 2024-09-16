@@ -18,8 +18,8 @@ public class SysDepartmentService {
         this.sysDepartmentMapper = sysDepartmentMapper;
     }
 
-    public List<SysDepartment> findList() {
-        return sysDepartmentMapper.findList();
+    public List<SysDepartment> findList(SysDepartment sysDepartment) {
+        return sysDepartmentMapper.findList(sysDepartment);
     }
 
     public Page getCount() {
