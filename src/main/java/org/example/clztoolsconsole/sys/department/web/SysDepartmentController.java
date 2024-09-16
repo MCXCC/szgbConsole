@@ -25,7 +25,7 @@ public class SysDepartmentController {
      * 获取部门列表信息
      * @return AjaxJson对象，其中包括部门数据
      */
-    @GetMapping("/list")
+    @PostMapping("/list")
     public AjaxJson getDepartmentList(@RequestBody SysDepartment sysDepartment) {
         return AjaxJson.success("操作成功").put(sysDepartmentService.findList(sysDepartment)).page(sysDepartmentService.getCount());
     }
