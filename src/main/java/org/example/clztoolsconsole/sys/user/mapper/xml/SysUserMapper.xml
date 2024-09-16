@@ -68,4 +68,18 @@
         where a.is_deleted=false
         and a.id = #{id}
     </select>
+
+    <insert id="addUser" parameterType="org.example.clztoolsconsole.sys.user.entity.SysUser">
+        INSERT INTO sys_user
+        (username,
+         name,
+         department_id,
+         created_by,
+         updated_by)
+        VALUES (#{username},
+                #{name},
+                #{department.id},
+                #{createdBy.id},
+                #{updatedBy.id})
+    </insert>
 </mapper>

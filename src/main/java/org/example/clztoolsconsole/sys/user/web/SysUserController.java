@@ -1,5 +1,6 @@
 package org.example.clztoolsconsole.sys.user.web;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.service.SysUserService;
@@ -21,8 +22,15 @@ public class SysUserController {
 
     @PostMapping("/list")
     public AjaxJson getUserList(@RequestBody SysUser user) {
-        System.out.println("user = " + user);
         return AjaxJson.success("操作成功").put(sysUserService.findList(user)).page(sysUserService.getCount());
+    }
+
+    @PostMapping
+    public AjaxJson addUser(@RequestBody SysUser user, HttpServletRequest request) {
+        user.setId(Integer.parseInt( request.getAttribute("uid").toString()));
+        user.setUpdatedBy(user);
+        sysUserService.addUser(user);
+        return AjaxJson.success("操作成功");
     }
 
     @PostMapping("/login")

@@ -50,4 +50,9 @@ public class SysUserService {
             return sysUser;
         }
     }
+
+    public void addUser(SysUser user) {
+        user.setCreatedBy(user.getUpdatedBy());
+        sysUserMapper.addUser(user);
+    }
 }

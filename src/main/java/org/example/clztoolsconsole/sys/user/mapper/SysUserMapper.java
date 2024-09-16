@@ -17,4 +17,6 @@ public interface SysUserMapper {
     SysUser getOfLogin(SysUser user);
 
     Integer getCount();
+
+    void addUser(SysUser user);
 }
