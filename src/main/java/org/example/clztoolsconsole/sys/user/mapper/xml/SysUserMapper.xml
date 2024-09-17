@@ -37,6 +37,7 @@
         <include refid="userColumns"/>
         FROM sys_user a
         <include refid="userJoins"/>
+
         <where>
             a.is_deleted = false
             <if test="department.id != null and department.id != ''">
@@ -49,6 +50,9 @@
         SELECT COUNT(*)
         FROM sys_user a
         WHERE a.is_deleted = false
+        <if test="department.id != null and department.id != ''">
+            AND a.department_id = #{department.id}
+        </if>
     </select>
 
     <select id="getOfLogin" resultMap="SysUser">

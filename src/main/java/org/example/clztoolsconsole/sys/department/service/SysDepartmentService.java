@@ -22,9 +22,9 @@ public class SysDepartmentService {
         return sysDepartmentMapper.findList(sysDepartment);
     }
 
-    public Page getCount() {
-        Page page = new Page();
-        page.setCount(sysDepartmentMapper.getCount());
+    public Page<SysDepartment> findPage(Page<SysDepartment> page, SysDepartment sysDepartment){
+        page.setList(sysDepartmentMapper.findList(sysDepartment));
+        page.setCount(sysDepartmentMapper.getCount(sysDepartment));
         return page;
     }
 

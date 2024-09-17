@@ -11,7 +11,7 @@ import java.util.List;
 public interface SysDepartmentMapper {
     List<SysDepartment> findList(SysDepartment sysDepartment);
 
-    Integer getCount();
+    Integer getCount(SysDepartment sysDepartment);
 
     void addDepartment(SysDepartment sysDepartment);
 }

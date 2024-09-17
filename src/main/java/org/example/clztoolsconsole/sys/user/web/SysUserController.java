@@ -1,10 +1,12 @@
 package org.example.clztoolsconsole.sys.user.web;
 
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.service.SysUserService;
 import org.example.clztoolsconsole.utils.AjaxJson;
+import org.example.clztoolsconsole.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,16 +23,18 @@ public class SysUserController {
     }
 
     @PostMapping("/list")
-    public AjaxJson getUserList(@RequestBody SysUser user) {
-        return AjaxJson.success("操作成功").put(sysUserService.findList(user)).page(sysUserService.getCount());
+    public AjaxJson getUserList(@RequestBody SysUser user, HttpServletRequest request, HttpServletResponse response) {
+        Page<SysUser> page =new Page<>(request,response);
+        page.setList(sysUserService.findList(user));
+        return AjaxJson.success().put("page",page);
     }
 
-    @PostMapping
-    public AjaxJson addUser(@RequestBody SysUser user, HttpServletRequest request) {
+    @PostMapping("/save")
+    public AjaxJson save(@RequestBody SysUser user, HttpServletRequest request) {
         user.setId(Integer.parseInt( request.getAttribute("uid").toString()));
         user.setUpdatedBy(user);
-        sysUserService.addUser(user);
-        return AjaxJson.success("操作成功");
+        sysUserService.save(user);
+        return AjaxJson.success();
     }
 
     @PostMapping("/login")
@@ -39,7 +43,7 @@ public class SysUserController {
         if (sysUser == null) {
             return AjaxJson.error("账号或密码错误");
         }
-        return AjaxJson.success("操作成功").put(sysUser);
+        return AjaxJson.success("操作成功").put("sysUser",sysUser);
     }
 
 

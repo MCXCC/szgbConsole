@@ -1,11 +1,13 @@
 package org.example.clztoolsconsole.material.web;
 
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.example.clztoolsconsole.material.entity.Material;
 import org.example.clztoolsconsole.material.service.MaterialService;
 import org.example.clztoolsconsole.utils.AjaxJson;
+import org.example.clztoolsconsole.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping(value = "/material")
@@ -17,8 +19,10 @@ public class MaterialController {
         this.materialService = materialService;
     }
 
-    @GetMapping("/list")
-    public AjaxJson getMaterialList() {
-        return AjaxJson.success("操作成功").put(materialService.findList());
+    @PostMapping("/list")
+    public AjaxJson getMaterialList(@RequestBody Material material, HttpServletRequest request, HttpServletResponse response) {
+        Page<Material> page=new Page<>(request,response);
+        page.setList(materialService.findList());
+        return AjaxJson.success().put("page", page);
     }
 }

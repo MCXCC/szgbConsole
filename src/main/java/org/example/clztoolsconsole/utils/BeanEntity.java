@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Data
-public class BeanEntity implements Serializable {
+public class BeanEntity<T> implements Serializable {
     private Integer id;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
@@ -30,6 +30,8 @@ public class BeanEntity implements Serializable {
     private SysUser updatedBy;
 
     private Integer sortOrder;
+
+    private Page<T> page;
 
     public BeanEntity() {
     }
