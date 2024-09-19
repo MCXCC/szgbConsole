@@ -33,7 +33,8 @@ public class Page<T> implements Serializable {
 
     public Page(HttpServletRequest request, HttpServletResponse response, int defaultPageSize) {
         // 设置页码参数（传递repage参数，来记住页码）
-        String no = request.getParameter("pageNo");
+        String[] cookies = request.getHeader("Cookie").split("; ");
+        String no = cookies[0].split("=")[1];
         if (StringUtils.isNumeric(no)) {
             CookieUtils.setCookie(response, "pageNo", no);
             this.setPageNo(Integer.parseInt(no));
@@ -44,7 +45,7 @@ public class Page<T> implements Serializable {
             }
         }
         // 设置页面大小参数（传递repage参数，来记住页码大小）
-        String size = request.getParameter("pageSize");
+        String size = cookies[1].split("=")[1];
         if (StringUtils.isNumeric(size)) {
             CookieUtils.setCookie(response, "pageSize", size);
             this.setPageSize(Integer.parseInt(size));

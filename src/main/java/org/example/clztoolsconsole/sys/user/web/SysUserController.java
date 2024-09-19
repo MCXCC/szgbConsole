@@ -8,7 +8,10 @@ import org.example.clztoolsconsole.sys.user.service.SysUserService;
 import org.example.clztoolsconsole.utils.AjaxJson;
 import org.example.clztoolsconsole.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
@@ -24,14 +27,15 @@ public class SysUserController {
 
     @PostMapping("/list")
     public AjaxJson getUserList(@RequestBody SysUser user, HttpServletRequest request, HttpServletResponse response) {
-        Page<SysUser> page =new Page<>(request,response);
+        Page<SysUser> page = new Page<>(request, response);
+        user.setPage(page);
         page.setList(sysUserService.findList(user));
-        return AjaxJson.success().put("page",page);
+        return AjaxJson.success().put("page", page);
     }
 
     @PostMapping("/save")
     public AjaxJson save(@RequestBody SysUser user, HttpServletRequest request) {
-        user.setId(Integer.parseInt( request.getAttribute("uid").toString()));
+        user.setId(Integer.parseInt(request.getAttribute("uid").toString()));
         user.setUpdatedBy(user);
         sysUserService.save(user);
         return AjaxJson.success();
@@ -43,7 +47,7 @@ public class SysUserController {
         if (sysUser == null) {
             return AjaxJson.error("账号或密码错误");
         }
-        return AjaxJson.success("操作成功").put("sysUser",sysUser);
+        return AjaxJson.success("操作成功").put("sysUser", sysUser);
     }
 
 

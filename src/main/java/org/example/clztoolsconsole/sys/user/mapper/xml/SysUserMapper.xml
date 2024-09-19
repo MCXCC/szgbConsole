@@ -23,13 +23,13 @@
         a.is_deleted,
         a.version,
         a.created_by AS "createdBy.id",
-		a.updated_by AS "updatedBy.id",
+        a.updated_by AS "updatedBy.id",
         a.sort_order,
         d.name AS "department.name"
     </sql>
 
     <sql id="userJoins">
-        LEFT JOIN sys_department d ON  d.id = a.department_id
+        LEFT JOIN sys_department d ON d.id = a.department_id
     </sql>
 
     <select id="findList" resultMap="SysUser">
@@ -45,7 +45,7 @@
             </if>
         </where>
     </select>
-    
+
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
         FROM sys_user a
@@ -64,7 +64,7 @@
         and a.username = #{username}
         and a.password = #{password}
     </select>
-    <select id="findById" resultMap="SysUser">
+    <select id="get" resultMap="SysUser">
         SELECT
         <include refid="userColumns"/>
         FROM sys_user a
@@ -73,7 +73,7 @@
         and a.id = #{id}
     </select>
 
-    <insert id="addUser" parameterType="org.example.clztoolsconsole.sys.user.entity.SysUser">
+    <insert id="insert" parameterType="org.example.clztoolsconsole.sys.user.entity.SysUser">
         INSERT INTO sys_user
         (username,
          name,
