@@ -51,7 +51,6 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
         String[] id = ids.split(",");
         for (String s : id) {
             mapper.delete(Integer.parseInt(s));
-            log.info("删除id为：{}的数据", s);
         }
     }
 }
