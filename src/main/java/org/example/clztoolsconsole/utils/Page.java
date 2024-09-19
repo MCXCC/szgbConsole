@@ -21,4 +21,8 @@ public class Page<T> implements Serializable {
     private Integer last;
     private List<T> list = new ArrayList<>();
     private String orderBy = "";
+
+    public Page() {
+        this.first=(this.pageNo-1)*this.pageSize;
+    }
 }

@@ -12,4 +12,6 @@ public interface BaseMapper <T>{
     public Integer getCount(T entity);
     public void insert(T entity);
     public void update(T entity);
+    public void delete(int id);
+    public void delete(T entity);
 }

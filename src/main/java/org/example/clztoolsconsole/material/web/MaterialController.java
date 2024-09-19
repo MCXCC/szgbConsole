@@ -21,7 +21,7 @@ public class MaterialController {
 
     @PostMapping("/list")
     public AjaxJson getMaterialList(@RequestBody Material material, HttpServletRequest request, HttpServletResponse response) {
-        Page<Material> page=new Page<>(request,response);
+        Page<Material> page=new Page<>();
         page.setList(materialService.findList());
         return AjaxJson.success().put("page", page);
     }

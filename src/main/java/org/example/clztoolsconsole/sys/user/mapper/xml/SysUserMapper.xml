@@ -107,6 +107,12 @@
         WHERE id=#{id}
     </update>
 
+    <update id="delete" >
+        UPDATE sys_user
+        SET is_deleted= TRUE
+        where id = #{id}
+    </update>
+
     <select id="getOfLogin" resultMap="SysUser">
         SELECT
         <include refid="userColumns"/>

@@ -39,16 +39,18 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
         }
     }
 
-    public void delete(T entity) {
-        entity.setIsDeleted(true);
-        mapper.update(entity);
+    public void delete(int id) {
+        mapper.delete(id);
     }
 
-    public void delete(int id) {
-//        mapper.delete(id);
+    public void delete(T entity) {
+        mapper.delete(entity);
     }
 
     public void delete(String ids) {
-//        mapper.delete(ids);
+        String[] id = ids.split(",");
+        for (String s : id) {
+            mapper.delete(Integer.parseInt(s));
+        }
     }
 }

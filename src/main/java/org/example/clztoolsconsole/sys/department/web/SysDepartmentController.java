@@ -29,7 +29,7 @@ public class SysDepartmentController {
      */
     @PostMapping("/list")
     public AjaxJson getDepartmentList(@RequestBody SysDepartment sysDepartment,HttpServletRequest request, HttpServletResponse response) {
-        return AjaxJson.success().put("page",sysDepartmentService.findPage(new Page<>(request,response), sysDepartment));
+        return AjaxJson.success().put("page",sysDepartmentService.findPage(new Page<>(), sysDepartment));
     }
 
     @PostMapping("/add")
