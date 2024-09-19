@@ -25,7 +25,6 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
     public List<T> findList(T entity) {
         Page<T> page = entity.getPage();
         page.setFirst((page.getPageNo()-1)*page.getPageSize());
-        page.setCount(mapper.getCount(entity));
         entity.setPage(page);
         return mapper.findList(entity);
     }

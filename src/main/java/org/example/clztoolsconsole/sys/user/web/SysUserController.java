@@ -29,6 +29,7 @@ public class SysUserController {
     public AjaxJson getUserList(@RequestBody SysUser user, HttpServletRequest request, HttpServletResponse response) {
         Page<SysUser> page = new Page<>();
         page.setList(sysUserService.findList(user));
+        page.setCount(sysUserService.getCount(user));
         return AjaxJson.success().put("page", page);
     }
 
