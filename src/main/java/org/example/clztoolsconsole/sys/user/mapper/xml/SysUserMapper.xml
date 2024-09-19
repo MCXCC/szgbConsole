@@ -91,7 +91,7 @@
                 <if test="name != null and name != ''">
                     name=#{name}
                 </if>
-                <if test="department.id != null and department.id != ''">
+                <if test="department!=null and department.id != null and department.id != ''">
                     department_id=#{department.id}
                 </if>
                 <if test="updatedBy.id != null and updatedBy.id != ''">
