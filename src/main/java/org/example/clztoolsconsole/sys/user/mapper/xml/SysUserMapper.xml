@@ -53,10 +53,10 @@
                 AND a.department_id = #{department.id}
             </if>
             <if test="username != null and username != ''">
-                AND a.username = #{username}
+                AND a.username Like #{username}
             </if>
             <if test="name != null and name != ''">
-                AND a.name = #{name}
+                AND a.name Like #{name}
             </if>
         </where>
         LIMIT #{page.first}, #{page.pageSize}
