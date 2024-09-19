@@ -19,7 +19,7 @@ public class Page<T> implements Serializable {
     private Integer pageSize;
     private Integer first;
     private Integer last;
-    private List<T> list = new ArrayList<T>();
+    private List<T> list = new ArrayList<>();
     private String orderBy = "";
 
     public Page() {
@@ -50,7 +50,7 @@ public class Page<T> implements Serializable {
             CookieUtils.setCookie(response, "pageSize", size);
             this.setPageSize(Integer.parseInt(size));
         } else if (request.getParameter("repage") != null) {
-            no = CookieUtils.getCookie(request, "pageSize");
+            size = CookieUtils.getCookie(request, "pageSize");
             if (StringUtils.isNumeric(size)) {
                 this.setPageSize(Integer.parseInt(size));
             }
