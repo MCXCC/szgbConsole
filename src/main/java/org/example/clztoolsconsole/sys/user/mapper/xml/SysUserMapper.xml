@@ -52,6 +52,12 @@
             <if test="department.id != null and department.id != ''">
                 AND a.department_id = #{department.id}
             </if>
+            <if test="username != null and username != ''">
+                AND a.username = #{username}
+            </if>
+            <if test="name != null and name != ''">
+                AND a.name = #{name}
+            </if>
         </where>
         LIMIT #{page.first}, #{page.pageSize}
     </select>
