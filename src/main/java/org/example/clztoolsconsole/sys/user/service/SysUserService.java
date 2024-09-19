@@ -18,6 +18,7 @@ public class SysUserService extends BaseService<SysUserMapper, SysUser> {
 
     @Autowired
     public SysUserService(SysUserMapper sysUserMapper) {
+        super(sysUserMapper);
         this.sysUserMapper = sysUserMapper;
     }
 

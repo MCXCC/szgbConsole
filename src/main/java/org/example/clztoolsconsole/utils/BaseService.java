@@ -10,7 +10,7 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
     protected M mapper;
 
     @Autowired
-    public void setMapper(M mapper) {
+    public BaseService(M mapper) {
         this.mapper = mapper;
     }
 
@@ -37,5 +37,18 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
         } else {
             mapper.insert(entity);
         }
+    }
+
+    public void delete(T entity) {
+        entity.setIsDeleted(true);
+        mapper.update(entity);
+    }
+
+    public void delete(int id) {
+//        mapper.delete(id);
+    }
+
+    public void delete(String ids) {
+//        mapper.delete(ids);
     }
 }

@@ -27,8 +27,7 @@ public class SysUserController {
 
     @PostMapping("/list")
     public AjaxJson getUserList(@RequestBody SysUser user, HttpServletRequest request, HttpServletResponse response) {
-        Page<SysUser> page = new Page<>(request, response);
-        user.setPage(page);
+        Page<SysUser> page = new Page<>();
         page.setList(sysUserService.findList(user));
         return AjaxJson.success().put("page", page);
     }
