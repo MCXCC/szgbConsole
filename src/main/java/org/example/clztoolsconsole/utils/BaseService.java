@@ -34,11 +34,12 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
     }
 
     public void save(T entity) {
-        if (entity.getId() != null) {
+        if (entity.getId() == null) {
             entity.setCreatedBy(entity.getUpdatedBy());
-            mapper.update(entity);
-        } else {
             mapper.insert(entity);
+        } else {
+            mapper.update(entity);
+
         }
     }
 
