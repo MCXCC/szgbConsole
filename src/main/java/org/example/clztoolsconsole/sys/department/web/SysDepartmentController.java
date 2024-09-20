@@ -10,7 +10,10 @@ import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.utils.AjaxJson;
 import org.example.clztoolsconsole.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
@@ -25,19 +28,23 @@ public class SysDepartmentController {
 
     /**
      * 获取部门列表信息
+     *
      * @return AjaxJson对象，其中包括部门数据
      */
     @PostMapping("/list")
-    public AjaxJson getDepartmentList(@RequestBody SysDepartment sysDepartment,HttpServletRequest request, HttpServletResponse response) {
-        return AjaxJson.success().put("page",sysDepartmentService.findPage(new Page<>(), sysDepartment));
+    public AjaxJson getDepartmentList(@RequestBody SysDepartment sysDepartment, HttpServletRequest request,
+                                      HttpServletResponse response) {
+        return AjaxJson.success(request, response).put("page", sysDepartmentService.findPage(new Page<>(),
+                sysDepartment));
     }
 
     @PostMapping("/add")
-    public AjaxJson addDepartment(@RequestBody SysDepartment sysDepartment,HttpServletRequest request) {
+    public AjaxJson addDepartment(@RequestBody SysDepartment sysDepartment, HttpServletRequest request,
+                                  HttpServletResponse response) {
         SysUser sysUser = new SysUser();
-        sysUser.setId(Integer.parseInt( request.getAttribute("uid").toString()));
+        sysUser.setId(Integer.parseInt(request.getAttribute("uid").toString()));
         sysDepartment.setUpdatedBy(sysUser);
         sysDepartmentService.addDepartment(sysDepartment);
-        return AjaxJson.success();
+        return AjaxJson.success(request, response);
     }
 }

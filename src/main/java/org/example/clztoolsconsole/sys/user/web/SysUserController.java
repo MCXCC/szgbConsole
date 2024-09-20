@@ -31,33 +31,33 @@ public class SysUserController {
         Page<SysUser> page = new Page<>();
         page.setList(sysUserService.findList(user));
         page.setCount(sysUserService.getCount(user));
-        return AjaxJson.success().put("page", page);
+        return AjaxJson.success(request,response).put("page", page);
     }
 
     @PostMapping("/save")
-    public AjaxJson save(@RequestBody SysUser user, HttpServletRequest request) {
+    public AjaxJson save(@RequestBody SysUser user, HttpServletRequest request, HttpServletResponse response) {
         SysUser sysUser = new SysUser();
         sysUser.setId(TokenUtils.getUid(request));
         user.setUpdatedBy(sysUser);
         Map<Boolean, String> save = sysUserService.save(user);
         boolean isSuccess = save.containsKey(true);
         String message = save.get(isSuccess);
-        return isSuccess?AjaxJson.success(message):AjaxJson.error(message).put("code", HttpStatus.HTTP_CONFLICT);
+        return isSuccess?AjaxJson.success(message,request,response):AjaxJson.error(message,HttpStatus.HTTP_CONFLICT,request,response).put("code", HttpStatus.HTTP_CONFLICT);
     }
 
     @DeleteMapping("/delete")
-    public AjaxJson deleteByIds(String ids) {
+    public AjaxJson deleteByIds(String ids, HttpServletRequest request, HttpServletResponse response) {
         sysUserService.delete(ids);
-        return AjaxJson.success();
+        return AjaxJson.success(request,response);
     }
 
     @PostMapping("/login")
-    public AjaxJson getLogin(@RequestBody SysUser user) {
+    public AjaxJson getLogin(@RequestBody SysUser user, HttpServletRequest request, HttpServletResponse response) {
         SysUser sysUser = sysUserService.getToken(user);
         if (sysUser == null) {
-            return AjaxJson.error("账号或密码错误");
+            return AjaxJson.error("账号或密码错误",HttpStatus.HTTP_UNAUTHORIZED,request,response);
         }
-        return AjaxJson.success("操作成功").put("sysUser", sysUser);
+        return AjaxJson.success("操作成功",request,response).put("sysUser", sysUser);
     }
 
 

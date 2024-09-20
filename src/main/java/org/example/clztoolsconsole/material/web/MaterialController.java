@@ -7,7 +7,10 @@ import org.example.clztoolsconsole.material.service.MaterialService;
 import org.example.clztoolsconsole.utils.AjaxJson;
 import org.example.clztoolsconsole.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/material")
@@ -20,9 +23,10 @@ public class MaterialController {
     }
 
     @PostMapping("/list")
-    public AjaxJson getMaterialList(@RequestBody Material material, HttpServletRequest request, HttpServletResponse response) {
-        Page<Material> page=new Page<>();
+    public AjaxJson getMaterialList(@RequestBody Material material, HttpServletRequest request,
+                                    HttpServletResponse response) {
+        Page<Material> page = new Page<>();
         page.setList(materialService.findList());
-        return AjaxJson.success().put("page", page);
+        return AjaxJson.success(request, response).put("page", page);
     }
 }
