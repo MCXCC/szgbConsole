@@ -62,7 +62,9 @@
         <where>
             <include refid="userWhere"/>
         </where>
-        LIMIT #{page.first}, #{page.pageSize}
+        <if test="page.first != null and page.first !='' and page.pageSize != null and page.pageSize !=''">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
         <if test="page.orderBy != null and page.orderBy != ''">
             ORDER BY ${page.orderBy}
         </if>
