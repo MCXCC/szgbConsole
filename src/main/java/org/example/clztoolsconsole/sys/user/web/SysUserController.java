@@ -8,10 +8,7 @@ import org.example.clztoolsconsole.sys.user.service.SysUserService;
 import org.example.clztoolsconsole.utils.AjaxJson;
 import org.example.clztoolsconsole.utils.Page;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -42,6 +39,12 @@ public class SysUserController {
         sysUser.setId(Integer.parseInt(request.getAttribute("uid").toString()));
         user.setUpdatedBy(sysUser);
         sysUserService.save(user);
+        return AjaxJson.success();
+    }
+
+    @DeleteMapping("/delete")
+    public AjaxJson deleteByIds(String ids) {
+        sysUserService.delete(ids);
         return AjaxJson.success();
     }
 
