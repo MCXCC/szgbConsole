@@ -1,7 +1,9 @@
 package org.example.clztoolsconsole.utils;
 
 import cn.hutool.jwt.JWT;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
+import org.example.clztoolsconsole.sys.user.entity.SysUser;
 
 @Slf4j
 public class TokenUtils {
@@ -45,4 +47,10 @@ public class TokenUtils {
     public static Integer getUid(String token) {
         return Integer.parseInt(JWT.of(token).getPayload("uid").toString());
     }
+
+    public static Integer getUid(HttpServletRequest request) {
+        return Integer.parseInt(request.getAttribute("uid").toString());
+    }
+
+
 }

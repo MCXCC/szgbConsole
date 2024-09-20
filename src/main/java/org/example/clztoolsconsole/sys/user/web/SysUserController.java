@@ -7,6 +7,7 @@ import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.service.SysUserService;
 import org.example.clztoolsconsole.utils.AjaxJson;
 import org.example.clztoolsconsole.utils.Page;
+import org.example.clztoolsconsole.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,11 +33,8 @@ public class SysUserController {
 
     @PostMapping("/save")
     public AjaxJson save(@RequestBody SysUser user, HttpServletRequest request) {
-        if (user.getId() == null) {
-            return AjaxJson.error("没有id");
-        }
         SysUser sysUser = new SysUser();
-        sysUser.setId(Integer.parseInt(request.getAttribute("uid").toString()));
+        sysUser.setId(TokenUtils.getUid(request));
         user.setUpdatedBy(sysUser);
         sysUserService.save(user);
         return AjaxJson.success();
