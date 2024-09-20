@@ -1,5 +1,6 @@
 package org.example.clztoolsconsole.sys.user.web;
 
+import cn.hutool.http.HttpStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
@@ -41,7 +42,7 @@ public class SysUserController {
         Map<Boolean, String> save = sysUserService.save(user);
         boolean isSuccess = save.containsKey(true);
         String message = save.get(isSuccess);
-        return isSuccess?AjaxJson.success(message):AjaxJson.error(message);
+        return isSuccess?AjaxJson.success(message):AjaxJson.error(message).put("code", HttpStatus.HTTP_CONFLICT);
     }
 
     @DeleteMapping("/delete")
