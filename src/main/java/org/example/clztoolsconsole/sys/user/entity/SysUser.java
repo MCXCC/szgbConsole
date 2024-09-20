@@ -9,7 +9,7 @@ import java.io.Serial;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SysUser extends BeanEntity {
+public class SysUser extends BeanEntity<SysUser> {
     @Serial
     private static final long serialVersionUID = 1L;
     private String username;

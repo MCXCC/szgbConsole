@@ -3,6 +3,7 @@ package org.example.clztoolsconsole.sys.user.service;
 import lombok.extern.slf4j.Slf4j;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.mapper.SysUserMapper;
+import org.example.clztoolsconsole.utils.BaseService;
 import org.example.clztoolsconsole.utils.Page;
 import org.example.clztoolsconsole.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,24 +13,13 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class SysUserService {
+public class SysUserService extends BaseService<SysUserMapper, SysUser> {
     private final SysUserMapper sysUserMapper;
 
     @Autowired
     public SysUserService(SysUserMapper sysUserMapper) {
+        super(sysUserMapper);
         this.sysUserMapper = sysUserMapper;
-    }
-
-    public List<SysUser> findList(SysUser user) {
-        List<SysUser> list = sysUserMapper.findList(user);
-        log.info("findList:{}", list);
-        return list;
-    }
-
-    public Page getCount() {
-        Page page = new Page();
-        page.setCount(sysUserMapper.getCount());
-        return page;
     }
 
     public SysUser getToken(SysUser user) {
@@ -38,7 +28,7 @@ public class SysUserService {
             // 已登录，放行
             SysUser sysUser = new SysUser();
             sysUser.setId(TokenUtils.getUid(token));
-            sysUser = sysUserMapper.findById(sysUser);
+            sysUser = sysUserMapper.get(sysUser);
             sysUser.setToken(token);
             return sysUser;
         }
