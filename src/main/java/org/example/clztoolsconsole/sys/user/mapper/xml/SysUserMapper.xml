@@ -59,11 +59,13 @@
         <include refid="userColumns"/>
         FROM sys_user a
         <include refid="userJoins"/>
-
         <where>
             <include refid="userWhere"/>
         </where>
         LIMIT #{page.first}, #{page.pageSize}
+        <if test="page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
     </select>
 
     <select id="getCount" resultType="int">
