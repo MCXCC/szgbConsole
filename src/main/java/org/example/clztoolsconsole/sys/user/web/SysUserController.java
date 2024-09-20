@@ -35,8 +35,12 @@ public class SysUserController {
 
     @PostMapping("/save")
     public AjaxJson save(@RequestBody SysUser user, HttpServletRequest request) {
-        user.setId(Integer.parseInt(request.getAttribute("uid").toString()));
-        user.setUpdatedBy(user);
+        if (user.getId() == null) {
+            return AjaxJson.error("没有id");
+        }
+        SysUser sysUser = new SysUser();
+        sysUser.setId(Integer.parseInt(request.getAttribute("uid").toString()));
+        user.setUpdatedBy(sysUser);
         sysUserService.save(user);
         return AjaxJson.success();
     }

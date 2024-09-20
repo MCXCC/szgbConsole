@@ -82,6 +82,7 @@
          updated_by)
         VALUES (#{username},
                 #{name},
+
                 #{department.id},
                 #{createdBy.id},
                 #{updatedBy.id})
@@ -89,30 +90,30 @@
 
     <update id="update" parameterType="org.example.clztoolsconsole.sys.user.entity.SysUser">
         UPDATE sys_user
-            <set>
-                <if test="username != null and username != ''">
-                    username=#{username}
-                </if>
-                <if test="password != null and password != ''">
-                    password=#{password}
-                </if>
-                <if test="name != null and name != ''">
-                    name=#{name}
-                </if>
-                <if test="department!=null and department.id != null and department.id != ''">
-                    department_id=#{department.id}
-                </if>
-                <if test="updatedBy.id != null and updatedBy.id != ''">
-                    updated_by=#{updatedBy.id}
-                </if>
-                <if test="is_deleted != null and is_deleted != ''">
-                    is_deleted=#{is_deleted}
-                </if>
-                <if test="version != null and version != ''">
-                    version=#{version}
-                </if>
-            </set>
-        WHERE id=#{id}
+        <set>
+            <if test="username != null and username != ''">
+                username=#{username},
+            </if>
+            <if test="password != null and password != ''">
+                password=#{password},
+            </if>
+            <if test="name != null and name != ''">
+                name=#{name},
+            </if>
+            <if test="department!=null and department.id != null and department.id != ''">
+                department_id=#{department.id},
+            </if>
+            <if test="updatedBy.id != null and updatedBy.id != ''">
+                updated_by=#{updatedBy.id},
+            </if>
+            <if test="isDeleted != null and isDeleted != ''">
+                is_deleted=#{isDeleted},
+            </if>
+            <if test="version != null and version != ''">
+                version=#{version}
+            </if>
+        </set>
+        WHERE id = #{id}
     </update>
 
     <update id="delete" >
@@ -130,7 +131,5 @@
         and a.username = #{username}
         and a.password = #{password}
     </select>
-
-
 
 </mapper>
