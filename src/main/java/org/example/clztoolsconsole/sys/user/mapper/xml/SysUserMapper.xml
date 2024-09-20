@@ -55,20 +55,20 @@
     </select>
 
        <select id="findList" resultMap="SysUser">
-       SELECT
-       <include refid="userColumns"/>
-       FROM sys_user a
-       <include refid="userJoins"/>
-       <where>
-           <include refid="userWhere"/>
-       </where>
-       <if test="page.first >= 0 and page.pageSize > 0">
-           LIMIT #{page.first}, #{page.pageSize}
-       </if>
-       <if test="page.orderBy != null and page.orderBy != ''">
-           ORDER BY #{page.orderBy}
-       </if>
-   </select>
+           SELECT
+           <include refid="userColumns"/>
+           FROM sys_user a
+           <include refid="userJoins"/>
+           <where>
+               <include refid="userWhere"/>
+           </where>
+           <if test="page.orderBy != null and page.orderBy != ''">
+               ORDER BY #{page.orderBy}
+           </if>
+           <if test="page.first >= 0 and page.pageSize > 0">
+               LIMIT #{page.first}, #{page.pageSize}
+           </if>
+       </select>
 
 
     <select id="getCount" resultType="int">
