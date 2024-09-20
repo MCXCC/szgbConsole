@@ -72,8 +72,6 @@
         </if>
     </select>
 
-
-
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
         FROM sys_user a
@@ -90,7 +88,6 @@
          updated_by)
         VALUES (#{username},
                 #{name},
-
                 #{department.id},
                 #{createdBy.id},
                 #{updatedBy.id})

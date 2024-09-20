@@ -11,6 +11,8 @@ import org.example.clztoolsconsole.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 @Slf4j
 @RestController
 @RequestMapping(value = "/sys/user")
@@ -36,8 +38,10 @@ public class SysUserController {
         SysUser sysUser = new SysUser();
         sysUser.setId(TokenUtils.getUid(request));
         user.setUpdatedBy(sysUser);
-        sysUserService.save(user);
-        return AjaxJson.success();
+        Map<Boolean, String> save = sysUserService.save(user);
+        boolean isSuccess = save.containsKey(true);
+        String message = save.get(isSuccess);
+        return isSuccess?AjaxJson.success(message):AjaxJson.error(message);
     }
 
     @DeleteMapping("/delete")

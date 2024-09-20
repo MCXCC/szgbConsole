@@ -4,12 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.sys.user.mapper.SysUserMapper;
 import org.example.clztoolsconsole.utils.BaseService;
-import org.example.clztoolsconsole.utils.Page;
 import org.example.clztoolsconsole.utils.TokenUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 @Slf4j
 @Service
