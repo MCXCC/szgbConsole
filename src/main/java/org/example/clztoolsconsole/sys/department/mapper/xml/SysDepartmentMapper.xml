@@ -27,17 +27,44 @@
     <sql id="departmentJoins">
     </sql>
 
+    <sql id="departmentWhere">
+        a.is_deleted = false
+        <if test="name != null and name != ''">
+            AND a.name Like CONCAT('%',#{name},'%')
+        </if>
+    </sql>
+
+    <select id="get" resultMap="SysDepartment">
+        SELECT
+        <include refid="departmentColumns"/>
+        FROM sys_department a
+        <include refid="departmentJoins"/>
+        where a.is_deleted=false
+        and a.id = #{id}
+    </select>
+
     <select id="findList" resultMap="SysDepartment">
         SELECT
         <include refid="departmentColumns"/>
         FROM sys_department a
-        where is_deleted = false
+        <where>
+            <include refid="departmentWhere"/>
+        </where>
+
+        <if test="page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
+
+        <if test="page.first >= 0 and page.pageSize > 0">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
     </select>
 
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
-        FROM sys_department
-        WHERE is_deleted = false
+        FROM sys_department a
+        WHERE
+        <include refid="departmentWhere"/>
     </select>
 
     <insert id="addDepartment" parameterType="org.example.clztoolsconsole.sys.department.entity.SysDepartment">
@@ -51,4 +78,32 @@
                 #{createdBy.id},
                 #{updatedBy.id})
     </insert>
+
+    <update id="update" parameterType="org.example.clztoolsconsole.sys.department.entity.SysDepartment">
+        UPDATE sys_department
+        <set>
+            <if test="name != null and name != ''">
+                name=#{name},
+            </if>
+            <if test="parent!=null and parent.id != null and parent.id != ''">
+                parent_id=#{parent.id},
+            </if>
+            <if test="updatedBy.id != null and updatedBy.id != ''">
+                updated_by=#{updatedBy.id},
+            </if>
+            <if test="isDeleted != null and isDeleted != ''">
+                is_deleted=#{isDeleted},
+            </if>
+            <if test="version != null and version != ''">
+                version=#{version}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <delete id="delete" >
+        UPDATE sys_department
+        SET is_deleted= TRUE
+        where id = #{id}
+    </delete>
 </mapper>

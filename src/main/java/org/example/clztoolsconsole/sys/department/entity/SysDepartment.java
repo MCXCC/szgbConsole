@@ -11,6 +11,5 @@ public class SysDepartment extends BeanEntity<SysDepartment> {
     private SysDepartment parent;
 
     public SysDepartment() {
-        super();
     }
 }
