@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.example.clztoolsconsole.sys.user_role.mapper.SysUserRoleMapper">
-    <resultMap id="SysUserRole" type="org.example.clztoolsconsole.sys.user_role.entity.SysUserRole">
+<mapper namespace="org.example.clztoolsconsole.certification.mapper.CertificationMapper">
+    <resultMap id="Certification" type="org.example.clztoolsconsole.certification.entity.Certification">
         <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="period" column="period"/>
         <result property="createdAt" column="created_at" javaType="java.util.Date"/>
         <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
         <result property="isDeleted" column="is_deleted"/>
@@ -10,10 +12,10 @@
         <result property="sortOrder" column="sort_order"/>
     </resultMap>
 
-    <sql id="userRoleColumns">
+    <sql id="certificationColumns">
         a.id,
-        a.user_id AS "user.id",
-        a.role_id AS "role.id",
+        a.name,
+        a.period,
         a.created_at,
         a.updated_at,
         a.is_deleted,
@@ -21,41 +23,32 @@
         a.created_by AS "createdBy.id",
         a.updated_by AS "updatedBy.id",
         a.sort_order,
-        u.name AS "user.name"
-        r.name AS "role.id"
     </sql>
 
-    <sql id="userRoleJoins">
-        LEFT JOIN sys_user u ON u.id = a.user_id
-        LEFT JOIN sys_role r ON r.id = a.role_id
+    <sql id="certificationJoins">
     </sql>
 
-    <sql id="userRoleWhere">
+    <sql id="certificationWhere">
         a.is_deleted = false
-        <if test="user != null and user.id != ''">
-            AND a.user_id = #{user.id}
-        </if>
-        <if test="role != null and role.id != ''">
-            AND a.role_id = #{role.id}
+        <if test="name != null and name != ''">
+            AND a.name Like CONCAT('%',#{name},'%')
         </if>
     </sql>
 
-    <select id="get" resultMap="SysUserRole">
+    <select id="get" resultMap="Certification">
         SELECT
-        <include refid="userRoleColumns"/>
-        FROM sys_user_role a
-        <include refid="userRoleJoins"/>
+        <include refid="certificationColumns"/>
+        FROM certification a
         where a.is_deleted=false
         and a.id = #{id}
     </select>
 
-    <select id="findList" resultMap="SysUserRole">
+    <select id="findList" resultMap="Certification">
         SELECT
-        <include refid="userRoleColumns"/>
-        FROM sys_user_role a
-        <include refid="userRoleJoins"/>
+        <include refid="certificationColumns"/>
+        FROM certification a
         <where>
-            <include refid="userRoleWhere"/>
+            <include refid="certificationWhere"/>
         </where>
 
         <if test="page!=null and page.orderBy != null and page.orderBy != ''">
@@ -69,31 +62,31 @@
 
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
-        FROM sys_user_role a
+        FROM certification a
         WHERE
-        <include refid="userRoleWhere"/>
+        <include refid="certificationWhere"/>
     </select>
 
-    <insert id="insert" parameterType="org.example.clztoolsconsole.sys.user_role.entity.SysUserRole">
-        INSERT INTO sys_user_role
-        (user_id,
-         role_id,
+    <insert id="insert" parameterType="org.example.clztoolsconsole.certification.entity.Certification">
+        INSERT INTO certification
+        (name,
+         period,
          created_by,
          updated_by)
-        VALUES (#{user.id},
-                #{role.id},
+        VALUES (#{name},
+                #{period},
                 #{createdBy.id},
                 #{updatedBy.id})
     </insert>
 
-    <update id="update" parameterType="org.example.clztoolsconsole.sys.user_role.entity.SysUserRole">
-        UPDATE sys_user_role
+    <update id="update" parameterType="org.example.clztoolsconsole.certification.entity.Certification">
+        UPDATE certification
         <set>
-            <if test="user != null and user.id != ''">
-                a.user_id = #{user.id},
+            <if test="name != null and name != ''">
+                name=#{name},
             </if>
-            <if test="role != null and role.id != ''">
-                a.role_id = #{role.id},
+            <if test="period != null and period != ''">
+                period=#{period},
             </if>
             <if test="updatedBy.id != null and updatedBy.id != ''">
                 updated_by=#{updatedBy.id},
@@ -109,7 +102,7 @@
     </update>
 
     <update id="delete" >
-        UPDATE sys_user_role
+        UPDATE certification
         SET is_deleted= TRUE
         where id = #{id}
     </update>

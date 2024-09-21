@@ -67,7 +67,7 @@
         <include refid="departmentWhere"/>
     </select>
 
-    <insert id="addDepartment" parameterType="org.example.clztoolsconsole.sys.department.entity.SysDepartment">
+    <insert id="insert" parameterType="org.example.clztoolsconsole.sys.department.entity.SysDepartment">
         INSERT INTO sys_department
         (name,
          parent_id,
