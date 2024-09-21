@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.clztoolsconsole.sys.role.mapper.SysRoleMapper">
+    <resultMap id="SysRole" type="org.example.clztoolsconsole.sys.role.entity.SysRole">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="createdAt" column="created_at" javaType="java.util.Date"/>
+        <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="version" column="version"/>
+        <result property="sortOrder" column="sort_order"/>
+    </resultMap>
+
+    <sql id="roleColumns">
+        a.id,
+        a.name,
+        a.created_at,
+        a.updated_at,
+        a.is_deleted,
+        a.version,
+        a.created_by AS "createdBy.id",
+        a.updated_by AS "updatedBy.id",
+        a.sort_order,
+    </sql>
+
+    <sql id="roleJoins">
+    </sql>
+
+    <sql id="roleWhere">
+        a.is_deleted = false
+        <if test="name != null and name != ''">
+            AND a.name Like CONCAT('%',#{name},'%')
+        </if>
+    </sql>
+
+    <select id="get" resultMap="SysRole">
+        SELECT
+        <include refid="roleColumns"/>
+        FROM sys_role a
+        where a.is_deleted=false
+        and a.id = #{id}
+    </select>
+
+    <select id="findList" resultMap="SysRole">
+        SELECT
+        <include refid="roleColumns"/>
+        FROM sys_role a
+        <where>
+            <include refid="roleWhere"/>
+        </where>
+
+        <if test="page!=null and page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
+
+        <if test="page!=null and page.first >= 0 and page.pageSize > 0">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM sys_role a
+        WHERE
+        <include refid="roleWhere"/>
+    </select>
+
+    <insert id="insert" parameterType="org.example.clztoolsconsole.sys.role.entity.SysRole">
+        INSERT INTO sys_role
+        (name,
+         created_by,
+         updated_by)
+        VALUES (#{name},
+                #{createdBy.id},
+                #{updatedBy.id})
+    </insert>
+
+    <update id="update" parameterType="org.example.clztoolsconsole.sys.role.entity.SysRole">
+        UPDATE sys_role
+        <set>
+            <if test="name != null and name != ''">
+                name=#{name},
+            </if>
+            <if test="updatedBy.id != null and updatedBy.id != ''">
+                updated_by=#{updatedBy.id},
+            </if>
+            <if test="isDeleted != null and isDeleted != ''">
+                is_deleted=#{isDeleted},
+            </if>
+            <if test="version != null and version != ''">
+                version=#{version}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete" >
+        UPDATE sys_role
+        SET is_deleted= TRUE
+        where id = #{id}
+    </update>
+</mapper>
