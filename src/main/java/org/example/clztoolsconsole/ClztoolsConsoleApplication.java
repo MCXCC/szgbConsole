@@ -7,7 +7,6 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 
 @SpringBootApplication
 @ServletComponentScan
-@MapperScan("org.example.clztoolsconsole.**.mapper")
 public class ClztoolsConsoleApplication {
 
     public static void main(String[] args) {
