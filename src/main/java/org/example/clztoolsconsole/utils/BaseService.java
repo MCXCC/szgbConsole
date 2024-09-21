@@ -25,9 +25,11 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
     }
 
     public List<T> findList(T entity) {
+    if (entity.getPage()!= null){
         Page<T> page = entity.getPage();
-        page.setFirst((page.getPageNo()-1)*page.getPageSize());
+        page.setFirst((page.getPageNo() - 1) * page.getPageSize());
         entity.setPage(page);
+    }
         return mapper.findList(entity);
     }
 
@@ -43,7 +45,7 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
      * @param entity 要保存的实体对象，类型为泛型T
      * @return 返回一个Map对象，键为Boolean表示操作是否成功，值为String表示操作的结果信息
      */
-    public Map<Boolean,String> save(T entity) {
+    public Map<Boolean, String> save(T entity) {
         // 检查实体对象的ID是否为null，判断是否为新实体
         if (entity.getId() == null) {
             // 对于新实体，设置创建者信息
@@ -51,21 +53,21 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
             // 执行插入操作
             mapper.insert(entity);
             // 返回成功插入的信息
-            return Map.of(true,"新增成功");
+            return Map.of(true, "新增成功");
         } else {
             // 对于现有实体，根据ID获取数据库中的实体对象
             T t = mapper.get(entity);
             // 检查数据版本是否冲突
-            if (!Objects.equals(t.getVersion(), entity.getVersion())){
+            if (!Objects.equals(t.getVersion(), entity.getVersion())) {
                 // 如果数据版本冲突，返回错误信息
-                return Map.of(false,"数据版本冲突，请刷新后重试");
+                return Map.of(false, "数据版本冲突，请刷新后重试");
             }
             // 更新实体的数据版本
-            entity.setVersion(entity.getVersion()+1);
+            entity.setVersion(entity.getVersion() + 1);
             // 执行更新操作
             mapper.update(entity);
             // 返回成功更新的信息
-            return Map.of(true,"修改成功");
+            return Map.of(true, "修改成功");
         }
     }
 

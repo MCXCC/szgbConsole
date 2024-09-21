@@ -51,11 +51,11 @@
             <include refid="departmentWhere"/>
         </where>
 
-        <if test="page.orderBy != null and page.orderBy != ''">
+        <if test="page!=null and page.orderBy != null and page.orderBy != ''">
             ORDER BY ${page.orderBy}
         </if>
 
-        <if test="page.first >= 0 and page.pageSize > 0">
+        <if test="page!=null and page.first >= 0 and page.pageSize > 0">
             LIMIT #{page.first}, #{page.pageSize}
         </if>
     </select>
