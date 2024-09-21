@@ -51,6 +51,9 @@ public abstract class BaseController<S extends BaseService<M, T>, M extends Base
      */
     @PostMapping("/save")
     public AjaxJson save(@RequestBody T entity, HttpServletRequest request, HttpServletResponse response) {
+        if (entity == null) {
+            return AjaxJson.error("参数错误", HttpStatus.HTTP_BAD_REQUEST, request, response);
+        }
         // 创建一个系统用户对象，用于存储当前操作用户的信息
         SysUser sysUser = new SysUser();
         // 从请求中提取当前用户的ID，并设置到用户对象
