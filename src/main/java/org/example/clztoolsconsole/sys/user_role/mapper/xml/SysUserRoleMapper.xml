@@ -21,8 +21,8 @@
         a.created_by AS "createdBy.id",
         a.updated_by AS "updatedBy.id",
         a.sort_order,
-        u.name AS "user.name"
-        r.name AS "role.id"
+        u.name AS "user.name",
+        r.name AS "role.name"
     </sql>
 
     <sql id="userRoleJoins">
