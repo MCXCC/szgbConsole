@@ -13,10 +13,7 @@
     </resultMap>
 
     <sql id="certificationColumns">
-        a
-        .
-        id
-        ,
+        a.id,
         a.name,
         a.period,
         a.created_at,
