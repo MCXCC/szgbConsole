@@ -1,9 +1,8 @@
-package org.example.clztoolsconsole.sys.user_role.entity;
+package org.example.clztoolsconsole.sys.user.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.example.clztoolsconsole.sys.role.entity.SysRole;
-import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.utils.BeanEntity;
 
 import java.io.Serial;

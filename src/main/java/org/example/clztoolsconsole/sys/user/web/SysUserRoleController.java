@@ -1,8 +1,8 @@
-package org.example.clztoolsconsole.sys.user_role.web;
+package org.example.clztoolsconsole.sys.user.web;
 
-import org.example.clztoolsconsole.sys.user_role.entity.SysUserRole;
-import org.example.clztoolsconsole.sys.user_role.mapper.SysUserRoleMapper;
-import org.example.clztoolsconsole.sys.user_role.service.SysUserRoleService;
+import org.example.clztoolsconsole.sys.user.entity.SysUserRole;
+import org.example.clztoolsconsole.sys.user.mapper.SysUserRoleMapper;
+import org.example.clztoolsconsole.sys.user.service.SysUserRoleService;
 import org.example.clztoolsconsole.utils.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;

@@ -1,9 +1,9 @@
-package org.example.clztoolsconsole.sys.user_role.service;
+package org.example.clztoolsconsole.sys.user.service;
 
 
 import lombok.extern.slf4j.Slf4j;
-import org.example.clztoolsconsole.sys.user_role.entity.SysUserRole;
-import org.example.clztoolsconsole.sys.user_role.mapper.SysUserRoleMapper;
+import org.example.clztoolsconsole.sys.user.entity.SysUserRole;
+import org.example.clztoolsconsole.sys.user.mapper.SysUserRoleMapper;
 import org.example.clztoolsconsole.utils.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
