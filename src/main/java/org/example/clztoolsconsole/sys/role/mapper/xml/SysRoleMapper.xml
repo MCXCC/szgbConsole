@@ -12,7 +12,10 @@
     </resultMap>
 
     <sql id="roleColumns">
-        a.id,
+        a
+        .
+        id
+        ,
         a.name,
         a.created_at,
         a.updated_at,
@@ -20,7 +23,7 @@
         a.version,
         a.created_by AS "createdBy.id",
         a.updated_by AS "updatedBy.id",
-        a.sort_order,
+        a.sort_order
     </sql>
 
     <sql id="roleJoins">
@@ -94,7 +97,7 @@
         WHERE id = #{id}
     </update>
 
-    <update id="delete" >
+    <update id="delete">
         UPDATE sys_role
         SET is_deleted= TRUE
         where id = #{id}

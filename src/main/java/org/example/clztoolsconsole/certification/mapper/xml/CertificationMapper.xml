@@ -13,7 +13,10 @@
     </resultMap>
 
     <sql id="certificationColumns">
-        a.id,
+        a
+        .
+        id
+        ,
         a.name,
         a.period,
         a.created_at,
@@ -22,7 +25,7 @@
         a.version,
         a.created_by AS "createdBy.id",
         a.updated_by AS "updatedBy.id",
-        a.sort_order,
+        a.sort_order
     </sql>
 
     <sql id="certificationJoins">
@@ -101,7 +104,7 @@
         WHERE id = #{id}
     </update>
 
-    <update id="delete" >
+    <update id="delete">
         UPDATE certification
         SET is_deleted= TRUE
         where id = #{id}
