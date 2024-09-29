@@ -12,8 +12,8 @@
 
     <sql id="userRoleColumns">
         a.id,
-        a.user_id AS "user.id",
-        a.role_id AS "role.id",
+        a.user_id    AS "user.id",
+        a.role_id    AS "role.id",
         a.created_at,
         a.updated_at,
         a.is_deleted,
@@ -21,13 +21,14 @@
         a.created_by AS "createdBy.id",
         a.updated_by AS "updatedBy.id",
         a.sort_order,
-        u.name AS "user.name",
-        r.name AS "role.name"
+        u.name       AS "user.name",
+        r.name       AS "role.name"
     </sql>
 
     <sql id="userRoleJoins">
-        LEFT JOIN sys_user u ON u.id = a.user_id
-        LEFT JOIN sys_role r ON r.id = a.role_id
+        LEFT JOIN sys_user u
+        ON u.id = a.user_id
+            LEFT JOIN sys_role r ON r.id = a.role_id
     </sql>
 
     <sql id="userRoleWhere">
@@ -45,8 +46,8 @@
         <include refid="userRoleColumns"/>
         FROM sys_user_role a
         <include refid="userRoleJoins"/>
-        where a.is_deleted=false
-        and a.id = #{id}
+        where a.is_deleted = false
+          and a.id = #{id}
     </select>
 
     <select id="findList" resultMap="SysUserRole">
@@ -58,11 +59,11 @@
             <include refid="userRoleWhere"/>
         </where>
 
-        <if test="page!=null and page.orderBy != null and page.orderBy != ''">
+        <if test="page != null and page.orderBy != null and page.orderBy != ''">
             ORDER BY ${page.orderBy}
         </if>
 
-        <if test="page!=null and page.first >= 0 and page.pageSize > 0">
+        <if test="page != null and page.first >= 0 and page.pageSize > 0">
             LIMIT #{page.first}, #{page.pageSize}
         </if>
     </select>
@@ -90,10 +91,10 @@
         UPDATE sys_user_role
         <set>
             <if test="user != null and user.id != ''">
-                a.user_id = #{user.id},
+                user_id = #{user.id},
             </if>
             <if test="role != null and role.id != ''">
-                a.role_id = #{role.id},
+                role_id = #{role.id},
             </if>
             <if test="updatedBy.id != null and updatedBy.id != ''">
                 updated_by=#{updatedBy.id},
@@ -108,7 +109,7 @@
         WHERE id = #{id}
     </update>
 
-    <update id="delete" >
+    <update id="delete">
         UPDATE sys_user_role
         SET is_deleted= TRUE
         where id = #{id}
