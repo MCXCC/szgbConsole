@@ -33,10 +33,10 @@
 
     <sql id="userRoleWhere">
         a.is_deleted = false
-        <if test="user != null and user.id != ''">
+        <if test="user != null and user.id != null and user.id != ''">
             AND a.user_id = #{user.id}
         </if>
-        <if test="role != null and role.id != ''">
+        <if test="role != null and role.id != null and role.id != ''">
             AND a.role_id = #{role.id}
         </if>
     </sql>
