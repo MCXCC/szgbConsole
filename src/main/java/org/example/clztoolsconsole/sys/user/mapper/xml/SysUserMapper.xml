@@ -4,6 +4,7 @@
     <resultMap id="SysUser" type="org.example.clztoolsconsole.sys.user.entity.SysUser">
         <id property="id" column="id"/>
         <result property="username" column="username"/>
+        <result property="no" column="no"/>
         <result property="name" column="name"/>
         <result property="password" column="password"/>
         <result property="createdAt" column="created_at" javaType="java.util.Date"/>
@@ -16,6 +17,7 @@
     <sql id="userColumns">
         a.id,
         a.username,
+        a.no,
         a.name,
         a.department_id AS "department.id",
         a.created_at,
@@ -42,6 +44,9 @@
         </if>
         <if test="name != null and name != ''">
             AND a.name Like CONCAT('%',#{name},'%')
+        </if>
+        <if test="no != null and no != ''">
+            AND a.no = #{no}
         </if>
     </sql>
 
@@ -82,11 +87,13 @@
     <insert id="insert" parameterType="org.example.clztoolsconsole.sys.user.entity.SysUser">
         INSERT INTO sys_user
         (username,
+         no,
          name,
          department_id,
          created_by,
          updated_by)
         VALUES (#{username},
+                #{no},
                 #{name},
                 #{department.id},
                 #{createdBy.id},
@@ -98,6 +105,9 @@
         <set>
             <if test="username != null and username != ''">
                 username=#{username},
+            </if>
+            <if test="no != null and no != ''">
+                no=#{no},
             </if>
             <if test="password != null and password != ''">
                 password=#{password},
