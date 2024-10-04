@@ -103,10 +103,10 @@
             <if test="certification != null and certification.id != ''">
                 certification_id = #{certification.id},
             </if>
-            <if test="gotAt != null and gotAt != ''">
+            <if test="gotAt != null">
                 got_at=#{gotAt},
             </if>
-            <if test="expiredAt != null and expiredAt != ''">
+            <if test="expiredAt != null">
                 expired_at=#{expiredAt},
             </if>
             <if test="updatedBy.id != null and updatedBy.id != ''">

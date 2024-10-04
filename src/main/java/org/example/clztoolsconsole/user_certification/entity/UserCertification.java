@@ -18,9 +18,11 @@ public class UserCertification extends BeanEntity<UserCertification> {
     private static final long serialVersionUID = 1L;
     private SysUser user;
     private Certification certification;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date gotAt;
+
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date expiredAt;
