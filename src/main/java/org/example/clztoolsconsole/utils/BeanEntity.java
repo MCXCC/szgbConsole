@@ -18,7 +18,6 @@ public class BeanEntity<T> implements Serializable {
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
-
     private Date updatedAt;
 
     private Boolean isDeleted;
