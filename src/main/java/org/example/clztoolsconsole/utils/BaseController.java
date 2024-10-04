@@ -19,6 +19,17 @@ public abstract class BaseController<S extends BaseService<M, T>, M extends Base
         this.service = service;
     }
 
+    @PostMapping("/get")
+    public AjaxJson get(@RequestBody T entity, HttpServletRequest request, HttpServletResponse response) {
+        // 调用服务层方法，根据实体对象获取单个实体对象
+        T t = service.get(entity);
+        // 如果实体对象为空，则返回错误响应
+        if (t == null) {
+            return AjaxJson.error("数据不存在", HttpStatus.HTTP_NOT_FOUND, request, response);
+        }
+        // 返回成功的响应，并将实体对象放入响应中
+        return AjaxJson.success(request, response).put("data", t);
+    }
     /**
      * 处理POST请求，根据给定的实体获取列表并返回
      *

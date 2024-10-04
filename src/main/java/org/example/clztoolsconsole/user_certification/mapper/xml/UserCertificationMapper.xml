@@ -36,10 +36,10 @@
 
     <sql id="userCertificationWhere">
         a.is_deleted = false
-        <if test="user != null and user.id != null and user.id != ''">
+        <if test="user != null and user.id != null">
             AND a.user_id = #{user.id}
         </if>
-        <if test="certification != null and certification.id != null and certification.id != ''">
+        <if test="certification != null and certification.id != null">
             AND a.certification_id = #{certification.id}
         </if>
     </sql>
@@ -97,10 +97,10 @@
     <update id="update" parameterType="org.example.clztoolsconsole.user_certification.entity.UserCertification">
         UPDATE user_certification
         <set>
-            <if test="user != null and user.id != ''">
+            <if test="user != null and user.id != null">
                 user_id = #{user.id},
             </if>
-            <if test="certification != null and certification.id != ''">
+            <if test="certification != null and certification.id != null">
                 certification_id = #{certification.id},
             </if>
             <if test="gotAt != null">
@@ -109,13 +109,13 @@
             <if test="expiredAt != null">
                 expired_at=#{expiredAt},
             </if>
-            <if test="updatedBy.id != null and updatedBy.id != ''">
+            <if test="updatedBy.id != null">
                 updated_by=#{updatedBy.id},
             </if>
-            <if test="isDeleted != null and isDeleted != ''">
+            <if test="isDeleted != null">
                 is_deleted=#{isDeleted},
             </if>
-            <if test="version != null and version != ''">
+            <if test="version != null">
                 version=#{version}
             </if>
         </set>
