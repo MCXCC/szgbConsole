@@ -7,11 +7,14 @@ import org.example.clztoolsconsole.sys.department.entity.SysDepartment;
 import org.example.clztoolsconsole.utils.BeanEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.Serial;
 import java.util.Date;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class Schedule extends BeanEntity<Schedule> {
+    @Serial
+    private static final long serialVersionUID = 1L;
     private SysDepartment department;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

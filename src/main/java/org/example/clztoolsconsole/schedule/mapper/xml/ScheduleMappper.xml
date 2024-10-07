@@ -87,7 +87,7 @@
         <include refid="scheduleWhere"/>
     </select>
 
-    <insert id="insert" parameterType="org.example.clztoolsconsole.certification.entity.Certification">
+    <insert id="insert" parameterType="org.example.clztoolsconsole.schedule.entity.Schedule">
         INSERT INTO schedule
         (department_id,
          date,
@@ -121,7 +121,7 @@
                 #{updatedBy.id})
     </insert>
 
-    <update id="update" parameterType="org.example.clztoolsconsole.certification.entity.Certification">
+    <update id="update" parameterType="org.example.clztoolsconsole.schedule.entity.Schedule">
         UPDATE schedule
         <set>
             <if test="department != null and department.id != null">
