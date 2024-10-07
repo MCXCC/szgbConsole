@@ -6,6 +6,7 @@
         <result property="username" column="username"/>
         <result property="no" column="no"/>
         <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
         <result property="password" column="password"/>
         <result property="createdAt" column="created_at" javaType="java.util.Date"/>
         <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
@@ -19,6 +20,7 @@
         a.username,
         a.no,
         a.name,
+        a.phone,
         a.department_id AS "department.id",
         a.created_at,
         a.updated_at,
@@ -89,12 +91,14 @@
         (username,
          no,
          name,
+         phone,
          department_id,
          created_by,
          updated_by)
         VALUES (#{username},
                 #{no},
                 #{name},
+                #{phone},
                 #{department.id},
                 #{createdBy.id},
                 #{updatedBy.id})
@@ -114,6 +118,9 @@
             </if>
             <if test="name != null and name != ''">
                 name=#{name},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone=#{phone},
             </if>
             <if test="department!=null and department.id != null">
                 department_id=#{department.id},

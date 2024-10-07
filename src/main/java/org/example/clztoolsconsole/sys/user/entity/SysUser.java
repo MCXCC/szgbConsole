@@ -15,6 +15,7 @@ public class SysUser extends BeanEntity<SysUser> {
     private String username;
     private String no;
     private String name;
+    private String phone;
     private String password;
     private String token;
     private SysDepartment department;
