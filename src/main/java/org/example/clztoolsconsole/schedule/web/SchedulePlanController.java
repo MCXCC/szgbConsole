@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/schedule")
+@RequestMapping(value = "/schedule/plan")
 public class SchedulePlanController extends BaseController<SchedulePlanService, SchedulePlanMapper, SchedulePlan> {
     private final SchedulePlanService schedulePlanService;
 
