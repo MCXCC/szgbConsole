@@ -19,7 +19,7 @@
     </resultMap>
 
     <sql id="schedulePlanColumns">
-        a.id
+        a.id,
         a.schedule_id AS "schedule.id",
         a.task_type,
         a.task_name,
@@ -35,7 +35,7 @@
         a.version,
         a.created_by AS "createdBy.id",
         a.updated_by AS "updatedBy.id",
-        a.sort_order,
+        a.sort_order
     </sql>
 
     <sql id="schedulePlanJoins">
