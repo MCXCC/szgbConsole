@@ -109,7 +109,7 @@
             <if test="schedule != null and schedule.id != null">
                 schedule_id=#{schedule.id},
             </if>
-            <if test="taskType != null and taskType != ''">
+            <if test="taskType != null">
                 task_type=#{taskType},
             </if>
             <if test="taskName != null and taskName != ''">
@@ -118,7 +118,7 @@
             <if test="location != null and location != ''">
                 location=#{location},
             </if>
-            <if test="scheduleType != null and scheduleType != ''">
+            <if test="scheduleType != null">
                 schedule_type=#{scheduleType},
             </if>
             <if test="startAt != null">
@@ -133,13 +133,13 @@
             <if test="remark != null and remark != ''">
                 remark=#{remark},
             </if>
-            <if test="updatedBy.id != null and updatedBy.id != ''">
+            <if test="updatedBy != null and updatedBy.id != null">
                 updated_by=#{updatedBy.id},
             </if>
-            <if test="isDeleted != null and isDeleted != ''">
+            <if test="isDeleted != null">
                 is_deleted=#{isDeleted},
             </if>
-            <if test="version != null and version != ''">
+            <if test="version != null">
                 version=#{version}
             </if>
         </set>

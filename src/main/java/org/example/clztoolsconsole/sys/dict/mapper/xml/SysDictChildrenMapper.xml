@@ -88,7 +88,7 @@
     <update id="update" parameterType="org.example.clztoolsconsole.sys.dict.entity.SysDictChildren">
         UPDATE sys_dict_children
         <set>
-            <if test="dict != null and dict.id != null and dict.id != ''">
+            <if test="dict != null and dict.id != null">
                 dict=#{dict.id},
             </if>
             <if test="label != null and label != ''">
@@ -97,13 +97,13 @@
             <if test="value != null and value != ''">
                 value=#{value},
             </if>
-            <if test="updatedBy.id != null and updatedBy.id != ''">
+            <if test="updatedBy != null and updatedBy.id != null">
                 updated_by=#{updatedBy.id},
             </if>
-            <if test="isDeleted != null and isDeleted != ''">
+            <if test="isDeleted != null">
                 is_deleted=#{isDeleted},
             </if>
-            <if test="version != null and version != ''">
+            <if test="version != null">
                 version=#{version}
             </if>
         </set>

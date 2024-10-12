@@ -33,10 +33,10 @@
 
     <sql id="userRoleWhere">
         a.is_deleted = false
-        <if test="user != null and user.id != null and user.id != ''">
+        <if test="user != null and user.id != null">
             AND a.user_id = #{user.id}
         </if>
-        <if test="role != null and role.id != null and role.id != ''">
+        <if test="role != null and role.id != null">
             AND a.role_id = #{role.id}
         </if>
     </sql>
@@ -90,19 +90,19 @@
     <update id="update" parameterType="org.example.clztoolsconsole.sys.user.entity.SysUserRole">
         UPDATE sys_user_role
         <set>
-            <if test="user != null and user.id != ''">
+            <if test="user != null and user.id != null">
                 user_id = #{user.id},
             </if>
-            <if test="role != null and role.id != ''">
+            <if test="role != null and role.id != null">
                 role_id = #{role.id},
             </if>
-            <if test="updatedBy.id != null and updatedBy.id != ''">
+            <if test="updatedBy != null and updatedBy.id != null">
                 updated_by=#{updatedBy.id},
             </if>
-            <if test="isDeleted != null and isDeleted != ''">
+            <if test="isDeleted != null">
                 is_deleted=#{isDeleted},
             </if>
-            <if test="version != null and version != ''">
+            <if test="version != null">
                 version=#{version}
             </if>
         </set>
