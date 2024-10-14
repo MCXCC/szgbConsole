@@ -43,7 +43,12 @@ public class SysDictService extends BaseService<SysDictMapper, SysDict> {
                 // 假设 SysDict 类中有 addChild 方法用于添加子节点
                 dictList.stream()
                         .filter(dict -> dict.getId().equals(child.getDict().getId()))
-                        .findFirst().ifPresent(parent -> parent.getDictChildren().add(child));
+                        .findFirst().ifPresent(parent -> {
+                            if (parent.getDictChildren() == null) {
+                                parent.setDictChildren(new ArrayList<SysDictChildren>());
+                            }
+                            parent.getDictChildren().add(child);
+                        });
             }
         }
         return dictList;
