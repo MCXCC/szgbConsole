@@ -1,17 +1,12 @@
 package org.example.clztoolsconsole.utils;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
-@Service
 public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<T>> {
     protected M mapper;
 
-    @Autowired
     public BaseService(M mapper) {
         this.mapper = mapper;
     }
