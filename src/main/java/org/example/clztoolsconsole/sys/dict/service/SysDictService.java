@@ -49,4 +49,24 @@ public class SysDictService extends BaseService<SysDictMapper, SysDict> {
         }
         return dictList;
     }
+
+    @Override
+    public void delete(String ids) {
+        String[] id = ids.split(",");
+        for (String s : id) {
+            SysDict sysDict = new SysDict();
+            sysDict.setId(Integer.parseInt(s));
+
+            SysDictChildren sysDictChildren = new SysDictChildren();
+            sysDictChildren.setDict(sysDict);
+            List<SysDictChildren> list = sysDictChildrenMapper.findList(sysDictChildren);
+
+            if(list != null){
+                for (SysDictChildren sysDictChildren1 : list) {
+                    sysDictChildrenMapper.delete(sysDictChildren1);
+                }
+            }
+            sysDictMapper.delete(sysDict);
+        }
+    }
 }
