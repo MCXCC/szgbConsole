@@ -14,11 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/sys/role")
 public class SysRoleController extends BaseController<SysRoleService, SysRoleMapper, SysRole> {
 
-    private final SysRoleService sysRoleService;
-
     @Autowired
     public SysRoleController(SysRoleService sysRoleService) {
         super(sysRoleService);
-        this.sysRoleService = sysRoleService;
     }
 }

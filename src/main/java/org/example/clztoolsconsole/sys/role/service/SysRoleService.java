@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class SysRoleService extends BaseService<SysRoleMapper, SysRole> {
-    private final SysRoleMapper sysRoleMapper;
 
     @Autowired
     public SysRoleService(SysRoleMapper sysRoleMapper) {
         super(sysRoleMapper);
-        this.sysRoleMapper = sysRoleMapper;
     }
 }

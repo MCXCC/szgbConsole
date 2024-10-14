@@ -13,13 +13,11 @@ import java.util.Map;
 @Slf4j
 @Service
 public class ScheduleService extends BaseService<ScheduleMapper, Schedule> {
-    private final ScheduleMapper scheduleMapper;
     private final SchedulePlanService schedulePlanService;
 
     @Autowired
     public ScheduleService(ScheduleMapper scheduleMapper, SchedulePlanService schedulePlanService) {
         super(scheduleMapper);
-        this.scheduleMapper = scheduleMapper;
         this.schedulePlanService = schedulePlanService;
     }
 

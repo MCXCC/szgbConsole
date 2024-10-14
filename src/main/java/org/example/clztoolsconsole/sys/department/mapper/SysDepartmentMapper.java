@@ -5,8 +5,6 @@ import org.example.clztoolsconsole.sys.department.entity.SysDepartment;
 import org.example.clztoolsconsole.utils.BaseMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Mapper
 @Repository
 public interface SysDepartmentMapper extends BaseMapper<SysDepartment> {

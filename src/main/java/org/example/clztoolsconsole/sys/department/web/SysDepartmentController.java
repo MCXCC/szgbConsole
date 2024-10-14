@@ -15,11 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/sys/department")
 public class SysDepartmentController extends BaseController<SysDepartmentService, SysDepartmentMapper, SysDepartment> {
 
-    private final SysDepartmentService sysDepartmentService;
-
     @Autowired
     public SysDepartmentController(SysDepartmentService sysDepartmentService) {
         super(sysDepartmentService);
-        this.sysDepartmentService = sysDepartmentService;
     }
 }

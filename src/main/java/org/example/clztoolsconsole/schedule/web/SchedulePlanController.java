@@ -13,11 +13,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/schedule/plan")
 public class SchedulePlanController extends BaseController<SchedulePlanService, SchedulePlanMapper, SchedulePlan> {
-    private final SchedulePlanService schedulePlanService;
 
     @Autowired
     public SchedulePlanController(SchedulePlanService schedulePlanService) {
         super(schedulePlanService);
-        this.schedulePlanService = schedulePlanService;
     }
 }

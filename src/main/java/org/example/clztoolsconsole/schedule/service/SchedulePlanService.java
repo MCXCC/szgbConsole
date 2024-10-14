@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class SchedulePlanService extends BaseService<SchedulePlanMapper, SchedulePlan> {
-    private final SchedulePlanMapper schedulePlanMapper;
 
     @Autowired
     public SchedulePlanService(SchedulePlanMapper schedulePlanMapper) {
         super(schedulePlanMapper);
-        this.schedulePlanMapper = schedulePlanMapper;
     }
 }

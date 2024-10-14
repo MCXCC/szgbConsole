@@ -14,12 +14,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/sys/dict/Children")
 public class SysDictChildrenController extends BaseController<SysDictChildrenService, SysDictChildrenMapper,
         SysDictChildren> {
-    private final SysDictChildrenService sysDictChildrenService;
 
     @Autowired
     public SysDictChildrenController(SysDictChildrenService sysDictChildrenService) {
         super(sysDictChildrenService);
-        this.sysDictChildrenService = sysDictChildrenService;
     }
 
 

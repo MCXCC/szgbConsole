@@ -12,11 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/userCertification")
 public class UserCertificationController extends BaseController<UserCertificationService, UserCertificationMapper,
         UserCertification> {
-    private final UserCertificationService userCertificationService;
 
     @Autowired
     public UserCertificationController(UserCertificationService userCertificationService) {
         super(userCertificationService);
-        this.userCertificationService = userCertificationService;
     }
 }

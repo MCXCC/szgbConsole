@@ -5,8 +5,6 @@ import org.example.clztoolsconsole.sys.user.entity.SysUser;
 import org.example.clztoolsconsole.utils.BaseMapper;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
-
 @Mapper
 @Repository
 public interface SysUserMapper extends BaseMapper<SysUser> {

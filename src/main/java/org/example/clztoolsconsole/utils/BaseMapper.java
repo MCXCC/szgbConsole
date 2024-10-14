@@ -6,12 +6,12 @@ import java.util.List;
 
 @Mapper
 public interface BaseMapper <T>{
-    public T get(int id);
-    public T get(T entity);
-    public List<T> findList(T entity);
-    public Integer getCount(T entity);
-    public void insert(T entity);
-    public void update(T entity);
-    public void delete(int id);
-    public void delete(T entity);
+    T get(int id);
+    T get(T entity);
+    List<T> findList(T entity);
+    Integer getCount(T entity);
+    void insert(T entity);
+    void update(T entity);
+    void delete(int id);
+    void delete(T entity);
 }

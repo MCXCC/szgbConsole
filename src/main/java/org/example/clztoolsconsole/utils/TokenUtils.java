@@ -3,7 +3,6 @@ package org.example.clztoolsconsole.utils;
 import cn.hutool.jwt.JWT;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
-import org.example.clztoolsconsole.sys.user.entity.SysUser;
 
 @Slf4j
 public class TokenUtils {

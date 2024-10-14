@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class SysDictChildrenService extends BaseService<SysDictChildrenMapper, SysDictChildren> {
-    private final SysDictChildrenMapper sysDictChildrenMapper;
 
     @Autowired
     public SysDictChildrenService(SysDictChildrenMapper sysDictChildrenMapper) {
         super(sysDictChildrenMapper);
-        this.sysDictChildrenMapper = sysDictChildrenMapper;
     }
 }

@@ -10,11 +10,9 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class UserCertificationService extends BaseService<UserCertificationMapper, UserCertification> {
-    private final UserCertificationMapper userCertificationMapper;
 
     @Autowired
     public UserCertificationService(UserCertificationMapper userCertificationMapper) {
         super(userCertificationMapper);
-        this.userCertificationMapper = userCertificationMapper;
     }
 }
