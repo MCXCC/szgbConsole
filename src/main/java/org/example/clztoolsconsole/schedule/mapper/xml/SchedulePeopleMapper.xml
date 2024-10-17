@@ -49,7 +49,7 @@
     <select id="get" resultMap="SchedulePeople">
         SELECT
         <include refid="schedulePeopleColumns"/>
-        FROM schedule_people a
+        FROM schedule_plan_people a
         where a.is_deleted=false
         and a.id = #{id}
     </select>
@@ -57,7 +57,7 @@
     <select id="findList" resultMap="SchedulePeople">
         SELECT
         <include refid="schedulePeopleColumns"/>
-        FROM schedule_people a
+        FROM schedule_plan_people a
         <where>
             <include refid="schedulePeopleWhere"/>
         </where>
@@ -73,13 +73,13 @@
 
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
-        FROM schedule_people a
+        FROM schedule_plan_people a
         WHERE
         <include refid="schedulePeopleWhere"/>
     </select>
 
     <insert id="insert" parameterType="org.example.clztoolsconsole.schedule.entity.SchedulePeople">
-        INSERT INTO schedule_people
+        INSERT INTO schedule_plan_people
         (schedule_plan_id,
          type,
          user_id,
@@ -93,7 +93,7 @@
     </insert>
 
     <update id="update" parameterType="org.example.clztoolsconsole.schedule.entity.SchedulePeople">
-        UPDATE schedule_people
+        UPDATE schedule_plan_people
         <set>
             <if test="schedule != null and schedule.id != null">
                 schedule_id=#{schedule.id},
@@ -118,7 +118,7 @@
     </update>
 
     <update id="delete">
-        UPDATE schedule_people
+        UPDATE schedule_plan_people
         SET is_deleted= TRUE
         where id = #{id}
     </update>
