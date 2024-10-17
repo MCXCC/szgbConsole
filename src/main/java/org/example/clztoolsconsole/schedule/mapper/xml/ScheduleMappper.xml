@@ -59,6 +59,7 @@
         SELECT
         <include refid="scheduleColumns"/>
         FROM schedule a
+        <include refid="scheduleJoins"/>
         where a.is_deleted=false
         and a.id = #{id}
     </select>
