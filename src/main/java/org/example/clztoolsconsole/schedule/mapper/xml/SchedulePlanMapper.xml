@@ -43,6 +43,9 @@
 
     <sql id="schedulePlanWhere">
         a.is_deleted = false
+        <if test="schedule != null and schedule.id != null">
+            AND a.schedule_id = #{schedule.id}
+        </if>
     </sql>
 
     <select id="get" resultMap="SchedulePlan">
