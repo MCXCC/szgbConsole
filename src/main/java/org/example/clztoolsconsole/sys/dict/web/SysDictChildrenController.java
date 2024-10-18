@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/sys/dict/Children")
+@RequestMapping(value = "/sys/dict/children")
 public class SysDictChildrenController extends BaseController<SysDictChildrenService, SysDictChildrenMapper,
         SysDictChildren> {
 

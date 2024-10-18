@@ -10,7 +10,7 @@ import java.io.Serial;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class SchedulePeople extends BeanEntity<SchedulePeople> {
+public class SchedulePlanPeople extends BeanEntity<SchedulePlanPeople> {
     @Serial
     private static final long serialVersionUID = 1L;
     private SchedulePlan schedulePlan;

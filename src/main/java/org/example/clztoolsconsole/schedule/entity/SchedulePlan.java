@@ -53,5 +53,5 @@ public class SchedulePlan extends BeanEntity<SchedulePlan> {
      */
     private String remark;
 
-    private List<SchedulePeople> schedulePeopleList;
+    private List<SchedulePlanPeople> schedulePeopleList;
 }
