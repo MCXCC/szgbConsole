@@ -2,10 +2,11 @@ spring:
   application:
     name: clztoolsConsole
   datasource:
-    url: jdbc:mysql://8.134.116.13:3306/tools
+    url: jdbc:mysql://8.134.116.13:3306/tools?serverTimezone=Asia/Shanghai
     username: root
     password: Abc123456
     driver-class-name: com.mysql.cj.jdbc.Driver
+
 
 mybatis:
   mapper-locations: classpath:org/example/clztoolsconsole/**/mapper/xml/*.xml
