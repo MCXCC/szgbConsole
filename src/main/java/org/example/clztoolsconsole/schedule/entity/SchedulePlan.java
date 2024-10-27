@@ -31,7 +31,7 @@ public class SchedulePlan extends BeanEntity<SchedulePlan> {
     /**
      * 班次类型
      */
-    private String scheduleType;
+    private int scheduleType;
     /**
      * 开始时间
      */
