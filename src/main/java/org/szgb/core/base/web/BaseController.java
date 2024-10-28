@@ -3,11 +3,12 @@ package org.szgb.core.base.web;
 import cn.hutool.http.HttpStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import org.szgb.console.sys.user.entity.SysUser;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.szgb.console.utils.*;
+import org.szgb.console.sys.user.entity.SysUser;
+import org.szgb.console.utils.Page;
+import org.szgb.console.utils.TokenUtils;
 import org.szgb.core.base.entity.BeanEntity;
 import org.szgb.core.base.mapper.BaseMapper;
 import org.szgb.core.base.service.BaseService;
@@ -46,6 +47,12 @@ public abstract class BaseController<S extends BaseService<M, T>, M extends Base
     public AjaxJson getList(@RequestBody T entity, HttpServletRequest request, HttpServletResponse response) {
         // 创建一个Page对象，用于分页显示
         Page<T> page = new Page<>();
+
+        // 如果实体对象的ID不为空，则直接调用get方法获取单个实体对象
+        if (entity.getId() != null) {
+            return this.get(entity, request, response);
+        }
+
         // 设置Page对象的列表属性，包含根据实体对象查询到的数据
         page.setList(service.findList(entity));
         // 设置Page对象的总记录数属性，用于分页显示
