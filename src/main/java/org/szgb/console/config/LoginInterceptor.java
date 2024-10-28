@@ -4,7 +4,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
-import org.szgb.console.utils.TokenUtils;
+import org.szgb.console.utils.TokenUtil;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -48,9 +48,9 @@ public class LoginInterceptor implements HandlerInterceptor {
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String token = authHeader.substring(7); // 移除"Bearer "前缀
             // 验证token的有效性
-            if (TokenUtils.verifyToken(token)) {
+            if (TokenUtil.verifyToken(token)) {
                 // 从token中提取uid
-                Integer uid = TokenUtils.getUid(token);
+                Integer uid = TokenUtil.getUid(token);
                 // 将uid存储在request中，以便后续处理使用
                 request.setAttribute("uid", uid);
                 // 已登录，放行

@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.szgb.console.sys.user.entity.SysUser;
 import org.szgb.console.utils.Page;
-import org.szgb.console.utils.TokenUtils;
+import org.szgb.console.utils.TokenUtil;
 import org.szgb.core.base.entity.BeanEntity;
 import org.szgb.core.base.mapper.BaseMapper;
 import org.szgb.core.base.service.BaseService;
@@ -87,7 +87,7 @@ public abstract class BaseController<S extends BaseService<M, T>, M extends Base
         // 创建一个系统用户对象，用于存储当前操作用户的信息
         SysUser sysUser = new SysUser();
         // 从请求中提取当前用户的ID，并设置到用户对象
-        sysUser.setId(TokenUtils.getUid(request));
+        sysUser.setId(TokenUtil.getUid(request));
         // 设置实体对象的更新者为当前用户
         entity.setUpdatedBy(sysUser);
         // 调用服务层的save方法，尝试保存或更新实体对象，返回保存结果的Map

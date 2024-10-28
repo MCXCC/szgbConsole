@@ -5,7 +5,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-public class TokenUtils {
+public class TokenUtil {
     private static final byte[] key = "clz11053".getBytes();
     private static final Long expireTime = 1000 * 60 * 60 * 24 * 2L;
 
