@@ -23,6 +23,17 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
     }
 
     @Override
+    public List<SchedulePlan> findList(SchedulePlan schedulePlan){
+        List<SchedulePlan> list = super.findList(schedulePlan);
+        for (SchedulePlan t : list) {
+            SchedulePlanPeople schedulePlanPeople = new SchedulePlanPeople();
+            schedulePlanPeople.setSchedulePlan(t);
+            t.setSchedulePeopleList(schedulePlanPeopleService.findList(schedulePlanPeople));
+        }
+        return list;
+    }
+
+    @Override
     public SchedulePlan get(SchedulePlan schedulePlan) {
         SchedulePlan t = super.get(schedulePlan);
         if (t != null) {
