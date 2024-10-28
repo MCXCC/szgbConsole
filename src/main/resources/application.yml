@@ -9,5 +9,5 @@ spring:
 
 
 mybatis:
-  mapper-locations: classpath:org/szgb/console/**/mapper/xml/*.xml
+  mapper-locations: classpath:org/szgb/**/mapper/xml/*.xml
   type-aliases-package: org.szgb.console

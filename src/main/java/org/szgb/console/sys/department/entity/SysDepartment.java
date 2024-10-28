@@ -2,7 +2,7 @@ package org.szgb.console.sys.department.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.szgb.console.utils.BeanEntity;
+import org.szgb.core.base.entity.BeanEntity;
 
 @EqualsAndHashCode(callSuper = true)
 @Data

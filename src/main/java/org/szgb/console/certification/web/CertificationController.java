@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.szgb.console.certification.entity.Certification;
 import org.szgb.console.certification.mapper.CertificationMapper;
 import org.szgb.console.certification.service.CertificationService;
-import org.szgb.console.utils.BaseController;
+import org.szgb.core.base.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;

@@ -1,4 +1,4 @@
-package org.szgb.console.utils;
+package org.szgb.core.base.mapper;
 
 import java.util.List;
 

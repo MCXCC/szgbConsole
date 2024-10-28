@@ -1,4 +1,4 @@
-package org.szgb.console.utils;
+package org.szgb.core.base.web;
 
 import cn.hutool.http.HttpStatus;
 import jakarta.servlet.http.HttpServletRequest;
@@ -7,6 +7,11 @@ import org.szgb.console.sys.user.entity.SysUser;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.szgb.console.utils.*;
+import org.szgb.core.base.entity.BeanEntity;
+import org.szgb.core.base.mapper.BaseMapper;
+import org.szgb.core.base.service.BaseService;
+import org.szgb.core.utils.AjaxJson;
 
 import java.util.Map;
 

@@ -1,4 +1,4 @@
-package org.szgb.console.utils;
+package org.szgb.core.utils;
 
 import cn.hutool.http.HttpStatus;
 import com.fasterxml.jackson.annotation.JsonIgnore;

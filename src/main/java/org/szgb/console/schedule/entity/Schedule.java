@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.szgb.console.sys.department.entity.SysDepartment;
-import org.szgb.console.utils.BeanEntity;
+import org.szgb.core.base.entity.BeanEntity;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serial;

@@ -1,9 +1,10 @@
-package org.szgb.console.utils;
+package org.szgb.core.base.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import org.szgb.console.sys.user.entity.SysUser;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.szgb.console.utils.Page;
 
 import java.io.Serializable;
 import java.util.Date;

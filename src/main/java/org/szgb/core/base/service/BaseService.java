@@ -1,4 +1,8 @@
-package org.szgb.console.utils;
+package org.szgb.core.base.service;
+
+import org.szgb.core.base.entity.BeanEntity;
+import org.szgb.console.utils.Page;
+import org.szgb.core.base.mapper.BaseMapper;
 
 import java.util.List;
 import java.util.Map;

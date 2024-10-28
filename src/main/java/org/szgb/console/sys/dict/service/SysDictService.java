@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.szgb.console.sys.dict.entity.SysDict;
 import org.szgb.console.sys.dict.entity.SysDictChildren;
 import org.szgb.console.sys.dict.mapper.SysDictMapper;
-import org.szgb.console.utils.BaseService;
+import org.szgb.core.base.service.BaseService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

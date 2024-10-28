@@ -4,7 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.szgb.console.schedule.entity.SchedulePlan;
 import org.szgb.console.schedule.mapper.SchedulePlanMapper;
 import org.szgb.console.schedule.service.SchedulePlanService;
-import org.szgb.console.utils.BaseController;
+import org.szgb.core.base.web.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
