@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Slf4j
 @Service
@@ -42,6 +43,14 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
             t.setSchedulePeopleList(schedulePlanPeopleService.findList(schedulePlanPeople));
         }
         return t;
+    }
+
+    @Override
+    public Map<Boolean, String> save(SchedulePlan entity) {
+        for (SchedulePlanPeople schedulePlanPeople : entity.getSchedulePeopleList()) {
+            schedulePlanPeopleService.save(schedulePlanPeople);
+        }
+        return super.save(entity);
     }
 
     @Override
