@@ -23,10 +23,21 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
     }
 
     @Override
+    public SchedulePlan get(SchedulePlan schedulePlan) {
+        SchedulePlan t = super.get(schedulePlan);
+        if (t != null) {
+            SchedulePlanPeople schedulePlanPeople = new SchedulePlanPeople();
+            schedulePlanPeople.setSchedulePlan(t);
+            t.setSchedulePeopleList(schedulePlanPeopleService.findList(schedulePlanPeople));
+        }
+        return t;
+    }
+
+    @Override
     public void delete(List<SchedulePlan> entityList){
         for (SchedulePlan entity : entityList) {
             SchedulePlanPeople schedulePlanPeople = new SchedulePlanPeople();
-            schedulePlanPeople.setSchedulePlan(mapper.get(entity));
+            schedulePlanPeople.setSchedulePlan(this.get(entity));
             schedulePlanPeopleService.delete(schedulePlanPeopleService.findList(schedulePlanPeople));
             mapper.delete(entity);
         }

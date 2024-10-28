@@ -5,8 +5,6 @@ import java.util.List;
 public interface BaseMapper<T> {
     T get(int id);
 
-    T get(T entity);
-
     List<T> findList(T entity);
 
     Integer getCount(T entity);

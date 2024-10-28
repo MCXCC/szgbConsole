@@ -11,12 +11,10 @@ import org.springframework.stereotype.Service;
 @Slf4j
 @Service
 public class SysUserService extends BaseService<SysUserMapper, SysUser> {
-    private final SysUserMapper sysUserMapper;
 
     @Autowired
     public SysUserService(SysUserMapper sysUserMapper) {
         super(sysUserMapper);
-        this.sysUserMapper = sysUserMapper;
     }
 
     public SysUser getToken(SysUser user) {
@@ -25,11 +23,11 @@ public class SysUserService extends BaseService<SysUserMapper, SysUser> {
             // 已登录，放行
             SysUser sysUser = new SysUser();
             sysUser.setId(TokenUtils.getUid(token));
-            sysUser = sysUserMapper.get(sysUser);
+            sysUser = this.get(sysUser);
             sysUser.setToken(token);
             return sysUser;
         }
-        SysUser sysUser = sysUserMapper.getOfLogin(user);
+        SysUser sysUser = mapper.getOfLogin(user);
         if (sysUser == null) {
             return null;
         } else {

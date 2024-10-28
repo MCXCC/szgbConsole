@@ -16,10 +16,10 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
     }
 
     public T get(T entity) {
-        return mapper.get(entity);
+        return this.get(entity.getId());
     }
 
-    public T get(int id) {
+    protected T get(int id) {
         return mapper.get(id);
     }
 
@@ -55,7 +55,7 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
             return Map.of(true, "新增成功");
         } else {
             // 对于现有实体，根据ID获取数据库中的实体对象
-            T t = mapper.get(entity);
+            T t = this.get(entity);
             // 检查数据版本是否冲突
             if (!Objects.equals(t.getVersion(), entity.getVersion())) {
                 // 如果数据版本冲突，返回错误信息
