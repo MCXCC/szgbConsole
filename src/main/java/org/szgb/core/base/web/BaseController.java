@@ -23,6 +23,14 @@ public abstract class BaseController<S extends BaseService<M, T>, M extends Base
         this.service = service;
     }
 
+    /**
+     * 处理POST请求以获取实体对象
+     *
+     * @param entity 请求体中的实体对象，用于查询
+     * @param request HTTP请求对象，用于获取请求信息
+     * @param response HTTP响应对象，用于设置响应信息
+     * @return 返回一个AjaxJson对象，包含查询结果或错误信息
+     */
     @PostMapping("/get")
     public AjaxJson get(@RequestBody T entity, HttpServletRequest request, HttpServletResponse response) {
         // 调用服务层方法，根据实体对象获取单个实体对象
