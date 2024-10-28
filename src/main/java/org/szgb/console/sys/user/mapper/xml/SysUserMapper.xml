@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.szgb.console.sys.user.mapper.SysUserMapper">
+    <resultMap id="SysUser" type="org.szgb.console.sys.user.entity.SysUser">
+        <id property="id" column="id"/>
+        <result property="username" column="username"/>
+        <result property="no" column="no"/>
+        <result property="name" column="name"/>
+        <result property="phone" column="phone"/>
+        <result property="password" column="password"/>
+        <result property="createdAt" column="created_at" javaType="java.util.Date"/>
+        <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="version" column="version"/>
+        <result property="sortOrder" column="sort_order"/>
+    </resultMap>
+
+    <sql id="userColumns">
+        a.id,
+        a.username,
+        a.no,
+        a.name,
+        a.phone,
+        a.department_id AS "department.id",
+        a.created_at,
+        a.updated_at,
+        a.is_deleted,
+        a.version,
+        a.created_by AS "createdBy.id",
+        a.updated_by AS "updatedBy.id",
+        a.sort_order,
+        d.name AS "department.name"
+    </sql>
+
+    <sql id="userJoins">
+        LEFT JOIN sys_department d ON d.id = a.department_id
+    </sql>
+
+    <sql id="userWhere">
+        a.is_deleted = false
+        <if test="department != null and department.id != null">
+            AND a.department_id = #{department.id}
+        </if>
+        <if test="username != null and username != ''">
+            AND a.username Like CONCAT('%',#{username},'%')
+        </if>
+        <if test="name != null and name != ''">
+            AND a.name Like CONCAT('%',#{name},'%')
+        </if>
+        <if test="no != null and no != ''">
+            AND a.no = #{no}
+        </if>
+    </sql>
+
+    <select id="get" resultMap="SysUser">
+        SELECT
+        <include refid="userColumns"/>
+        FROM sys_user a
+        <include refid="userJoins"/>
+        where a.is_deleted=false
+        and a.id = #{id}
+    </select>
+
+    <select id="findList" resultMap="SysUser">
+        SELECT
+        <include refid="userColumns"/>
+        FROM sys_user a
+        <include refid="userJoins"/>
+        <where>
+            <include refid="userWhere"/>
+        </where>
+
+        <if test="page!=null and page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
+
+        <if test="page!=null and page.first >= 0 and page.pageSize > 0">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM sys_user a
+        WHERE
+        <include refid="userWhere"/>
+    </select>
+
+    <insert id="insert" parameterType="org.szgb.console.sys.user.entity.SysUser">
+        INSERT INTO sys_user
+        (username,
+         no,
+         name,
+         phone,
+         department_id,
+         created_by,
+         updated_by)
+        VALUES (#{username},
+                #{no},
+                #{name},
+                #{phone},
+                #{department.id},
+                #{createdBy.id},
+                #{updatedBy.id})
+    </insert>
+
+    <update id="update" parameterType="org.szgb.console.sys.user.entity.SysUser">
+        UPDATE sys_user
+        <set>
+            <if test="username != null and username != ''">
+                username=#{username},
+            </if>
+            <if test="no != null and no != ''">
+                no=#{no},
+            </if>
+            <if test="password != null and password != ''">
+                password=#{password},
+            </if>
+            <if test="name != null and name != ''">
+                name=#{name},
+            </if>
+            <if test="phone != null and phone != ''">
+                phone=#{phone},
+            </if>
+            <if test="department != null and department.id != null">
+                department_id=#{department.id},
+            </if>
+            <if test="updatedBy != null and updatedBy.id != null">
+                updated_by=#{updatedBy.id},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted=#{isDeleted},
+            </if>
+            <if test="version != null">
+                version=#{version}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete" >
+        UPDATE sys_user
+        SET is_deleted= TRUE
+        where id = #{id}
+    </update>
+
+    <select id="getOfLogin" resultMap="SysUser">
+        SELECT
+        <include refid="userColumns"/>
+        FROM sys_user a
+        <include refid="userJoins"/>
+        where a.is_deleted=false
+        and a.username = #{username}
+        and a.password = #{password}
+    </select>
+
+</mapper>

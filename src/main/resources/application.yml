@@ -1,6 +1,6 @@
 spring:
   application:
-    name: clztoolsConsole
+    name: szgbConsole
   datasource:
     url: jdbc:mysql://8.134.116.13:3306/tools?serverTimezone=Asia/Shanghai
     username: root
@@ -9,5 +9,5 @@ spring:
 
 
 mybatis:
-  mapper-locations: classpath:org/example/clztoolsconsole/**/mapper/xml/*.xml
-  type-aliases-package: org.example.clztoolsconsole
+  mapper-locations: classpath:org/szgb/console/**/mapper/xml/*.xml
+  type-aliases-package: org.szgb.console
