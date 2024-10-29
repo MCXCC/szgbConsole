@@ -40,10 +40,15 @@ public class ScheduleController extends BaseController<ScheduleService, Schedule
         ExportExcel excel = new ExportExcel();
         excel.createSheet("排班表");
         excel.setCellAlignment(HorizontalAlignment.CENTER, VerticalAlignment.CENTER);
+        // 表格抬头
         excel.createRow().mergeCells(1, 9).createCell(schedule1.getDepartment().getName() + "日排班表");
         excel.createRow().mergeCells(1, 2).createCell(schedule1.getDate(), "yyyy年MM月dd日 EEEE");
         excel.setCurrentCellIndex(2).mergeCells(1, 6);
         excel.setCurrentCellIndex(8).createCell("800M：" + schedule1.getM800());
+        // 白班
+        excel.createRow().mergeCells(3, 2).createCell("白班");
+        excel.setCurrentCellIndex(2).createCell("领班", "班制", "工时", "人数", "人员", "应急分工");
+        // 夜班
         excel.createRow().mergeCells(3, 2).createCell("白班");
         excel.setCurrentCellIndex(2).createCell("领班", "班制", "工时", "人数", "人员", "应急分工");
 

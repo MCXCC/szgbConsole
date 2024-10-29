@@ -55,7 +55,6 @@ public class ExportExcel {
     /**
      * 当前单元格位置
      */
-    @Setter
     @Getter
     private int currentCellIndex;
     /**
