@@ -6,7 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.poi.ss.usermodel.HorizontalAlignment;
 import org.apache.poi.ss.usermodel.VerticalAlignment;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import org.szgb.console.schedule.entity.Schedule;
 import org.szgb.console.schedule.mapper.ScheduleMapper;
 import org.szgb.console.schedule.service.ScheduleService;
@@ -37,9 +40,10 @@ public class ScheduleController extends BaseController<ScheduleService, Schedule
         excel.createSheet("排班表");
         excel.setCellAlignment(HorizontalAlignment.CENTER, VerticalAlignment.CENTER);
         excel.createRow().createCell(schedule1.getDepartment().getName() + "日排班表").mergeCells(0, 0, 0, 8);
-        excel.createRow().createCell(schedule1.getDate(), "yyyy年MM月dd日 EEEE");
+        excel.createRow().createCell(schedule1.getDate(), "yyyy年MM月dd日 EEEE").mergeCells(1, 1, 0, 1).mergeCells(1, 1,
+                2, 7);
         excel.setCurrentCellIndex(8).createCell("800M：" + schedule1.getM800());
-        excel.createRow().createCell("白班");
+        excel.createRow().createCell("白班").mergeCells(2, 4, 0, 1);
         excel.setCurrentCellIndex(2).createCell("领班", "班制", "工时", "人数", "人员", "应急分工");
 
         excel.write(response, "排班表");
