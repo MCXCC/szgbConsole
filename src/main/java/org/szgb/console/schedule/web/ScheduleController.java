@@ -32,6 +32,7 @@ public class ScheduleController extends BaseController<ScheduleService, Schedule
     @PostMapping("/export")
     public AjaxJson export(@RequestBody Schedule schedule, HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 模拟查询数据
+        System.out.println("schedule = " + schedule);
         Schedule schedule1 = new Schedule();
         schedule1.setId(1);
         schedule1 = service.get(schedule1);
@@ -39,11 +40,11 @@ public class ScheduleController extends BaseController<ScheduleService, Schedule
         ExportExcel excel = new ExportExcel();
         excel.createSheet("排班表");
         excel.setCellAlignment(HorizontalAlignment.CENTER, VerticalAlignment.CENTER);
-        excel.createRow().createCell(schedule1.getDepartment().getName() + "日排班表").mergeCells(0, 0, 0, 8);
-        excel.createRow().createCell(schedule1.getDate(), "yyyy年MM月dd日 EEEE").mergeCells(1, 1, 0, 1).mergeCells(1, 1,
-                2, 7);
+        excel.createRow().mergeCells(1, 9).createCell(schedule1.getDepartment().getName() + "日排班表");
+        excel.createRow().mergeCells(1, 2).createCell(schedule1.getDate(), "yyyy年MM月dd日 EEEE");
+        excel.setCurrentCellIndex(2).mergeCells(1, 6);
         excel.setCurrentCellIndex(8).createCell("800M：" + schedule1.getM800());
-        excel.createRow().createCell("白班").mergeCells(2, 4, 0, 1);
+        excel.createRow().mergeCells(3, 2).createCell("白班");
         excel.setCurrentCellIndex(2).createCell("领班", "班制", "工时", "人数", "人员", "应急分工");
 
         excel.write(response, "排班表");

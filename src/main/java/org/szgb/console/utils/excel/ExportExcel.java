@@ -28,7 +28,7 @@ import java.util.Locale;
  * Excel导出工具类
  *
  * @author szgb
- * @version 0.1.2024.10.29
+ * @version 0.2.2024.10.29
  */
 public class ExportExcel {
     /**
@@ -162,6 +162,23 @@ public class ExportExcel {
         cellAddresses.setLastColumn(lastColumn);
         // 将指定区域的单元格合并
         sheet.addMergedRegion(cellAddresses);
+        return this;
+    }
+
+    /**
+     * 合并单元格函数的重载版本，用于根据相对位置合并单元格
+     * 此方法通过指定当前单元格的宽度和高度来合并单元格，而不是具体的起始和结束行列索引
+     * 它提供了一种更直观的方式来合并单元格，特别是当用户更关心合并区域的大小而非具体位置时
+     *
+     * @param height 要合并的单元格的高度（行数）
+     * @param width  要合并的单元格的宽度（列数）
+     * @return 返回一个ExportExcel对象，允许进行链式调用或其他操作
+     */
+    public ExportExcel mergeCells(int height, int width) {
+        // 调用另一个mergeCells方法，传入当前行索引、当前行索引加上宽度、当前列索引、当前列索引加上高度
+        // 这种设计允许通过相对位置来合并单元格，而不是每次都计算绝对的行列索引
+        mergeCells(currentRowIndex - 1, currentRowIndex - 2 + height, currentCellIndex,
+                currentCellIndex + width - 1);
         return this;
     }
 
