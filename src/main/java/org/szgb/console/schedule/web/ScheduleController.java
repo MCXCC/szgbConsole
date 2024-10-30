@@ -49,7 +49,7 @@ public class ScheduleController extends BaseController<ScheduleService, Schedule
         excel.createRow().mergeCells(3, 2).createCell("白班");
         excel.setCurrentCellIndex(2).createCell("领班", "班制", "工时", "人数", "人员", "应急分工");
         // 夜班
-        excel.createRow().createRow().mergeCells(3, 2).createCell("夜班");
+        excel.createRow().createRow().createRow().mergeCells(3, 2).createCell("夜班");
         excel.setCurrentCellIndex(2).createCell("领班", "班制", "工时", "人数", "人员", "应急分工");
 
         excel.write(response, "排班表");
