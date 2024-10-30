@@ -9,7 +9,7 @@ public interface BaseMapper<T> {
 
     Integer getCount(T entity);
 
-    void insert(T entity);
+    int insert(T entity);
 
     void update(T entity);
 

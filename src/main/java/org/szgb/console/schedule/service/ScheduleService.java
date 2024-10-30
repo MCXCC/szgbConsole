@@ -23,14 +23,17 @@ public class ScheduleService extends BaseService<ScheduleMapper, Schedule> {
 
     @Override
     public Map<Boolean, String> save(Schedule schedule) {
+        Map<Boolean, String> saved = super.save(schedule);
+        int id = Integer.parseInt(saved.get(true).split("=")[1]);
         if (schedule.getSchedulePlanList() != null) {
             for (SchedulePlan schedulePlan : schedule.getSchedulePlanList()) {
-                if (schedulePlan != null) {
-                    schedulePlanService.save(schedulePlan);
-                }
+                Schedule schedule1 = new Schedule();
+                schedule1.setId(id);
+                schedulePlan.setSchedule(schedule1);
+                schedulePlanService.save(schedulePlan);
             }
         }
-        return super.save(schedule);
+        return saved;
     }
 
     @Override

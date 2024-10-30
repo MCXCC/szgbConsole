@@ -1,7 +1,7 @@
 package org.szgb.core.base.service;
 
-import org.szgb.core.base.entity.BeanEntity;
 import org.szgb.console.utils.Page;
+import org.szgb.core.base.entity.BeanEntity;
 import org.szgb.core.base.mapper.BaseMapper;
 
 import java.util.List;
@@ -50,9 +50,9 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
             // 对于新实体，设置创建者信息
             entity.setCreatedBy(entity.getUpdatedBy());
             // 执行插入操作
-            mapper.insert(entity);
+            int id = mapper.insert(entity);
             // 返回成功插入的信息
-            return Map.of(true, "新增成功");
+            return Map.of(true, "新增成功,id=" + id);
         } else {
             // 对于现有实体，根据ID获取数据库中的实体对象
             T t = this.get(entity);
@@ -85,7 +85,7 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
         mapper.delete(entity);
     }
 
-    protected void delete(List<T> entityList){
+    protected void delete(List<T> entityList) {
         for (T entity : entityList) {
             mapper.delete(entity);
         }

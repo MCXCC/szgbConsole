@@ -47,13 +47,18 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
 
     @Override
     public Map<Boolean, String> save(SchedulePlan entity) {
+        Map<Boolean, String> saved = super.save(entity);
+        int id = Integer.parseInt(saved.get(true).split("=")[1]);
         List<SchedulePlanPeople> schedulePeopleList = entity.getSchedulePeopleList();
         if (schedulePeopleList != null) {
             for (SchedulePlanPeople schedulePlanPeople : schedulePeopleList) {
+                SchedulePlan schedulePlan = new SchedulePlan();
+                schedulePlan.setId(id);
+                schedulePlanPeople.setSchedulePlan(schedulePlan);
                 schedulePlanPeopleService.save(schedulePlanPeople);
             }
         }
-        return super.save(entity);
+        return saved;
     }
 
     @Override
