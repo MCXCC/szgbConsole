@@ -75,7 +75,8 @@
         <include refid="userRoleWhere"/>
     </select>
 
-    <insert id="insert" parameterType="org.szgb.console.sys.user.entity.SysUserRole">
+    <insert id="insert" parameterType="org.szgb.console.sys.user.entity.SysUserRole" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO sys_user_role
         (user_id,
          role_id,

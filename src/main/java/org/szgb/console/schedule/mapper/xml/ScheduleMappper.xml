@@ -89,7 +89,8 @@
         <include refid="scheduleWhere"/>
     </select>
 
-    <insert id="insert" parameterType="org.szgb.console.schedule.entity.Schedule">
+    <insert id="insert" parameterType="org.szgb.console.schedule.entity.Schedule" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO schedule
         (department_id,
          date,

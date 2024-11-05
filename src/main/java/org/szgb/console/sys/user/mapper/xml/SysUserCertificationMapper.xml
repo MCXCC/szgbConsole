@@ -78,7 +78,8 @@
         <include refid="userCertificationWhere"/>
     </select>
 
-    <insert id="insert" parameterType="org.szgb.console.sys.user.entity.SysUserCertification">
+    <insert id="insert" parameterType="org.szgb.console.sys.user.entity.SysUserCertification" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO sys_user_certification
         (user_id,
          certification_id,

@@ -86,7 +86,8 @@
         <include refid="userWhere"/>
     </select>
 
-    <insert id="insert" parameterType="org.szgb.console.sys.user.entity.SysUser">
+    <insert id="insert" parameterType="org.szgb.console.sys.user.entity.SysUser" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO sys_user
         (username,
          no,

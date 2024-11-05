@@ -67,7 +67,8 @@
         <include refid="certificationWhere"/>
     </select>
 
-    <insert id="insert" parameterType="org.szgb.console.certification.entity.Certification">
+    <insert id="insert" parameterType="org.szgb.console.certification.entity.Certification" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO certification
         (name,
          period,

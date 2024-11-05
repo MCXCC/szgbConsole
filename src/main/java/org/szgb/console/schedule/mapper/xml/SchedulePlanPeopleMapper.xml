@@ -83,7 +83,8 @@
         <include refid="SchedulePlanPeopleWhere"/>
     </select>
 
-    <insert id="insert" parameterType="org.szgb.console.schedule.entity.SchedulePlanPeople">
+    <insert id="insert" parameterType="org.szgb.console.schedule.entity.SchedulePlanPeople" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO schedule_plan_people
         (schedule_plan_id,
          type,

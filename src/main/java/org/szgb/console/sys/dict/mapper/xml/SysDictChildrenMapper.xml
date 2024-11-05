@@ -71,7 +71,8 @@
         <include refid="dictChildrenWhere"/>
     </select>
 
-    <insert id="insert" parameterType="org.szgb.console.sys.dict.entity.SysDictChildren">
+    <insert id="insert" parameterType="org.szgb.console.sys.dict.entity.SysDictChildren" useGeneratedKeys="true"
+            keyProperty="id">
         INSERT INTO sys_dict_children
         (dict_id,
          label,
