@@ -24,4 +24,9 @@ public class SchedulePlanPeopleService extends BaseService<SchedulePlanPeopleMap
     public void delete(List<SchedulePlanPeople> entityList){
         super.delete(entityList);
     }
+
+    @Transactional(readOnly = false)
+    public void deleteBySchedulePlanId(int schedulePlanId) {
+        mapper.deleteBySchedulePlanId(schedulePlanId);
+    }
 }

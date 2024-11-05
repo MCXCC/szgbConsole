@@ -3,8 +3,8 @@ package org.szgb.console.schedule.entity;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.szgb.core.base.entity.BeanEntity;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.szgb.core.base.entity.BeanEntity;
 
 import java.io.Serial;
 import java.util.Date;
@@ -35,13 +35,13 @@ public class SchedulePlan extends BeanEntity<SchedulePlan> {
     /**
      * 开始时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date startAt;
     /**
      * 结束时间
      */
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date endAt;
     /**
@@ -54,4 +54,11 @@ public class SchedulePlan extends BeanEntity<SchedulePlan> {
     private String remark;
 
     private List<SchedulePlanPeople> schedulePeopleList;
+
+    public SchedulePlan() {
+    }
+
+    public SchedulePlan(int id) {
+        this.setId(id);
+    }
 }

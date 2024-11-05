@@ -32,7 +32,4 @@ public class BeanEntity<T> implements Serializable {
     private Integer sortOrder;
 
     private Page<T> page;
-
-    public BeanEntity() {
-    }
 }

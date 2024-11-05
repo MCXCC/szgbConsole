@@ -66,9 +66,7 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
     @Transactional(readOnly = false)
     public void delete(List<SchedulePlan> entityList){
         for (SchedulePlan entity : entityList) {
-            SchedulePlanPeople schedulePlanPeople = new SchedulePlanPeople();
-            schedulePlanPeople.setSchedulePlan(this.get(entity));
-            schedulePlanPeopleService.delete(schedulePlanPeopleService.findList(schedulePlanPeople));
+            schedulePlanPeopleService.deleteBySchedulePlanId(entity.getId());
             mapper.delete(entity);
         }
     }
@@ -79,9 +77,7 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
         String[] id = ids.split(",");
         for (String s : id) {
             int i = Integer.parseInt(s);
-            SchedulePlanPeople schedulePlanPeople = new SchedulePlanPeople();
-            schedulePlanPeople.setSchedulePlan(mapper.get(i));
-            schedulePlanPeopleService.delete(schedulePlanPeopleService.findList(schedulePlanPeople));
+            schedulePlanPeopleService.deleteBySchedulePlanId(i);
             mapper.delete(i);
         }
     }
