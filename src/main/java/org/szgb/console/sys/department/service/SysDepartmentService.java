@@ -41,7 +41,7 @@ public class SysDepartmentService extends BaseService<SysDepartmentMapper, SysDe
         for (String s : id) {
             int i = Integer.parseInt(s);
             SysDepartment sysDepartment = new SysDepartment();
-            sysDepartment.setParent(mapper.get(i));
+            sysDepartment.setParent(new SysDepartment(i));
             List<SysDepartment> list = this.findList(sysDepartment);
             if(!list.isEmpty()){
                 this.delete(list);
