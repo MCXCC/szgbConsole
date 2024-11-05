@@ -11,7 +11,7 @@ import org.szgb.core.base.web.BaseController;
 
 @Slf4j
 @RestController
-@RequestMapping(value = "/sys/line")
+@RequestMapping(value = "/sys/line/location")
 public class SysLineLocationController extends BaseController<SysLineLocationService, SysLineLocationMapper,
         SysLineLocation> {
     @Autowired
