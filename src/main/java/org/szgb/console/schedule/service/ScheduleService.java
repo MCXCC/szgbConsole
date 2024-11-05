@@ -1,6 +1,7 @@
 package org.szgb.console.schedule.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import org.szgb.console.schedule.entity.Schedule;
 import org.szgb.console.schedule.entity.SchedulePlan;
 import org.szgb.console.schedule.mapper.ScheduleMapper;
@@ -22,6 +23,7 @@ public class ScheduleService extends BaseService<ScheduleMapper, Schedule> {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public Schedule save(Schedule schedule) {
         schedule = super.save(schedule);
         if (schedule.getSchedulePlanList() != null) {
@@ -34,6 +36,7 @@ public class ScheduleService extends BaseService<ScheduleMapper, Schedule> {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Schedule get(Schedule schedule) {
         Schedule t = super.get(schedule);
         if (t != null) {
@@ -45,6 +48,7 @@ public class ScheduleService extends BaseService<ScheduleMapper, Schedule> {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void delete(String ids) {
         String[] id = ids.split(",");
         for (String s : id) {

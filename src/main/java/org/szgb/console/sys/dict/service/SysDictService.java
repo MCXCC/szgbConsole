@@ -1,6 +1,7 @@
 package org.szgb.console.sys.dict.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import org.szgb.console.sys.dict.entity.SysDict;
 import org.szgb.console.sys.dict.entity.SysDictChildren;
 import org.szgb.console.sys.dict.mapper.SysDictMapper;
@@ -22,6 +23,7 @@ public class SysDictService extends BaseService<SysDictMapper, SysDict> {
         this.sysDictChildrenService = sysDictChildrenService;
     }
 
+    @Transactional(readOnly = true)
     public List<SysDict> findTreeList() {
         // 查询父级字典列表
         List<SysDict> dictList = mapper.findList(new SysDict());
@@ -48,6 +50,7 @@ public class SysDictService extends BaseService<SysDictMapper, SysDict> {
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void delete(String ids) {
         String[] id = ids.split(",");
         for (String s : id) {

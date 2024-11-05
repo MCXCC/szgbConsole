@@ -1,5 +1,6 @@
 package org.szgb.core.base.service;
 
+import org.springframework.transaction.annotation.Transactional;
 import org.szgb.console.utils.Page;
 import org.szgb.core.base.entity.BeanEntity;
 import org.szgb.core.base.mapper.BaseMapper;
@@ -15,14 +16,16 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
         this.mapper = mapper;
     }
 
+    @Transactional(readOnly = true)
     public T get(T entity) {
         return this.get(entity.getId());
     }
-
+    @Transactional(readOnly = true)
     protected T get(int id) {
         return mapper.get(id);
     }
 
+    @Transactional(readOnly = true)
     public List<T> findList(T entity) {
         if (entity.getPage() != null) {
             Page<T> page = entity.getPage();
@@ -32,6 +35,7 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
         return mapper.findList(entity);
     }
 
+    @Transactional(readOnly = true)
     public Integer getCount(T entity) {
         return mapper.getCount(entity);
     }
@@ -44,6 +48,7 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
      * @param entity 要保存的实体对象，类型为泛型T
      * @return 返回一个Map对象，键为Boolean表示操作是否成功，值为String表示操作的结果信息
      */
+    @Transactional(readOnly = false)
     public T save(T entity) {
         // 检查实体对象的ID是否为null，判断是否为新实体
         if (entity.getId() == null) {
@@ -70,6 +75,7 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
         }
     }
 
+    @Transactional(readOnly = false)
     public void delete(String ids) {
         String[] id = ids.split(",");
         for (String s : id) {
@@ -77,14 +83,17 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
         }
     }
 
+    @Transactional(readOnly = false)
     protected void delete(int id) {
         mapper.delete(id);
     }
 
+    @Transactional(readOnly = false)
     protected void delete(T entity) {
         mapper.delete(entity);
     }
 
+    @Transactional(readOnly = false)
     protected void delete(List<T> entityList) {
         for (T entity : entityList) {
             mapper.delete(entity);

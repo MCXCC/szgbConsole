@@ -1,6 +1,7 @@
 package org.szgb.console.sys.department.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import org.szgb.console.schedule.entity.SchedulePlanPeople;
 import org.szgb.console.sys.department.entity.SysDepartment;
 import org.szgb.console.sys.department.mapper.SysDepartmentMapper;
@@ -20,6 +21,7 @@ public class SysDepartmentService extends BaseService<SysDepartmentMapper, SysDe
     }
 
     @Override
+    @Transactional(readOnly = false)
     protected void delete(List<SysDepartment> entityList) {
         for (SysDepartment entity : entityList) {
             SysDepartment sysDepartment = new SysDepartment();
@@ -33,6 +35,7 @@ public class SysDepartmentService extends BaseService<SysDepartmentMapper, SysDe
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void delete(String ids) {
         String[] id = ids.split(",");
         for (String s : id) {

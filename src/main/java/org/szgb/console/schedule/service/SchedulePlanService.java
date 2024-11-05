@@ -1,6 +1,7 @@
 package org.szgb.console.schedule.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.transaction.annotation.Transactional;
 import org.szgb.console.schedule.entity.SchedulePlan;
 import org.szgb.console.schedule.entity.SchedulePlanPeople;
 import org.szgb.console.schedule.mapper.SchedulePlanMapper;
@@ -24,6 +25,7 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<SchedulePlan> findList(SchedulePlan schedulePlan){
         List<SchedulePlan> list = super.findList(schedulePlan);
         for (SchedulePlan t : list) {
@@ -35,6 +37,7 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
     }
 
     @Override
+    @Transactional(readOnly = true)
     public SchedulePlan get(SchedulePlan schedulePlan) {
         SchedulePlan t = super.get(schedulePlan);
         if (t != null) {
@@ -46,6 +49,7 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
     }
 
     @Override
+    @Transactional(readOnly = false)
     public SchedulePlan save(SchedulePlan entity) {
         entity = super.save(entity);
         List<SchedulePlanPeople> schedulePeopleList = entity.getSchedulePeopleList();
@@ -59,6 +63,7 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void delete(List<SchedulePlan> entityList){
         for (SchedulePlan entity : entityList) {
             SchedulePlanPeople schedulePlanPeople = new SchedulePlanPeople();
@@ -69,6 +74,7 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
     }
 
     @Override
+    @Transactional(readOnly = false)
     public void delete(String ids) {
         String[] id = ids.split(",");
         for (String s : id) {
