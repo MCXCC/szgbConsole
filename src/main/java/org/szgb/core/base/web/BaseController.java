@@ -91,14 +91,12 @@ public abstract class BaseController<S extends BaseService<M, T>, M extends Base
         // 设置实体对象的更新者为当前用户
         entity.setUpdatedBy(sysUser);
         // 调用服务层的save方法，尝试保存或更新实体对象，返回保存结果的Map
-        Map<Boolean, String> save = service.save(entity);
-        // 判断保存是否成功，成功为true，失败为false
-        boolean isSuccess = save.containsKey(true);
-        // 获取保存操作的结果信息
-        String message = save.get(isSuccess);
+        entity = service.save(entity);
+        if(entity==null){
+            return AjaxJson.error("保存失败", HttpStatus.HTTP_NOT_FOUND, request, response);
+        }
         // 根据保存结果返回相应的AjaxJson对象
-        return isSuccess ? AjaxJson.success(message, request, response) : AjaxJson.error(message,
-                HttpStatus.HTTP_CONFLICT, request, response).put("code", HttpStatus.HTTP_CONFLICT);
+        return AjaxJson.success("保存成功", request, response).put("data", entity);
     }
 
     /**
