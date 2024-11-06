@@ -39,7 +39,7 @@ public class CertificationController extends BaseController<CertificationService
             sysUserCertification.setCertification(new Certification(i));
             List<SysUserCertification> list = sysUserCertificationService.findList(sysUserCertification);
             if (!(list == null || list.isEmpty())) {
-                return AjaxJson.error("存在该角色用户", HttpStatus.HTTP_BAD_REQUEST, request, response);
+                return AjaxJson.error("存在拥有该证件的用户", HttpStatus.HTTP_BAD_REQUEST, request, response);
             }
         }
         return super.deleteByIds(ids, request, response);

@@ -13,6 +13,11 @@ public class SysRole extends BeanEntity<SysRole> {
     private static final long serialVersionUID = 1L;
     private String name;
 
-    public SysRole() {}
+    public SysRole() {
+    }
+
+    public SysRole(int id) {
+        this.setId(id);
+    }
 }
 
