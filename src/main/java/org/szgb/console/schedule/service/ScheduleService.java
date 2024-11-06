@@ -1,15 +1,13 @@
 package org.szgb.console.schedule.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.szgb.console.schedule.entity.Schedule;
 import org.szgb.console.schedule.entity.SchedulePlan;
 import org.szgb.console.schedule.mapper.ScheduleMapper;
 import org.szgb.core.base.service.BaseService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import java.util.Map;
 
 @Slf4j
 @Service
@@ -54,7 +52,7 @@ public class ScheduleService extends BaseService<ScheduleMapper, Schedule> {
         for (String s : id) {
             int i = Integer.parseInt(s);
             SchedulePlan schedulePlan = new SchedulePlan();
-            schedulePlan.setSchedule(mapper.get(i));
+            schedulePlan.setSchedule(new Schedule(i));
             schedulePlanService.delete(schedulePlanService.findList(schedulePlan));
             mapper.delete(i);
         }

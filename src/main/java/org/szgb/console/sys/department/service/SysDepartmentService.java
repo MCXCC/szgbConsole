@@ -1,13 +1,12 @@
 package org.szgb.console.sys.department.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.szgb.console.schedule.entity.SchedulePlanPeople;
 import org.szgb.console.sys.department.entity.SysDepartment;
 import org.szgb.console.sys.department.mapper.SysDepartmentMapper;
 import org.szgb.core.base.service.BaseService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -27,8 +26,8 @@ public class SysDepartmentService extends BaseService<SysDepartmentMapper, SysDe
             SysDepartment sysDepartment = new SysDepartment();
             sysDepartment.setParent(entity);
             List<SysDepartment> list = this.findList(sysDepartment);
-            if(!list.isEmpty()){
-               this.delete(list);
+            if (!list.isEmpty()) {
+                this.delete(list);
             }
             mapper.delete(entity);
         }
@@ -43,7 +42,7 @@ public class SysDepartmentService extends BaseService<SysDepartmentMapper, SysDe
             SysDepartment sysDepartment = new SysDepartment();
             sysDepartment.setParent(new SysDepartment(i));
             List<SysDepartment> list = this.findList(sysDepartment);
-            if(!list.isEmpty()){
+            if (!list.isEmpty()) {
                 this.delete(list);
             }
             mapper.delete(i);
