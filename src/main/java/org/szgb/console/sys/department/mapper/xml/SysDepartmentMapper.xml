@@ -20,7 +20,7 @@
         a.is_deleted,
         a.version,
         a.created_by AS "createdBy.id",
-		a.updated_by AS "updatedBy.id",
+        a.updated_by AS "updatedBy.id",
         a.sort_order
     </sql>
 
@@ -67,17 +67,26 @@
         <include refid="departmentWhere"/>
     </select>
 
+    <select id="findChildren" resultType="org.szgb.console.sys.department.entity.SysDepartment">
+        SELECT
+        <include refid="departmentColumns"/>
+        FROM sys_department a
+        <where>
+            a.is_deleted=false AND a.parent_id=#{parentId}
+        </where>
+    </select>
+
     <insert id="insert" parameterType="org.szgb.console.sys.department.entity.SysDepartment" useGeneratedKeys="true"
             keyProperty="id">
         INSERT INTO sys_department
         (name,
-         parent_id,
-         created_by,
-         updated_by)
+        parent_id,
+        created_by,
+        updated_by)
         VALUES (#{name},
-                #{parent.id},
-                #{createdBy.id},
-                #{updatedBy.id})
+        #{parent.id},
+        #{createdBy.id},
+        #{updatedBy.id})
     </insert>
 
     <update id="update" parameterType="org.szgb.console.sys.department.entity.SysDepartment">
@@ -102,7 +111,7 @@
         WHERE id = #{id}
     </update>
 
-    <delete id="delete" >
+    <delete id="delete">
         UPDATE sys_department
         SET is_deleted= TRUE
         where id = #{id}

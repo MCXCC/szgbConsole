@@ -23,9 +23,7 @@ public class SysDepartmentService extends BaseService<SysDepartmentMapper, SysDe
     @Transactional(readOnly = false)
     protected void delete(List<SysDepartment> entityList) {
         for (SysDepartment entity : entityList) {
-            SysDepartment sysDepartment = new SysDepartment();
-            sysDepartment.setParent(entity);
-            List<SysDepartment> list = this.findList(sysDepartment);
+            List<SysDepartment> list = mapper.findChildren(entity.getId());
             if (!list.isEmpty()) {
                 this.delete(list);
             }
@@ -39,9 +37,7 @@ public class SysDepartmentService extends BaseService<SysDepartmentMapper, SysDe
         String[] id = ids.split(",");
         for (String s : id) {
             int i = Integer.parseInt(s);
-            SysDepartment sysDepartment = new SysDepartment();
-            sysDepartment.setParent(new SysDepartment(i));
-            List<SysDepartment> list = this.findList(sysDepartment);
+            List<SysDepartment> list = mapper.findChildren(i);
             if (!list.isEmpty()) {
                 this.delete(list);
             }
