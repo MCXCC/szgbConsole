@@ -15,5 +15,10 @@ public class Certification extends BeanEntity<Certification> {
     private String name;
     private int period;
 
-    public Certification() {}
+    public Certification() {
+    }
+
+    public Certification(int id) {
+        this.setId(id);
+    }
 }
