@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Objects;
 
 public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<T>> {
-    protected M mapper;
+    protected final M mapper;
 
     public BaseService(M mapper) {
         this.mapper = mapper;

@@ -15,7 +15,7 @@ import org.szgb.core.base.service.BaseService;
 import org.szgb.core.utils.AjaxJson;
 
 public abstract class BaseController<S extends BaseService<M, T>, M extends BaseMapper<T>, T extends BeanEntity<T>> {
-    protected S service;
+    protected final S service;
 
     public BaseController(S service) {
         this.service = service;
