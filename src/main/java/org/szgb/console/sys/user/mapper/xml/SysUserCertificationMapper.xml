@@ -31,7 +31,7 @@
 
     <sql id="userCertificationJoins">
         LEFT JOIN sys_user u ON u.id = a.user_id
-        LEFT JOIN certification c ON c.id = a.certification_id
+        LEFT JOIN sys_certification c ON c.id = a.certification_id
     </sql>
 
     <sql id="userCertificationWhere">
