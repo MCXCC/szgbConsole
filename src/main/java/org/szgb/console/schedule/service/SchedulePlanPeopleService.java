@@ -2,6 +2,7 @@ package org.szgb.console.schedule.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.szgb.console.schedule.entity.SchedulePlanPeople;
@@ -21,9 +22,11 @@ public class SchedulePlanPeopleService extends BaseService<SchedulePlanPeopleMap
     private final SysUserService sysUserService;
     private final SchedulePlanService schedulePlanService;
 
+    @Lazy
     @Autowired
-    public SchedulePlanPeopleService(SchedulePlanService schedulePlanService,
-                                     SchedulePlanPeopleMapper schedulePlanPeopleMapper, SysUserService sysUserService) {
+    public SchedulePlanPeopleService(
+            SchedulePlanPeopleMapper schedulePlanPeopleMapper, SysUserService sysUserService,
+            SchedulePlanService schedulePlanService) {
         super(schedulePlanPeopleMapper);
         this.sysUserService = sysUserService;
         this.schedulePlanService = schedulePlanService;
