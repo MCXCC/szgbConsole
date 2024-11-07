@@ -101,8 +101,8 @@
     <update id="update" parameterType="org.szgb.console.schedule.entity.SchedulePlanPeople">
         UPDATE schedule_plan_people
         <set>
-            <if test="schedule != null and schedule.id != null">
-                schedule_id=#{schedule.id},
+            <if test="schedulePlan != null and schedulePlan.id != null">
+                schedule_plan_id=#{schedulePlan.id},
             </if>
             <if test="type != null">
                 type=#{type},
