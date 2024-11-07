@@ -1,4 +1,4 @@
-package org.szgb.console.certification.entity;
+package org.szgb.console.sys.certification.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -9,11 +9,16 @@ import java.io.Serial;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
-public class Certification extends BeanEntity<Certification> {
+public class SysCertification extends BeanEntity<SysCertification> {
     @Serial
     private static final long serialVersionUID = 1L;
     private String name;
     private int period;
 
-    public Certification() {}
+    public SysCertification() {
+    }
+
+    public SysCertification(int id) {
+        this.setId(id);
+    }
 }

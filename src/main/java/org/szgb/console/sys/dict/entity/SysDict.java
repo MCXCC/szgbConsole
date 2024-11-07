@@ -14,4 +14,11 @@ public class SysDict extends BeanEntity<SysDict> {
     private static final long serialVersionUID = 1L;
     private String name;
     private List<SysDictChildren> dictChildren;
+
+    public SysDict() {
+    }
+
+    public SysDict(int id){
+        this.setId(id);
+    }
 }

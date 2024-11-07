@@ -14,10 +14,8 @@ import org.szgb.core.base.mapper.BaseMapper;
 import org.szgb.core.base.service.BaseService;
 import org.szgb.core.utils.AjaxJson;
 
-import java.util.Map;
-
 public abstract class BaseController<S extends BaseService<M, T>, M extends BaseMapper<T>, T extends BeanEntity<T>> {
-    protected S service;
+    protected final S service;
 
     public BaseController(S service) {
         this.service = service;
@@ -26,8 +24,8 @@ public abstract class BaseController<S extends BaseService<M, T>, M extends Base
     /**
      * 处理POST请求以获取实体对象
      *
-     * @param entity 请求体中的实体对象，用于查询
-     * @param request HTTP请求对象，用于获取请求信息
+     * @param entity   请求体中的实体对象，用于查询
+     * @param request  HTTP请求对象，用于获取请求信息
      * @param response HTTP响应对象，用于设置响应信息
      * @return 返回一个AjaxJson对象，包含查询结果或错误信息
      */
@@ -92,7 +90,7 @@ public abstract class BaseController<S extends BaseService<M, T>, M extends Base
         entity.setUpdatedBy(sysUser);
         // 调用服务层的save方法，尝试保存或更新实体对象，返回保存结果的Map
         entity = service.save(entity);
-        if(entity==null){
+        if (entity == null) {
             return AjaxJson.error("保存失败", HttpStatus.HTTP_NOT_FOUND, request, response);
         }
         // 根据保存结果返回相应的AjaxJson对象

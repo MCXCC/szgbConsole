@@ -56,7 +56,7 @@ public class SysDictService extends BaseService<SysDictMapper, SysDict> {
         for (String s : id) {
             int i = Integer.parseInt(s);
             SysDictChildren sysDictChildren = new SysDictChildren();
-            sysDictChildren.setDict(mapper.get(i));
+            sysDictChildren.setDict(new SysDict(i));
             sysDictChildrenService.delete(sysDictChildrenService.findList(sysDictChildren));
             mapper.delete(i);
         }

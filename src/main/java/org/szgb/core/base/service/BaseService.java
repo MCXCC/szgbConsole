@@ -6,11 +6,10 @@ import org.szgb.core.base.entity.BeanEntity;
 import org.szgb.core.base.mapper.BaseMapper;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 
 public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<T>> {
-    protected M mapper;
+    protected final M mapper;
 
     public BaseService(M mapper) {
         this.mapper = mapper;
@@ -20,6 +19,7 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
     public T get(T entity) {
         return this.get(entity.getId());
     }
+
     @Transactional(readOnly = true)
     protected T get(int id) {
         return mapper.get(id);
@@ -57,7 +57,6 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
             // 执行插入操作
             mapper.insert(entity);
             // 返回成功插入的信息
-            return entity;
         } else {
             // 对于现有实体，根据ID获取数据库中的实体对象
             T t = this.get(entity);
@@ -71,8 +70,8 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
             // 执行更新操作
             mapper.update(entity);
             // 返回成功更新的信息
-            return entity;
         }
+        return entity;
     }
 
     @Transactional(readOnly = false)

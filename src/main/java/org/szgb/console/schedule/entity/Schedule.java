@@ -17,7 +17,7 @@ public class Schedule extends BeanEntity<Schedule> {
     @Serial
     private static final long serialVersionUID = 1L;
     private SysDepartment department;
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
     private String M800;
@@ -66,4 +66,12 @@ public class Schedule extends BeanEntity<Schedule> {
      * 排班计划
      */
     private List<SchedulePlan> schedulePlanList;
+
+    public Schedule() {
+    }
+
+    public Schedule(int id) {
+        this.setId(id);
+    }
+
 }

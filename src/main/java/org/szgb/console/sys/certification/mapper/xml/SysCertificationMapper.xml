@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.szgb.console.certification.mapper.CertificationMapper">
-    <resultMap id="Certification" type="org.szgb.console.certification.entity.Certification">
+<mapper namespace="org.szgb.console.sys.certification.mapper.SysCertificationMapper">
+    <resultMap id="Certification" type="org.szgb.console.sys.certification.entity.SysCertification">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="period" column="period"/>
@@ -38,7 +38,7 @@
     <select id="get" resultMap="Certification">
         SELECT
         <include refid="certificationColumns"/>
-        FROM certification a
+        FROM sys_certification a
         where a.is_deleted=false
         and a.id = #{id}
     </select>
@@ -46,7 +46,7 @@
     <select id="findList" resultMap="Certification">
         SELECT
         <include refid="certificationColumns"/>
-        FROM certification a
+        FROM sys_certification a
         <where>
             <include refid="certificationWhere"/>
         </where>
@@ -62,14 +62,14 @@
 
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
-        FROM certification a
+        FROM sys_certification a
         WHERE
         <include refid="certificationWhere"/>
     </select>
 
-    <insert id="insert" parameterType="org.szgb.console.certification.entity.Certification" useGeneratedKeys="true"
+    <insert id="insert" parameterType="org.szgb.console.sys.certification.entity.SysCertification" useGeneratedKeys="true"
             keyProperty="id">
-        INSERT INTO certification
+        INSERT INTO sys_certification
         (name,
          period,
          created_by,
@@ -80,8 +80,8 @@
                 #{updatedBy.id})
     </insert>
 
-    <update id="update" parameterType="org.szgb.console.certification.entity.Certification">
-        UPDATE certification
+    <update id="update" parameterType="org.szgb.console.sys.certification.entity.SysCertification">
+        UPDATE sys_certification
         <set>
             <if test="name != null and name != ''">
                 name=#{name},
@@ -103,7 +103,7 @@
     </update>
 
     <update id="delete">
-        UPDATE certification
+        UPDATE sys_certification
         SET is_deleted= TRUE
         where id = #{id}
     </update>
