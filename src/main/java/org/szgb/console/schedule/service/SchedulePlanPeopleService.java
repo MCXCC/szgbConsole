@@ -19,11 +19,14 @@ import java.util.List;
 @Service
 public class SchedulePlanPeopleService extends BaseService<SchedulePlanPeopleMapper, SchedulePlanPeople> {
     private final SysUserService sysUserService;
+    private final SchedulePlanService schedulePlanService;
 
     @Autowired
-    public SchedulePlanPeopleService(SchedulePlanPeopleMapper schedulePlanPeopleMapper, SysUserService sysUserService) {
+    public SchedulePlanPeopleService(SchedulePlanService schedulePlanService,
+                                     SchedulePlanPeopleMapper schedulePlanPeopleMapper, SysUserService sysUserService) {
         super(schedulePlanPeopleMapper);
         this.sysUserService = sysUserService;
+        this.schedulePlanService = schedulePlanService;
     }
 
     @Override
@@ -40,6 +43,8 @@ public class SchedulePlanPeopleService extends BaseService<SchedulePlanPeopleMap
     @Override
     @Transactional(readOnly = false)
     public SchedulePlanPeople save(SchedulePlanPeople entity) {
+        entity = super.save(entity);
+        entity = get(entity);
         SysUser user = sysUserService.get(entity.getUser());
         LocalDate givenDate =
                 entity.getSchedulePlan().getSchedule().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
@@ -56,6 +61,6 @@ public class SchedulePlanPeopleService extends BaseService<SchedulePlanPeopleMap
         }
         user.setScheduleLastDay(entity.getSchedulePlan().getSchedule().getDate());
         sysUserService.save(user);
-        return super.save(entity);
+        return entity;
     }
 }
