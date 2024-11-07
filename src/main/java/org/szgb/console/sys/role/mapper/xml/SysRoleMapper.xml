@@ -4,6 +4,7 @@
     <resultMap id="SysRole" type="org.szgb.console.sys.role.entity.SysRole">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
+        <result property="menus" column="menus"/>
         <result property="createdAt" column="created_at" javaType="java.util.Date"/>
         <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
         <result property="isDeleted" column="is_deleted"/>
@@ -17,6 +18,7 @@
         id
         ,
         a.name,
+        a.menus,
         a.created_at,
         a.updated_at,
         a.is_deleted,
@@ -72,9 +74,11 @@
             keyProperty="id">
         INSERT INTO sys_role
         (name,
+         menus,
          created_by,
          updated_by)
         VALUES (#{name},
+                #{menus},
                 #{createdBy.id},
                 #{updatedBy.id})
     </insert>
@@ -84,6 +88,9 @@
         <set>
             <if test="name != null and name != ''">
                 name=#{name},
+            </if>
+            <if test="menus != null and menus != ''">
+                menus=#{menus},
             </if>
             <if test="updatedBy != null and updatedBy.id != null">
                 updated_by=#{updatedBy.id},
