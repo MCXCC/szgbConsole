@@ -82,12 +82,8 @@ public abstract class BaseController<S extends BaseService<M, T>, M extends Base
         if (entity == null) {
             return AjaxJson.error("参数错误", HttpStatus.HTTP_BAD_REQUEST, request, response);
         }
-        // 创建一个系统用户对象，用于存储当前操作用户的信息
-        SysUser sysUser = new SysUser();
-        // 从请求中提取当前用户的ID，并设置到用户对象
-        sysUser.setId(TokenUtil.getUid(request));
         // 设置实体对象的更新者为当前用户
-        entity.setUpdatedBy(sysUser);
+        entity.setUpdatedBy(new SysUser(TokenUtil.getUid(request)));
         // 调用服务层的save方法，尝试保存或更新实体对象，返回保存结果的Map
         entity = service.save(entity);
         if (entity == null) {

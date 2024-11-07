@@ -22,4 +22,8 @@ public class SysUser extends BeanEntity<SysUser> {
 
     public SysUser() {
     }
+
+    public SysUser(int id) {
+        this.setId(id);
+    }
 }

@@ -55,6 +55,7 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
         if (schedulePeopleList != null) {
             for (SchedulePlanPeople schedulePlanPeople : schedulePeopleList) {
                 schedulePlanPeople.setSchedulePlan(entity);
+                schedulePlanPeople.setUpdatedBy(entity.getUpdatedBy());
                 schedulePlanPeopleService.save(schedulePlanPeople);
             }
         }

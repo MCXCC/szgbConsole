@@ -27,6 +27,7 @@ public class ScheduleService extends BaseService<ScheduleMapper, Schedule> {
         if (schedule.getSchedulePlanList() != null) {
             for (SchedulePlan schedulePlan : schedule.getSchedulePlanList()) {
                 schedulePlan.setSchedule(schedule);
+                schedulePlan.setUpdatedBy(schedule.getUpdatedBy());
                 schedulePlanService.save(schedulePlan);
             }
         }
