@@ -10,6 +10,9 @@ import org.szgb.console.sys.user.entity.SysUser;
 import org.szgb.console.sys.user.service.SysUserService;
 import org.szgb.core.base.service.BaseService;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Slf4j
@@ -38,9 +41,17 @@ public class SchedulePlanPeopleService extends BaseService<SchedulePlanPeopleMap
     @Transactional(readOnly = false)
     public SchedulePlanPeople save(SchedulePlanPeople entity) {
         SysUser user = sysUserService.get(entity.getUser());
-        if (entity.getType() == 1 || entity.getType() == 2) {
+        LocalDate givenDate =
+                entity.getSchedulePlan().getSchedule().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        LocalDate yesterday = LocalDate.now().minusDays(1);
+        if (ChronoUnit.DAYS.between(givenDate, yesterday) != 0) {
+            user.setScheduleDayCount(0);
+            user.setScheduleNightCount(0);
+        } else if (entity.getType() == 1 || entity.getType() == 2) {
             user.setScheduleDayCount(user.getScheduleDayCount() + 1);
+            user.setScheduleNightCount(0);
         } else if (entity.getType() == 3) {
+            user.setScheduleDayCount(user.getScheduleDayCount() + 1);
             user.setScheduleNightCount(user.getScheduleNightCount() + 1);
         }
         user.setScheduleLastDay(entity.getSchedulePlan().getSchedule().getDate());
