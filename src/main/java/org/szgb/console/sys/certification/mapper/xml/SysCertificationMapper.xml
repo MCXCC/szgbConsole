@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.szgb.console.sys.certification.mapper.SysCertificationMapper">
-    <resultMap id="Certification" type="org.szgb.console.sys.certification.entity.SysCertification">
+    <resultMap id="SysCertification" type="org.szgb.console.sys.certification.entity.SysCertification">
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="period" column="period"/>
@@ -35,7 +35,7 @@
         </if>
     </sql>
 
-    <select id="get" resultMap="Certification">
+    <select id="get" resultMap="SysCertification">
         SELECT
         <include refid="certificationColumns"/>
         FROM sys_certification a
@@ -43,7 +43,7 @@
         and a.id = #{id}
     </select>
 
-    <select id="findList" resultMap="Certification">
+    <select id="findList" resultMap="SysCertification">
         SELECT
         <include refid="certificationColumns"/>
         FROM sys_certification a

@@ -36,7 +36,7 @@ public class SysCertificationController extends BaseController<SysCertificationS
         for (String s : ids.split(",")) {
             int i = Integer.parseInt(s);
             SysUserCertification sysUserCertification = new SysUserCertification();
-            sysUserCertification.setSysCertification(new SysCertification(i));
+            sysUserCertification.setCertification(new SysCertification(i));
             List<SysUserCertification> list = sysUserCertificationService.findList(sysUserCertification);
             if (!(list == null || list.isEmpty())) {
                 return AjaxJson.error("存在拥有该证件的用户", HttpStatus.HTTP_BAD_REQUEST, request, response);
