@@ -37,6 +37,10 @@
         .
         is_deleted
         = false
+        <if test="dict != null and dict.id != null">
+            AND a.dict_id = #{dict.id}
+        </if>
+
     </sql>
 
     <select id="get" resultMap="SysDictChildren">
@@ -75,15 +79,15 @@
             keyProperty="id">
         INSERT INTO sys_dict_children
         (dict_id,
-         label,
-         value,
-         created_by,
-         updated_by)
+        label,
+        value,
+        created_by,
+        updated_by)
         VALUES (#{dict.id},
-                #{label},
-                #{value},
-                #{createdBy.id},
-                #{updatedBy.id})
+        #{label},
+        #{value},
+        #{createdBy.id},
+        #{updatedBy.id})
     </insert>
 
     <update id="update" parameterType="org.szgb.console.sys.dict.entity.SysDictChildren">
