@@ -1,6 +1,7 @@
 package org.szgb.console.schedule.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +16,7 @@ import java.util.List;
 public class SchedulePlan extends BeanEntity<SchedulePlan> {
     @Serial
     private static final long serialVersionUID = 1L;
+    @JsonIgnore
     private Schedule schedule;
     /**
      * 任务类型

@@ -55,10 +55,10 @@ public class SchedulePlanPeopleService extends BaseService<SchedulePlanPeopleMap
         if (ChronoUnit.DAYS.between(givenDate, yesterday) != 0) {
             user.setScheduleDayCount(0);
             user.setScheduleNightCount(0);
-        } else if (entity.getType() == 1 || entity.getType() == 2) {
+        } else if (entity.getSchedulePlan().getScheduleType() == 1 || entity.getSchedulePlan().getScheduleType() == 2) {
             user.setScheduleDayCount(user.getScheduleDayCount() + 1);
             user.setScheduleNightCount(0);
-        } else if (entity.getType() == 3) {
+        } else if (entity.getSchedulePlan().getScheduleType() == 3) {
             user.setScheduleDayCount(user.getScheduleDayCount() + 1);
             user.setScheduleNightCount(user.getScheduleNightCount() + 1);
         }
