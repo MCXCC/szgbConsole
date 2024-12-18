@@ -19,18 +19,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/sys/user")
 public class SysUserController extends BaseController<SysUserService, SysUserMapper, SysUser> {
-
-    private final SysUserService sysUserService;
-
     @Autowired
     public SysUserController(SysUserService sysUserService) {
         super(sysUserService);
-        this.sysUserService = sysUserService;
     }
 
     @PostMapping("/login")
     public AjaxJson getLogin(@RequestBody SysUser user, HttpServletRequest request, HttpServletResponse response) {
-        SysUser sysUser = sysUserService.getToken(user);
+        SysUser sysUser = service.getToken(user);
         if (sysUser == null) {
             return AjaxJson.error("账号或密码错误", HttpStatus.HTTP_UNAUTHORIZED, request, response);
         }
