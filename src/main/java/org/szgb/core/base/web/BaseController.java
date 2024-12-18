@@ -3,6 +3,7 @@ package org.szgb.core.base.web;
 import cn.hutool.http.HttpStatus;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,6 +15,7 @@ import org.szgb.core.base.mapper.BaseMapper;
 import org.szgb.core.base.service.BaseService;
 import org.szgb.core.utils.AjaxJson;
 
+@Slf4j
 public abstract class BaseController<S extends BaseService<M, T>, M extends BaseMapper<T>, T extends BeanEntity<T>> {
     protected final S service;
 

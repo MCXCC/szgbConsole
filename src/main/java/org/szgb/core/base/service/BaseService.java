@@ -1,5 +1,6 @@
 package org.szgb.core.base.service;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.transaction.annotation.Transactional;
 import org.szgb.console.utils.Page;
 import org.szgb.core.base.entity.BeanEntity;
@@ -8,6 +9,7 @@ import org.szgb.core.base.mapper.BaseMapper;
 import java.util.List;
 import java.util.Objects;
 
+@Slf4j
 public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<T>> {
     protected final M mapper;
 
