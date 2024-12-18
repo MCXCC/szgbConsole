@@ -22,11 +22,6 @@ public class SysUser extends BeanEntity<SysUser> {
     private String password;
     private String token;
     private SysDepartment department;
-    private Integer scheduleDayCount;
-    private Integer scheduleNightCount;
-    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date scheduleLastDay;
 
     public SysUser() {
     }

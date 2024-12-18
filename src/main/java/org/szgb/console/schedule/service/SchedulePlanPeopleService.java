@@ -19,17 +19,10 @@ import java.util.List;
 @Slf4j
 @Service
 public class SchedulePlanPeopleService extends BaseService<SchedulePlanPeopleMapper, SchedulePlanPeople> {
-    private final SysUserService sysUserService;
-    private final SchedulePlanService schedulePlanService;
-
-    @Lazy
     @Autowired
     public SchedulePlanPeopleService(
-            SchedulePlanPeopleMapper schedulePlanPeopleMapper, SysUserService sysUserService,
-            SchedulePlanService schedulePlanService) {
+            SchedulePlanPeopleMapper schedulePlanPeopleMapper) {
         super(schedulePlanPeopleMapper);
-        this.sysUserService = sysUserService;
-        this.schedulePlanService = schedulePlanService;
     }
 
     @Override
@@ -41,29 +34,5 @@ public class SchedulePlanPeopleService extends BaseService<SchedulePlanPeopleMap
     @Transactional(readOnly = false)
     public void deleteBySchedulePlanId(int schedulePlanId) {
         mapper.deleteBySchedulePlanId(schedulePlanId);
-    }
-
-    @Override
-    @Transactional(readOnly = false)
-    public SchedulePlanPeople save(SchedulePlanPeople entity) {
-        entity = super.save(entity);
-        entity = get(entity);
-        SysUser user = sysUserService.get(entity.getUser());
-        LocalDate givenDate =
-                entity.getSchedulePlan().getSchedule().getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-        LocalDate yesterday = LocalDate.now().minusDays(1);
-        if (ChronoUnit.DAYS.between(givenDate, yesterday) != 0) {
-            user.setScheduleDayCount(0);
-            user.setScheduleNightCount(0);
-        } else if (entity.getSchedulePlan().getScheduleType() == 1 || entity.getSchedulePlan().getScheduleType() == 2) {
-            user.setScheduleDayCount(user.getScheduleDayCount() + 1);
-            user.setScheduleNightCount(0);
-        } else if (entity.getSchedulePlan().getScheduleType() == 3) {
-            user.setScheduleDayCount(user.getScheduleDayCount() + 1);
-            user.setScheduleNightCount(user.getScheduleNightCount() + 1);
-        }
-        user.setScheduleLastDay(entity.getSchedulePlan().getSchedule().getDate());
-        sysUserService.save(user);
-        return entity;
     }
 }
