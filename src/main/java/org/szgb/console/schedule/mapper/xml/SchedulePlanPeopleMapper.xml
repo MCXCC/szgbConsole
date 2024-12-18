@@ -83,6 +83,17 @@
         <include refid="SchedulePlanPeopleWhere"/>
     </select>
 
+    <select id="findListByPlanId" resultMap="SchedulePlanPeople">
+        SELECT
+        <include refid="SchedulePlanPeopleColumns"/>
+        FROM schedule_plan_people a
+        <include refid="SchedulePlanPeopleJoins"/>
+        <where>
+            <include refid="SchedulePlanPeopleWhere"/>
+            AND a.schedule_plan_id = #{schedulePlanId}
+        </where>
+    </select>
+
     <insert id="insert" parameterType="org.szgb.console.schedule.entity.SchedulePlanPeople" useGeneratedKeys="true"
             keyProperty="id">
         INSERT INTO schedule_plan_people
