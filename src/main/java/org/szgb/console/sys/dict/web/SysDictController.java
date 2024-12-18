@@ -17,16 +17,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping(value = "/sys/dict")
 public class SysDictController extends BaseController<SysDictService, SysDictMapper, SysDict> {
-    private final SysDictService sysDictService;
-
     @Autowired
     public SysDictController(SysDictService sysDictService) {
         super(sysDictService);
-        this.sysDictService = sysDictService;
     }
 
     @PostMapping("/treeList")
     public AjaxJson getTreeList(HttpServletRequest request, HttpServletResponse response) {
-        return AjaxJson.success(request, response).put("dictTree", sysDictService.findTreeList());
+        return AjaxJson.success(request, response).put("dictTree", service.findTreeList());
     }
 }

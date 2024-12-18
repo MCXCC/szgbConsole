@@ -15,7 +15,7 @@ import org.szgb.core.base.web.BaseController;
 public class SysLineLocationController extends BaseController<SysLineLocationService, SysLineLocationMapper,
         SysLineLocation> {
     @Autowired
-    public SysLineLocationController(SysLineLocationService service) {
-        super(service);
+    public SysLineLocationController(SysLineLocationService sysLineLocationService) {
+        super(sysLineLocationService);
     }
 }

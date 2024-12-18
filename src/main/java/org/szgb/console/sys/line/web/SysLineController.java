@@ -14,7 +14,7 @@ import org.szgb.core.base.web.BaseController;
 @RequestMapping(value = "/sys/line")
 public class SysLineController extends BaseController<SysLineService, SysLineMapper, SysLine> {
     @Autowired
-    public SysLineController(SysLineService service) {
-        super(service);
+    public SysLineController(SysLineService sysLineService) {
+        super(sysLineService);
     }
 }

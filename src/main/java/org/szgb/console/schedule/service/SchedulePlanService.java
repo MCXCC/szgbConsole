@@ -50,7 +50,6 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
     @Override
     @Transactional(readOnly = false)
     public SchedulePlan save(SchedulePlan entity) {
-        entity = super.save(entity);
         List<SchedulePlanPeople> schedulePeopleList = entity.getSchedulePeopleList();
         if (schedulePeopleList != null) {
             for (SchedulePlanPeople schedulePlanPeople : schedulePeopleList) {
@@ -59,26 +58,19 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
                 schedulePlanPeopleService.save(schedulePlanPeople);
             }
         }
+        entity = super.save(entity);
         return entity;
     }
 
     @Override
     @Transactional(readOnly = false)
     public void delete(List<SchedulePlan> entityList){
-        for (SchedulePlan entity : entityList) {
-            schedulePlanPeopleService.deleteBySchedulePlanId(entity.getId());
-            mapper.delete(entity);
-        }
+        super.delete(entityList);
     }
 
     @Override
-    @Transactional(readOnly = false)
-    public void delete(String ids) {
-        String[] id = ids.split(",");
-        for (String s : id) {
-            int i = Integer.parseInt(s);
-            schedulePlanPeopleService.deleteBySchedulePlanId(i);
-            mapper.delete(i);
-        }
+    protected void delete(int id) {
+        schedulePlanPeopleService.deleteBySchedulePlanId(id);
+        super.delete(id);
     }
 }
