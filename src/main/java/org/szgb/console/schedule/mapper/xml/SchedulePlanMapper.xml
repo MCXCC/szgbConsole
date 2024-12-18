@@ -19,10 +19,7 @@
     </resultMap>
 
     <sql id="schedulePlanColumns">
-        a
-        .
-        id
-        ,
+        a.id,
         a.schedule_id AS "schedule.id",
         a.task_type,
         a.task_name,

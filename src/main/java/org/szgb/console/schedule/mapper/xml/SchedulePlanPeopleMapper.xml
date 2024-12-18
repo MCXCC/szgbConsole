@@ -89,7 +89,7 @@
         FROM schedule_plan_people a
         <include refid="SchedulePlanPeopleJoins"/>
         <where>
-            <include refid="SchedulePlanPeopleWhere"/>
+            a.is_deleted = false
             AND a.schedule_plan_id = #{schedulePlanId}
         </where>
     </select>
@@ -98,15 +98,15 @@
             keyProperty="id">
         INSERT INTO schedule_plan_people
         (schedule_plan_id,
-         type,
-         user_id,
-         created_by,
-         updated_by)
+        type,
+        user_id,
+        created_by,
+        updated_by)
         VALUES (#{schedulePlan.id},
-                #{type},
-                #{user.id},
-                #{createdBy.id},
-                #{updatedBy.id})
+        #{type},
+        #{user.id},
+        #{createdBy.id},
+        #{updatedBy.id})
     </insert>
 
     <update id="update" parameterType="org.szgb.console.schedule.entity.SchedulePlanPeople">

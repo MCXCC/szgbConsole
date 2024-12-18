@@ -54,13 +54,32 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
         List<SchedulePlanPeople> oldList = schedulePlanPeopleService.findListByPlanId(schedulePlan.getId());
         if (schedulePeopleList != null) {
             for (SchedulePlanPeople schedulePlanPeople : schedulePeopleList) {
-                if (oldList.stream().anyMatch(obj -> Objects.equals(schedulePlanPeople.getId(), obj.getId()))) {
+                // 判断是否是新数据
+                if (schedulePlanPeople.getId() == null) {
                     schedulePlanPeople.setSchedulePlan(schedulePlan);
                     schedulePlanPeople.setUpdatedBy(schedulePlan.getUpdatedBy());
                     schedulePlanPeopleService.save(schedulePlanPeople);
-                }else{
-                    schedulePlanPeopleService.delete(schedulePlanPeople);
+                    continue;
                 }
+
+                // 判断是老数据
+                boolean isOld = false;
+                for (SchedulePlanPeople old : oldList) {
+                    if (Objects.equals(old.getId(), schedulePlanPeople.getId())) {
+                        isOld = true;
+                        schedulePlanPeople.setSchedulePlan(schedulePlan);
+                        schedulePlanPeople.setUpdatedBy(schedulePlan.getUpdatedBy());
+                        schedulePlanPeopleService.save(schedulePlanPeople);
+                        break; // 退出循环
+                    }
+                }
+                if (isOld) {
+                    continue;
+                }
+
+                // 删除已删除的数据
+                schedulePlanPeopleService.delete(schedulePlanPeople);
+
             }
         }
         return super.save(schedulePlan);
