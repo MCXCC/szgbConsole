@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.szgb.console.schedule.mapper.SchedulePlanTypeMapper">
+    <resultMap id="SchedulePlanType" type="org.szgb.console.schedule.entity.SchedulePlanType">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="startAt" column="start_at"/>
+        <result property="endAt" column="end_at"/>
+        <result property="createdAt" column="created_at" javaType="java.util.Date"/>
+        <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
+        <result property="isDeleted" column="is_deleted"/>
+        <result property="version" column="version"/>
+        <result property="sortOrder" column="sort_order"/>
+    </resultMap>
+
+    <sql id="SchedulePlanTypeColumns">
+        a.id,
+        a.name,
+        a.start_at,
+        a.end_at,
+        a.created_at,
+        a.updated_at,
+        a.is_deleted,
+        a.version,
+        a.created_by AS "createdBy.id",
+        a.updated_by AS "updatedBy.id",
+        a.sort_order,
+    </sql>
+
+    <sql id="SchedulePlanTypeJoins">
+    </sql>
+
+    <sql id="SchedulePlanTypeWhere">
+        a
+        .
+        is_deleted
+        = false
+
+    </sql>
+
+    <select id="get" resultMap="SchedulePlanType">
+        SELECT
+        <include refid="SchedulePlanTypeColumns"/>
+        FROM schedule_plan_type a
+        <include refid="SchedulePlanTypeJoins"/>
+        where a.is_deleted=false
+        and a.id = #{id}
+    </select>
+
+    <select id="findList" resultMap="SchedulePlanType">
+        SELECT
+        <include refid="SchedulePlanTypeColumns"/>
+        FROM schedule_plan_type a
+        <include refid="SchedulePlanTypeJoins"/>
+        <where>
+            <include refid="SchedulePlanTypeWhere"/>
+        </where>
+
+        <if test="page!=null and page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
+
+        <if test="page!=null and page.first >= 0 and page.pageSize > 0">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM schedule_plan_type a
+        WHERE
+        <include refid="SchedulePlanTypeWhere"/>
+    </select>
+
+    <select id="findListByPlanId" resultMap="SchedulePlanType">
+        SELECT
+        <include refid="SchedulePlanTypeColumns"/>
+        FROM schedule_plan_type a
+        <include refid="SchedulePlanTypeJoins"/>
+        <where>
+            a.is_deleted = false
+            AND a.schedule_plan_id = #{schedulePlanId}
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="org.szgb.console.schedule.entity.SchedulePlanType" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO schedule_plan_type
+        (
+        name,
+        start_at,
+        end_at,
+        created_by,
+        updated_by)
+        VALUES (#{schedulePlan.id},
+        #{type},
+        #{user.id},
+        #{createdBy.id},
+        #{updatedBy.id})
+    </insert>
+
+    <update id="update" parameterType="org.szgb.console.schedule.entity.SchedulePlanType">
+        UPDATE schedule_plan_type
+        <set>
+            <if test="name != null and name !=''">
+                name=#{name},
+            </if>
+            <if test="startAt != null">
+                start_at=#{startAt},
+            </if>
+            <if test="endAt != null">
+                end_at=#{endAt},
+            </if>
+            <if test="updatedBy != null and updatedBy.id != null">
+                updated_by=#{updatedBy.id},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted=#{isDeleted},
+            </if>
+            <if test="version != null">
+                version=#{version}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE schedule_plan_type
+        SET is_deleted= TRUE
+        where id = #{id}
+    </update>
+</mapper>
