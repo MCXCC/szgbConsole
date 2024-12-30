@@ -11,11 +11,17 @@ import java.io.Serial;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 排班计划
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class SchedulePlan extends BeanEntity<SchedulePlan> {
     @Serial
     private static final long serialVersionUID = 1L;
+    /**
+     * 排班消息
+     */
     @JsonIgnore
     private Schedule schedule;
     /**

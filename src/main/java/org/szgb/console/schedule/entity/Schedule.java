@@ -11,15 +11,27 @@ import java.io.Serial;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 排班消息
+ */
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class Schedule extends BeanEntity<Schedule> {
     @Serial
     private static final long serialVersionUID = 1L;
+    /**
+     * 部门
+     */
     private SysDepartment department;
+    /**
+     * 日期
+     */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date date;
+    /**
+     * 800M号码
+     */
     private String M800;
     /**
      * 白班领班
