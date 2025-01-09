@@ -155,4 +155,16 @@
         and a.password = #{password}
     </select>
 
+    <select id="getByIdList" resultType="org.szgb.console.sys.user.entity.SysUser">
+        SELECT
+        <include refid="userColumns"/>
+        FROM sys_user
+        <include refid="userJoins"/>
+        WHERE id IN
+        <foreach item="id" index="index" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </select>
+
+
 </mapper>

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.szgb.console.sys.user.entity.SysUser;
 import org.szgb.core.base.entity.BeanEntity;
 
 import java.io.Serial;
@@ -41,6 +42,18 @@ public class SchedulePlan extends BeanEntity<SchedulePlan> {
      */
     private int scheduleType;
     /**
+     * 施工负责人
+     */
+    private SysUser responsiblePerson;
+    /**
+     * 组员
+     */
+    private String groupMemberIds;
+    /**
+     * 组员列表
+     */
+    private List<SysUser> groupMember;
+    /**
      * 开始时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
@@ -60,8 +73,6 @@ public class SchedulePlan extends BeanEntity<SchedulePlan> {
      * 备注
      */
     private String remark;
-
-    private List<SchedulePlanPeople> schedulePeopleList;
 
     public SchedulePlan() {
     }
