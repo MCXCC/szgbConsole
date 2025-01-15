@@ -1,18 +1,18 @@
 package org.szgb.console.utils;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.szgb.console.sys.user.entity.SysUser;
 import org.szgb.console.sys.user.mapper.SysUserMapper;
-import org.szgb.core.utils.SpringContextUtil;
 
 import java.util.List;
 
 @Slf4j
 @Component
 public class UserUtil {
-
-    static SysUserMapper sysUserMapper = SpringContextUtil.getBean(SysUserMapper.class);
+    @Autowired
+    private static SysUserMapper sysUserMapper;
 
     public static List<SysUser> getUsersByIds(String ids, String separator) {
         if (ids == null || ids.isEmpty()) {

@@ -4,11 +4,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.szgb.console.utils.TokenUtil;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Objects;
 
 /**
  * 登录检查
@@ -20,6 +24,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Slf4j
 @Component
 public class LoginInterceptor implements HandlerInterceptor {
+    @Autowired
+    private Environment env;
     /**
      * 目标方法执行之前
      * 登录检查写在这里，如果没有登录，就不执行目标方法
@@ -32,6 +38,10 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
+        // 如果是debug模式，直接放行
+        if(Objects.equals(env.getProperty("debug"), "true")){
+            return true;
+        }
         // 如果是OPTIONS请求，直接放行
         if (HttpMethod.OPTIONS.toString().equals(request.getMethod())) {
             return true;

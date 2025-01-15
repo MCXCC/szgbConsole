@@ -1,3 +1,4 @@
+debug: true
 spring:
   application:
     name: szgbConsole
@@ -6,7 +7,6 @@ spring:
     username: root
     password: Abc123456
     driver-class-name: com.mysql.cj.jdbc.Driver
-
 
 mybatis:
   mapper-locations: classpath:org/szgb/**/mapper/xml/*.xml
