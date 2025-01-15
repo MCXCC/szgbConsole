@@ -16,7 +16,7 @@
         .
         id
         ,
-        a.line AS "line.id",
+        a.line_id AS "line.id",
         a.name,
         a.created_at,
         a.updated_at,
