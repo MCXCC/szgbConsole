@@ -25,6 +25,6 @@ public class SysLineController extends BaseController<SysLineService, SysLineMap
 
     @PostMapping("/treeList")
     public AjaxJson getTreeList(HttpServletRequest request, HttpServletResponse response) {
-        return AjaxJson.success(request, response).put("dictTree", service.findTreeList());
+        return AjaxJson.success(request, response).put("lineTree", service.findTreeList());
     }
 }

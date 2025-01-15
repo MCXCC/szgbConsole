@@ -1,4 +1,3 @@
-debug: true
 spring:
   application:
     name: szgbConsole
@@ -11,3 +10,6 @@ spring:
 mybatis:
   mapper-locations: classpath:org/szgb/**/mapper/xml/*.xml
   type-aliases-package: org.szgb.console
+
+run:
+  model: debug

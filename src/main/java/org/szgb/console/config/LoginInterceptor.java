@@ -39,7 +39,7 @@ public class LoginInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
         // 如果是debug模式，直接放行
-        if(Objects.equals(env.getProperty("debug"), "true")){
+        if(Objects.equals(env.getProperty("run.model"), "debug")){
             return true;
         }
         // 如果是OPTIONS请求，直接放行
