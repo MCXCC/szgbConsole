@@ -38,10 +38,10 @@ public class SysDictService extends BaseService<SysDictMapper, SysDict> {
                         .filter(dict -> dict.getId().equals(child.getDict().getId()))
                         .findFirst().ifPresent(parent -> {
                             try {
-                                parent.getDictChildren().add(child);
+                                parent.getChildren().add(child);
                             } catch (NullPointerException e) {
-                                parent.setDictChildren(new ArrayList<>());
-                                parent.getDictChildren().add(child);
+                                parent.setChildren(new ArrayList<>());
+                                parent.getChildren().add(child);
                             }
                         });
             }

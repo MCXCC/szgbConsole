@@ -13,7 +13,7 @@ public class SysDict extends BeanEntity<SysDict> {
     @Serial
     private static final long serialVersionUID = 1L;
     private String name;
-    private List<SysDictChildren> dictChildren;
+    private List<SysDictChildren> children;
 
     public SysDict() {
     }
