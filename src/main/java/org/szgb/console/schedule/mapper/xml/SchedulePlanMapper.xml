@@ -25,6 +25,8 @@
         a.task_name,
         a.location,
         a.schedule_type,
+        a.responsible_person_id AS "responsiblePerson.id",
+        a.group_member_ids,
         a.start_at,
         a.end_at,
         a.goal,
@@ -35,10 +37,12 @@
         a.version,
         a.created_by AS "createdBy.id",
         a.updated_by AS "updatedBy.id",
-        a.sort_order
+        a.sort_order,
+        u.name AS "responsiblePerson.name"
     </sql>
 
     <sql id="schedulePlanJoins">
+        LEFT JOIN sys_user u ON u.id = a.responsible_person_id
     </sql>
 
     <sql id="schedulePlanWhere">
@@ -88,6 +92,8 @@
          task_name,
          location,
          schedule_type,
+         responsible_person_id,
+         group_member_ids,
          start_at,
          end_at,
          goal,
@@ -99,6 +105,8 @@
                 #{taskName},
                 #{location},
                 #{scheduleType},
+                #{responsiblePerson.id},
+                #{groupMemberIds},
                 #{startAt},
                 #{endAt},
                 #{goal},
@@ -124,6 +132,12 @@
             </if>
             <if test="scheduleType != null">
                 schedule_type=#{scheduleType},
+            </if>
+            <if test="responsiblePerson != null and responsiblePerson.id != null">
+                responsible_person_id=#{responsiblePerson.id}
+            </if>
+            <if test="groupMemberIds != null and groupMemberIds != ''">
+                group_member_ids=#{groupMemberIds},
             </if>
             <if test="startAt != null">
                 start_at=#{startAt},
