@@ -7,6 +7,7 @@
         <result property="taskName" column="task_name"/>
         <result property="location" column="location"/>
         <result property="scheduleType" column="schedule_type"/>
+        <result property="groupMemberIds" column="group_member_ids"/>
         <result property="startAt" column="start_at" javaType="java.util.Date"/>
         <result property="endAt" column="end_at" javaType="java.util.Date"/>
         <result property="goal" column="goal"/>
