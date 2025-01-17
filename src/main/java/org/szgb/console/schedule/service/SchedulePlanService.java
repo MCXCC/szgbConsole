@@ -26,7 +26,9 @@ public class SchedulePlanService extends BaseService<SchedulePlanMapper, Schedul
     public List<SchedulePlan> findList(SchedulePlan entity) {
         List<SchedulePlan> list = super.findList(entity);
         list.forEach(schedulePlan -> {
-            schedulePlan.setGroupMember(sysUserMapper.getByIdList(schedulePlan.getGroupMemberIds().split(",")));
+            if (schedulePlan.getGroupMemberIds() != null) {
+                schedulePlan.setGroupMember(sysUserMapper.getByIdList(schedulePlan.getGroupMemberIds().split(",")));
+            }
         });
         return list;
     }

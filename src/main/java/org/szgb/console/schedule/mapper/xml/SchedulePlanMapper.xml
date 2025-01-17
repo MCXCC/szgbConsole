@@ -56,6 +56,7 @@
         SELECT
         <include refid="schedulePlanColumns"/>
         FROM schedule_plan a
+        <include refid="schedulePlanJoins"/>
         where a.is_deleted=false
         and a.id = #{id}
     </select>
@@ -64,6 +65,7 @@
         SELECT
         <include refid="schedulePlanColumns"/>
         FROM schedule_plan a
+        <include refid="schedulePlanJoins"/>
         <where>
             <include refid="schedulePlanWhere"/>
         </where>
