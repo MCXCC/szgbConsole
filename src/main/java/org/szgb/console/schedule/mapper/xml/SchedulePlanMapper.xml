@@ -137,7 +137,7 @@
                 schedule_type=#{scheduleType},
             </if>
             <if test="responsiblePerson != null and responsiblePerson.id != null">
-                responsible_person_id=#{responsiblePerson.id}
+                responsible_person_id=#{responsiblePerson.id},
             </if>
             <if test="groupMemberIds != null and groupMemberIds != ''">
                 group_member_ids=#{groupMemberIds},
