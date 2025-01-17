@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import org.szgb.core.base.entity.BeanEntity;
 
 import java.io.Serial;
+import java.sql.Time;
 import java.util.Date;
 
 /**
@@ -22,9 +23,9 @@ public class SchedulePlanType extends BeanEntity<SchedulePlanType> {
     /**
      * 开始时间
      */
-    private Date startAt;
+    private Time startAt;
     /**
      * 结束时间
      */
-    private Date endAt;
+    private Time endAt;
 }
