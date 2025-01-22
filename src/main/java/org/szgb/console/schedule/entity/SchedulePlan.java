@@ -40,7 +40,7 @@ public class SchedulePlan extends BeanEntity<SchedulePlan> {
     /**
      * 班次类型
      */
-    private int scheduleType;
+    private int schedulePlanType;
     /**
      * 施工负责人
      */

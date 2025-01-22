@@ -6,7 +6,7 @@
         <result property="taskType" column="task_type"/>
         <result property="taskName" column="task_name"/>
         <result property="location" column="location"/>
-        <result property="scheduleType" column="schedule_type"/>
+        <result property="schedulePlanType" column="schedule_plan_type"/>
         <result property="groupMemberIds" column="group_member_ids"/>
         <result property="startAt" column="start_at" javaType="java.util.Date"/>
         <result property="endAt" column="end_at" javaType="java.util.Date"/>
@@ -25,7 +25,7 @@
         a.task_type,
         a.task_name,
         a.location,
-        a.schedule_type,
+        a.schedule_plan_type,
         a.responsible_person_id AS "responsiblePerson.id",
         a.group_member_ids,
         a.start_at,
@@ -94,7 +94,7 @@
          task_type,
          task_name,
          location,
-         schedule_type,
+         schedule_plan_type,
          responsible_person_id,
          group_member_ids,
          start_at,
@@ -107,7 +107,7 @@
                 #{taskType},
                 #{taskName},
                 #{location},
-                #{scheduleType},
+                #{schedulePlanType},
                 #{responsiblePerson.id},
                 #{groupMemberIds},
                 #{startAt},
@@ -133,8 +133,8 @@
             <if test="location != null and location != ''">
                 location=#{location},
             </if>
-            <if test="scheduleType != null">
-                schedule_type=#{scheduleType},
+            <if test="schedulePlanType != null">
+                schedule_plan_type=#{schedulePlanType},
             </if>
             <if test="responsiblePerson != null and responsiblePerson.id != null">
                 responsible_person_id=#{responsiblePerson.id},

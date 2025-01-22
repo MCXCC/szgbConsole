@@ -24,7 +24,7 @@
         a.version,
         a.created_by AS "createdBy.id",
         a.updated_by AS "updatedBy.id",
-        a.sort_order,
+        a.sort_order
     </sql>
 
     <sql id="SchedulePlanTypeJoins">
