@@ -6,7 +6,6 @@ import org.szgb.core.base.entity.BeanEntity;
 
 import java.io.Serial;
 import java.sql.Time;
-import java.util.Date;
 
 /**
  * 排班类型

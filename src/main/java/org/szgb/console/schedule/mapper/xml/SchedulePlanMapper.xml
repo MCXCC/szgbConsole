@@ -6,7 +6,6 @@
         <result property="taskType" column="task_type"/>
         <result property="taskName" column="task_name"/>
         <result property="location" column="location"/>
-        <result property="schedulePlanType" column="schedule_plan_type"/>
         <result property="groupMemberIds" column="group_member_ids"/>
         <result property="startAt" column="start_at" javaType="java.util.Date"/>
         <result property="endAt" column="end_at" javaType="java.util.Date"/>
@@ -25,7 +24,7 @@
         a.task_type,
         a.task_name,
         a.location,
-        a.schedule_plan_type,
+        a.schedule_plan_type_id AS "schedulePlanType.id",
         a.responsible_person_id AS "responsiblePerson.id",
         a.group_member_ids,
         a.start_at,
@@ -39,11 +38,13 @@
         a.created_by AS "createdBy.id",
         a.updated_by AS "updatedBy.id",
         a.sort_order,
-        u.name AS "responsiblePerson.name"
+        u.name AS "responsiblePerson.name",
+        spt.name AS "schedulePlanType.name"
     </sql>
 
     <sql id="schedulePlanJoins">
         LEFT JOIN sys_user u ON u.id = a.responsible_person_id
+        LEFT JOIN schedule_plan_type spt ON spt.id = a.schedule_plan_type_id
     </sql>
 
     <sql id="schedulePlanWhere">
@@ -94,7 +95,7 @@
          task_type,
          task_name,
          location,
-         schedule_plan_type,
+         schedule_plan_type_id,
          responsible_person_id,
          group_member_ids,
          start_at,
@@ -107,7 +108,7 @@
                 #{taskType},
                 #{taskName},
                 #{location},
-                #{schedulePlanType},
+                #{schedulePlanType.id},
                 #{responsiblePerson.id},
                 #{groupMemberIds},
                 #{startAt},
@@ -133,8 +134,8 @@
             <if test="location != null and location != ''">
                 location=#{location},
             </if>
-            <if test="schedulePlanType != null">
-                schedule_plan_type=#{schedulePlanType},
+            <if test="schedulePlanType != null and schedulePlanType.id != null">
+                schedule_plan_type=#{schedulePlanType.id},
             </if>
             <if test="responsiblePerson != null and responsiblePerson.id != null">
                 responsible_person_id=#{responsiblePerson.id},
