@@ -55,7 +55,7 @@ public class SysLineService extends BaseService<SysLineMapper, SysLine> {
         });
 
         lineList.forEach(line -> {
-            line.setChildren(locationMap.get(line.getId()));
+            line.setLocations(locationMap.get(line.getId()));
         });
 
         return lineList;

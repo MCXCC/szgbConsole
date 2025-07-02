@@ -12,5 +12,6 @@ public class SysLineLocation extends BeanEntity<SysLineLocation> {
     @Serial
     private static final long serialVersionUID = 1L;
     private SysLine line;
+    private int type;
     private String name;
 }

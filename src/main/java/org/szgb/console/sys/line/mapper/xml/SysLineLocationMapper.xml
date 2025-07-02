@@ -3,6 +3,7 @@
 <mapper namespace="org.szgb.console.sys.line.mapper.SysLineLocationMapper">
     <resultMap id="SysLineLocation" type="org.szgb.console.sys.line.entity.SysLineLocation">
         <id property="id" column="id"/>
+        <result property="type" column="type"/>
         <result property="name" column="name"/>
         <result property="createdAt" column="created_at" javaType="java.util.Date"/>
         <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
@@ -18,6 +19,7 @@
         ,
         a.line_id AS "line.id",
         a.name,
+        a.type,
         a.created_at,
         a.updated_at,
         a.is_deleted,
