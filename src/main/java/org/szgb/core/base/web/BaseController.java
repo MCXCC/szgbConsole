@@ -52,12 +52,11 @@ public abstract class BaseController<S extends BaseService<M, T>, M extends Base
      * @return 包含查询结果和分页信息的AjaxJson对象
      */
     @PostMapping("/list")
-    public AjaxJson getList(@RequestBody T entity, HttpServletRequest request, HttpServletResponse response) {
+    public AjaxJson getList(@RequestBody(required = false) T entity, HttpServletRequest request, HttpServletResponse response) {
         // 创建一个Page对象，用于分页显示
         Page<T> page = new Page<>();
-
         // 如果实体对象的ID不为空，则直接调用get方法获取单个实体对象
-        if (entity.getId() != null) {
+        if (entity!=null && entity.getId() != null) {
             return this.get(entity, request, response);
         }
 

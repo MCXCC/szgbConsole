@@ -29,7 +29,7 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
 
     @Transactional(readOnly = true)
     public List<T> findList(T entity) {
-        if (entity.getPage() != null) {
+        if (entity!=null && entity.getPage() != null) {
             Page<T> page = entity.getPage();
             page.setFirst((page.getPageNo() - 1) * page.getPageSize());
             entity.setPage(page);
