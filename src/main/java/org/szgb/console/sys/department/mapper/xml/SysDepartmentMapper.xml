@@ -3,12 +3,12 @@
 <mapper namespace="org.szgb.console.sys.department.mapper.SysDepartmentMapper">
     <resultMap id="SysDepartment" type="org.szgb.console.sys.department.entity.SysDepartment" autoMapping="true">
         <id property="id" column="id"/>
-        <collection property="parent" column="{id=parent_id}" ofType="SysDepartment"
-                    select="get"/>
+        <result property="parent.id" column="parent_id"/>
     </resultMap>
 
     <resultMap id="SysDepartmentTree" type="org.szgb.console.sys.department.entity.SysDepartment" autoMapping="true">
         <id property="id" column="id"/>
+        <result property="parent.id" column="parent_id"/>
         <collection property="children" column="{parent.id=id}" ofType="SysDepartment"
                     select="findTree"/>
     </resultMap>
