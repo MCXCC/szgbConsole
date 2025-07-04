@@ -13,9 +13,11 @@ import java.util.Date;
 @Data
 public class BeanEntity<T> implements Serializable {
     private Integer id;
+    @JsonIgnore
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date createdAt;
+    @JsonIgnore
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private Date updatedAt;
@@ -23,11 +25,11 @@ public class BeanEntity<T> implements Serializable {
     private Boolean isDeleted;
 
     private Integer version;
-
-    private SysUser createdBy;
-
-    private SysUser updatedBy;
     @JsonIgnore
+    private SysUser createdBy;
+    @JsonIgnore
+    private SysUser updatedBy;
+
     private Integer sortOrder;
     @JsonIgnore
     private Page<T> page;

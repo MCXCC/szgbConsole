@@ -3,14 +3,9 @@
 <mapper namespace="org.szgb.console.sys.dict.mapper.SysDictMapper">
     <resultMap id="SysDict" type="org.szgb.console.sys.dict.entity.SysDict" autoMapping="true">
         <id property="id" column="id"/>
-        <result property="createdAt" column="created_at" javaType="java.util.Date"/>
-        <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
         <collection property="children" column="{dict.id=id}" ofType="org.szgb.console.sys.dict.entity.SysDictChildren"
                     select="org.szgb.console.sys.dict.mapper.SysDictChildrenMapper.findList"/>
     </resultMap>
-
-    <sql id="dictJoins">
-    </sql>
 
     <sql id="dictWhere">
         is_deleted = false
@@ -21,14 +16,14 @@
 
     <select id="get" resultMap="SysDict">
         SELECT *
-        FROM sys_dict a
+        FROM sys_dict
         where is_deleted = false
           and id = #{id}
     </select>
 
     <select id="findList" resultMap="SysDict">
         SELECT *
-        FROM sys_dict a
+        FROM sys_dict
         <where>
             <include refid="dictWhere"/>
         </where>
@@ -45,7 +40,7 @@
 
     <select id="getCount" resultType="int">
         SELECT COUNT(*)
-        FROM sys_dict a
+        FROM sys_dict
         <where>
             <include refid="dictWhere"/>
         </where>
