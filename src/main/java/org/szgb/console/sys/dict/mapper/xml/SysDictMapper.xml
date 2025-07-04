@@ -5,7 +5,8 @@
         <id property="id" column="id"/>
         <result property="createdAt" column="created_at" javaType="java.util.Date"/>
         <result property="updatedAt" column="updated_at" javaType="java.util.Date"/>
-        <collection property="children" column="id" ofType="org.szgb.console.sys.dict.entity.SysDictChildren" select="selectChildren"/>
+        <collection property="children" column="{dict.id=id}" ofType="org.szgb.console.sys.dict.entity.SysDictChildren"
+                    select="org.szgb.console.sys.dict.mapper.SysDictChildrenMapper.findList"/>
     </resultMap>
 
     <sql id="dictJoins">
@@ -48,13 +49,6 @@
         <where>
             <include refid="dictWhere"/>
         </where>
-    </select>
-
-    <select id="selectChildren" resultType="org.szgb.console.sys.dict.entity.SysDictChildren">
-        SELECT *
-        FROM sys_dict_children
-        WHERE
-        dict_id = #{id}
     </select>
 
     <insert id="insert" parameterType="org.szgb.console.sys.dict.entity.SysDict" useGeneratedKeys="true"
