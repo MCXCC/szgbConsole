@@ -3,7 +3,7 @@
 <mapper namespace="org.szgb.console.sys.dict.mapper.SysDictMapper">
     <resultMap id="SysDict" type="org.szgb.console.sys.dict.entity.SysDict" autoMapping="true">
         <id property="id" column="id"/>
-        <collection property="children" column="{dict.id=id}" ofType="org.szgb.console.sys.dict.entity.SysDictChildren"
+        <collection property="children" column="{dict.id=id}" ofType="SysDictChildren"
                     select="org.szgb.console.sys.dict.mapper.SysDictChildrenMapper.findList"/>
     </resultMap>
 

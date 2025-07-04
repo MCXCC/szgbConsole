@@ -44,4 +44,8 @@ public class SysDepartmentService extends BaseService<SysDepartmentMapper, SysDe
             mapper.delete(i);
         }
     }
+
+    public SysDepartment getDepartmentTree() {
+        return mapper.getDepartmentTree();
+    }
 }

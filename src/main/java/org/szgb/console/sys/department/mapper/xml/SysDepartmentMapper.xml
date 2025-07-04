@@ -3,10 +3,21 @@
 <mapper namespace="org.szgb.console.sys.department.mapper.SysDepartmentMapper">
     <resultMap id="SysDepartment" type="org.szgb.console.sys.department.entity.SysDepartment" autoMapping="true">
         <id property="id" column="id"/>
+        <collection property="parent" column="{id=parent_id}" ofType="SysDepartment"
+                    select="get"/>
+    </resultMap>
+
+    <resultMap id="SysDepartmentTree" type="org.szgb.console.sys.department.entity.SysDepartment" autoMapping="true">
+        <id property="id" column="id"/>
+        <collection property="children" column="{parent.id=id}" ofType="SysDepartment"
+                    select="findTree"/>
     </resultMap>
 
     <sql id="departmentWhere">
         is_deleted = false
+        <if test="parent != null and parent.id != null">
+            AND parent_id = #{parent.id}
+        </if>
         <if test="name != null and name != ''">
             AND name Like CONCAT('%', #{name}, '%')
         </if>
@@ -19,7 +30,30 @@
           and id = #{id}
     </select>
 
+    <select id="getDepartmentTree" resultMap="SysDepartmentTree">
+        SELECT *
+        FROM sys_department
+        WHERE parent_id IS NULL
+        LiMIT 1
+    </select>
+
     <select id="findList" resultMap="SysDepartment">
+        SELECT *
+        FROM sys_department
+        <where>
+            <include refid="departmentWhere"/>
+        </where>
+
+        <if test="page != null and page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
+
+        <if test="page != null and page.first >= 0 and page.pageSize > 0">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
+    </select>
+
+    <select id="findTree" resultMap="SysDepartmentTree">
         SELECT *
         FROM sys_department
         <where>
