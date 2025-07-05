@@ -6,9 +6,13 @@
         <result property="parent.id" column="parent_id"/>
     </resultMap>
 
+    <resultMap id="SysDepartmentParent" type="org.szgb.console.sys.department.entity.SysDepartment" autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="parent" column="{id=parent_id}" javaType="SysDepartment" select="getDefeat"/>
+    </resultMap>
+
     <resultMap id="SysDepartmentTree" type="org.szgb.console.sys.department.entity.SysDepartment" autoMapping="true">
         <id property="id" column="id"/>
-        <result property="parent.id" column="parent_id"/>
         <collection property="children" column="{parent.id=id}" ofType="SysDepartment"
                     select="findTree"/>
     </resultMap>
@@ -23,7 +27,14 @@
         </if>
     </sql>
 
-    <select id="get" resultMap="SysDepartment">
+    <select id="get" resultMap="SysDepartmentParent">
+        SELECT *
+        FROM sys_department
+        where is_deleted = false
+          and id = #{id}
+    </select>
+
+    <select id="getDefeat" resultMap="SysDepartment">
         SELECT *
         FROM sys_department
         where is_deleted = false
