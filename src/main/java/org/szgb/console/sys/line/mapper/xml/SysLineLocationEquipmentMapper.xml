@@ -10,6 +10,13 @@
                      select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.get"/>
     </resultMap>
 
+    <resultMap id="SysLineLocationEquipmentForTree" type="org.szgb.console.sys.line.entity.SysLineLocationEquipment"
+               autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="equipment" javaType="SysEquipment" column="{id=equipment_id}"
+                     select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.get"/>
+    </resultMap>
+
     <sql id="lineLocationEquipmentWhere">
         is_deleted = false
         <if test="name != null and name != ''">
@@ -25,6 +32,22 @@
     </select>
 
     <select id="findList" resultMap="SysLineLocationEquipment">
+        SELECT *
+        FROM sys_line_location_equipment
+        <where>
+            <include refid="lineLocationEquipmentWhere"/>
+        </where>
+
+        <if test="page != null and page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
+
+        <if test="page != null and page.first >= 0 and page.pageSize > 0">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
+    </select>
+
+    <select id="findListForTree" resultMap="SysLineLocationEquipmentForTree">
         SELECT *
         FROM sys_line_location_equipment
         <where>

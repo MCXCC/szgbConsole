@@ -60,4 +60,9 @@ public class SysLineService extends BaseService<SysLineMapper, SysLine> {
 
         return lineList;
     }
+
+    @Transactional(readOnly = true)
+    public List<SysLine> findListForEquipment(SysLine sysLine) {
+        return mapper.findListForEquipment(sysLine);
+    }
 }

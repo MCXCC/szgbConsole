@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 import org.szgb.core.base.entity.BeanEntity;
 
 import java.io.Serial;
+import java.util.ArrayList;
 
 @EqualsAndHashCode(callSuper = true)
 @Data
@@ -14,4 +15,5 @@ public class SysLineLocation extends BeanEntity<SysLineLocation> {
     private SysLine line;
     private int type;
     private String name;
+    private ArrayList<SysLineLocationEquipment> equipmentList;
 }
