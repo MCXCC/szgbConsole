@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.szgb.console.sys.line.mapper.SysLineLocationEquipmentMapper">
+    <resultMap id="SysLineLocationEquipment" type="org.szgb.console.sys.line.entity.SysLineLocationEquipment"
+               autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="lineLocation" javaType="SysLineLocation" column="{id=location_id}"
+                     select="org.szgb.console.sys.line.mapper.SysLineMapper.get"/>
+        <association property="equipment" javaType="SysEquipment" column="{id=equipment_id}"
+                     select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.get"/>
+    </resultMap>
+
+    <sql id="lineLocationEquipmentWhere">
+        is_deleted = false
+        <if test="name != null and name != ''">
+            AND name Like CONCAT('%', #{name}, '%')
+        </if>
+    </sql>
+
+    <select id="get" resultMap="SysLineLocationEquipment">
+        SELECT *
+        FROM sys_line_location_equipment
+        where is_deleted = false
+          and id = #{id}
+    </select>
+
+    <select id="findList" resultMap="SysLineLocationEquipment">
+        SELECT *
+        FROM sys_line_location_equipment
+        <where>
+            <include refid="lineLocationEquipmentWhere"/>
+        </where>
+
+        <if test="page != null and page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
+
+        <if test="page != null and page.first >= 0 and page.pageSize > 0">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM sys_line_location_equipment
+        WHERE
+        <include refid="lineLocationEquipmentWhere"/>
+    </select>
+
+    <insert id="insert" parameterType="org.szgb.console.sys.line.entity.SysLineLocationEquipment"
+            useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO sys_line_location_equipment
+        (location_id,
+         equipment_id,
+         name,
+         created_by,
+         updated_by)
+        VALUES (#{lineLocation.id},
+                #{equipment.id},
+                #{name},
+                #{createdBy.id},
+                #{updatedBy.id})
+    </insert>
+
+    <update id="update" parameterType="org.szgb.console.sys.line.entity.SysLineLocationEquipment">
+        UPDATE sys_line_location_equipment
+        <set>
+            <if test="lineLocation != null and lineLocation.id != null">
+                location_id= #{lineLocation.id},
+            </if>
+            <if test="equipment != null and equipment.id != null">
+                equipment_id= #{equipment.id},
+            </if>
+            <if test="name != null and name != ''">
+                name=#{name},
+            </if>
+            <if test="updatedBy != null and updatedBy.id != null">
+                updated_by=#{updatedBy.id},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted=#{isDeleted},
+            </if>
+            <if test="version != null">
+                version=#{version}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE sys_line_location_equipment
+        SET is_deleted= TRUE
+        where id = #{id}
+    </update>
+</mapper>
