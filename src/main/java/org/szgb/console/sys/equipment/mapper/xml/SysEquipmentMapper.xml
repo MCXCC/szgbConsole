@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper">
+    <resultMap id="SysEquipment" type="org.szgb.console.sys.equipment.entity.SysEquipment" autoMapping="true">
+        <id property="id" column="id"/>
+        <result property="line.id" column="line_id"/>
+        <collection property="line" column="{line.id=id}" ofType="SysLine"
+                    select="org.szgb.console.sys.line.mapper.SysLineMapper.get"/>
+    </resultMap>
+
+    <sql id="equipmentWhere">
+        is_deleted = false
+        <if test="line != null and line.id != null">
+            AND line_id = #{line.id}
+        </if>
+        <if test="type != null">
+            AND type = #{type}
+        </if>
+        <if test="manufacturer != null and manufacturer != ''">
+            AND manufacturer Like CONCAT('%',#{manufacturer},'%')
+        </if>
+        <if test="name != null and name != ''">
+            AND name Like CONCAT('%',#{name},'%')
+        </if>
+    </sql>
+
+    <select id="get" resultMap="SysEquipment">
+        SELECT *
+        FROM sys_equipment
+        where is_deleted = false
+          and id = #{id}
+    </select>
+
+    <select id="findList" resultMap="SysEquipment">
+        SELECT
+        *
+        FROM sys_equipment
+        <where>
+            <include refid="equipmentWhere"/>
+        </where>
+
+        <if test="page != null and page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
+
+        <if test="page != null and page.first >= 0 and page.pageSize > 0">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM sys_equipment
+        <where>
+            <include refid="equipmentWhere"/>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="org.szgb.console.sys.equipment.entity.SysEquipment" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO sys_equipment
+        (line_id,
+         type,
+         manufacturer,
+         name,
+         created_by,
+         updated_by)
+        VALUES (#{line.id},
+                #{type},
+                #{manufacturer},
+                #{name},
+                #{createdBy.id},
+                #{updatedBy.id})
+    </insert>
+
+    <update id="update" parameterType="org.szgb.console.sys.equipment.entity.SysEquipment">
+        UPDATE sys_equipment
+        <set>
+            <if test="line != null and line.id != null">
+                line_id= #{line.id},
+            </if>
+            <if test="type != null">
+                type= #{type},
+            </if>
+            <if test="manufacturer != null and manufacturer != ''">
+                manufacturer= #{manufacturer},
+            </if>
+            <if test="name != null and name != ''">
+                name=#{name},
+            </if>
+            <if test="updatedBy != null and updatedBy.id != null">
+                updated_by=#{updatedBy.id},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted=#{isDeleted},
+            </if>
+            <if test="version != null">
+                version=#{version}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE sys_equipment
+        SET is_deleted= TRUE
+        where id = #{id}
+    </update>
+</mapper>
