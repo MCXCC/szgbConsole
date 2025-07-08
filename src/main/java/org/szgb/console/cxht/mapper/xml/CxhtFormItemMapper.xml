@@ -4,6 +4,10 @@
     <resultMap id="CxhtFormItem" type="org.szgb.console.cxht.entity.CxhtFormItem" autoMapping="true">
         <id property="id" column="id"/>
         <result property="cxhtForm.id" column="form_id"/>
+        <result property="startPart" column="start_part"/>
+        <result property="startNumber" column="start_number"/>
+        <result property="endPart" column="end_part"/>
+        <result property="endNumber" column="end_number"/>
     </resultMap>
 
     <sql id="CxhtFormItemWhere">

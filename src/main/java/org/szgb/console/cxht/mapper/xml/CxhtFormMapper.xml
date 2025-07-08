@@ -5,6 +5,9 @@
         <id property="id" column="id"/>
         <association property="equipment" javaType="SysEquipment" column="{id=equipment_id}"
                      select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.get"/>
+        <collection property="cxhtFormItemList" ofType="org.szgb.console.cxht.entity.CxhtFormItem"
+                    column="{form_id=id}"
+                    select="org.szgb.console.cxht.mapper.CxhtFormItemMapper.findList"/>
     </resultMap>
 
     <sql id="CxhtFormWhere">
