@@ -82,7 +82,7 @@ public class Schedule extends BeanEntity<Schedule> {
     public Schedule() {
     }
 
-    public Schedule(int id) {
+    public Schedule(String id) {
         this.setId(id);
     }
 

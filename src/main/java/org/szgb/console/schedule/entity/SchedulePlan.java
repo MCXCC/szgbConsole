@@ -77,7 +77,7 @@ public class SchedulePlan extends BeanEntity<SchedulePlan> {
     public SchedulePlan() {
     }
 
-    public SchedulePlan(int id) {
+    public SchedulePlan(String id) {
         this.setId(id);
     }
 }

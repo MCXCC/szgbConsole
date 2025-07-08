@@ -36,12 +36,11 @@ public class SysDepartmentService extends BaseService<SysDepartmentMapper, SysDe
     public void delete(String ids) {
         String[] id = ids.split(",");
         for (String s : id) {
-            int i = Integer.parseInt(s);
-            List<SysDepartment> list = mapper.findChildren(i);
+            List<SysDepartment> list = mapper.findChildren(s);
             if (!list.isEmpty()) {
                 this.delete(list);
             }
-            mapper.delete(i);
+            mapper.delete(s);
         }
     }
     

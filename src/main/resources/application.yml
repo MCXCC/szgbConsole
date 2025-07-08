@@ -10,3 +10,5 @@ spring:
 mybatis:
   mapper-locations: classpath:org/szgb/**/mapper/xml/*.xml
   type-aliases-package: org.szgb.console
+
+debug: false

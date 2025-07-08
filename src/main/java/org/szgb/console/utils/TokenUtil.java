@@ -15,7 +15,7 @@ public class TokenUtil {
      * @param uid id
      * @return token
      */
-    public static String getToken(Integer uid) {
+    public static String getToken(String uid) {
 
         return JWT.create().setPayload("uid", uid).setPayload("expire_time", System.currentTimeMillis() + expireTime).setKey(key).sign();
     }
@@ -43,12 +43,12 @@ public class TokenUtil {
      * @param token token
      * @return uid
      */
-    public static Integer getUid(String token) {
-        return Integer.parseInt(JWT.of(token).getPayload("uid").toString());
+    public static String getUid(String token) {
+        return JWT.of(token).getPayload("uid").toString();
     }
 
-    public static Integer getUid(HttpServletRequest request) {
-        return Integer.parseInt(request.getAttribute("uid").toString());
+    public static String getUid(HttpServletRequest request) {
+        return request.getAttribute("uid").toString();
     }
 
 

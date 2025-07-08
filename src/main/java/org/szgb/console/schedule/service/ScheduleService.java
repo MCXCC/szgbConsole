@@ -51,11 +51,10 @@ public class ScheduleService extends BaseService<ScheduleMapper, Schedule> {
     public void delete(String ids) {
         String[] id = ids.split(",");
         for (String s : id) {
-            int i = Integer.parseInt(s);
             SchedulePlan schedulePlan = new SchedulePlan();
-            schedulePlan.setSchedule(new Schedule(i));
+            schedulePlan.setSchedule(new Schedule(s));
             schedulePlanService.delete(schedulePlanService.findList(schedulePlan));
-            mapper.delete(i);
+            mapper.delete(s);
         }
     }
 }

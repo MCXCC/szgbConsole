@@ -16,7 +16,7 @@ public class SysDepartment extends BeanEntity<SysDepartment> {
     public SysDepartment() {
     }
 
-    public SysDepartment(int id) {
+    public SysDepartment(String id) {
         this.setId(id);
     }
 }

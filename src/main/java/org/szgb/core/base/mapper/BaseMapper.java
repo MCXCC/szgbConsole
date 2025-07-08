@@ -3,7 +3,7 @@ package org.szgb.core.base.mapper;
 import java.util.List;
 
 public interface BaseMapper<T> {
-    T get(int id);
+    T get(String id);
 
     List<T> findList(T entity);
 
@@ -13,7 +13,7 @@ public interface BaseMapper<T> {
 
     void update(T entity);
 
-    void delete(int id);
+    void delete(String id);
 
     void delete(T entity);
 }

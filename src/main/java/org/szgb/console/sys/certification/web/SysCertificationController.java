@@ -34,9 +34,8 @@ public class SysCertificationController extends BaseController<SysCertificationS
     @DeleteMapping("/delete")
     public AjaxJson deleteByIds(String ids, HttpServletRequest request, HttpServletResponse response) {
         for (String s : ids.split(",")) {
-            int i = Integer.parseInt(s);
             SysUserCertification sysUserCertification = new SysUserCertification();
-            sysUserCertification.setCertification(new SysCertification(i));
+            sysUserCertification.setCertification(new SysCertification(s));
             List<SysUserCertification> list = sysUserCertificationService.findList(sysUserCertification);
             if (!(list == null || list.isEmpty())) {
                 return AjaxJson.error("存在拥有该证件的用户", HttpStatus.HTTP_BAD_REQUEST, request, response);

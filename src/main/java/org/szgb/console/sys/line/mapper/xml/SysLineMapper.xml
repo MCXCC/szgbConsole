@@ -4,15 +4,15 @@
     <resultMap id="SysLine" type="org.szgb.console.sys.line.entity.SysLine" autoMapping="true">
         <id property="id" column="id"/>
         <collection property="locations" ofType="org.szgb.console.sys.line.entity.SysLineLocation"
-                    column="{id=location.id}"
+                    column="{line.id=id}"
                     select="org.szgb.console.sys.line.mapper.SysLineLocationMapper.findList"/>
     </resultMap>
 
     <resultMap id="SysLineForEquipment" type="org.szgb.console.sys.line.entity.SysLine" autoMapping="true">
         <id property="id" column="id"/>
         <collection property="locations" ofType="org.szgb.console.sys.line.entity.SysLineLocation"
-                    column="{id=location.id}"
-                    select="org.szgb.console.sys.line.mapper.SysLineLocationMapper.getForEquipment"/>
+                    column="{line.id=id}"
+                    select="org.szgb.console.sys.line.mapper.SysLineLocationMapper.findListForEquipment"/>
     </resultMap>
 
     <sql id="lineWhere">

@@ -18,7 +18,7 @@ public class SysDict extends BeanEntity<SysDict> {
     public SysDict() {
     }
 
-    public SysDict(int id){
+    public SysDict(String id){
         this.setId(id);
     }
 }

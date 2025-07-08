@@ -33,7 +33,7 @@ public class ScheduleController extends BaseController<ScheduleService, Schedule
     public AjaxJson export(@RequestBody Schedule schedule, HttpServletRequest request, HttpServletResponse response) throws IOException {
         // 模拟查询数据
         Schedule schedule1 = new Schedule();
-        schedule1.setId(1);
+        schedule1.setId("1");
         schedule1 = service.get(schedule1);
 
         ExportExcel excel = new ExportExcel();

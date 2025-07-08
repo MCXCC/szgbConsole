@@ -17,7 +17,7 @@ public class SysRole extends BeanEntity<SysRole> {
     public SysRole() {
     }
 
-    public SysRole(int id) {
+    public SysRole(String id) {
         this.setId(id);
     }
 }

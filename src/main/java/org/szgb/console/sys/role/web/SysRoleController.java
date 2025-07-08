@@ -32,9 +32,8 @@ public class SysRoleController extends BaseController<SysRoleService, SysRoleMap
     @Override
     public AjaxJson deleteByIds(String ids, HttpServletRequest request, HttpServletResponse response) {
         for (String s : ids.split(",")) {
-            int i = Integer.parseInt(s);
             SysUserRole sysUserRole = new SysUserRole();
-            sysUserRole.setRole(new SysRole(i));
+            sysUserRole.setRole(new SysRole(s));
             List<SysUserRole> list = sysUserRoleService.findList(sysUserRole);
             if (!(list == null || list.isEmpty())) {
                 return AjaxJson.error("存在该角色用户", HttpStatus.HTTP_BAD_REQUEST, request, response);

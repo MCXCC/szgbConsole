@@ -25,11 +25,10 @@ public class SysDictService extends BaseService<SysDictMapper, SysDict> {
     public void delete(String ids) {
         String[] id = ids.split(",");
         for (String s : id) {
-            int i = Integer.parseInt(s);
             SysDictChildren sysDictChildren = new SysDictChildren();
-            sysDictChildren.setDict(new SysDict(i));
+            sysDictChildren.setDict(new SysDict(s));
             sysDictChildrenService.delete(sysDictChildrenService.findList(sysDictChildren));
-            mapper.delete(i);
+            mapper.delete(s);
         }
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 @Mapper
 @Repository
 public interface SysDepartmentMapper extends BaseMapper<SysDepartment> {
-    List<SysDepartment> findChildren(int parentId);
+    List<SysDepartment> findChildren(String parentId);
 
     SysDepartment getDepartmentTree();
 }

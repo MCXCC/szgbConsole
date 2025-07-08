@@ -18,7 +18,7 @@ public class SysCertification extends BeanEntity<SysCertification> {
     public SysCertification() {
     }
 
-    public SysCertification(int id) {
+    public SysCertification(String id) {
         this.setId(id);
     }
 }

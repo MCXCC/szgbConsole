@@ -12,7 +12,7 @@ import java.util.Date;
 
 @Data
 public class BeanEntity<T> implements Serializable {
-    private Integer id;
+    private String id;
     @JsonIgnore
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

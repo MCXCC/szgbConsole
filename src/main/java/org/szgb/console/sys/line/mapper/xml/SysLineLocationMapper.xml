@@ -9,14 +9,17 @@
                autoMapping="true">
         <id property="id" column="id"/>
         <collection property="equipmentList" ofType="org.szgb.console.sys.line.entity.SysLineLocationEquipment"
-                    column="{id=equipment.id}"
-                    select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.findListForTree"/>
+                    column="{equipment.id=id}"
+                    select="org.szgb.console.sys.line.mapper.SysLineLocationEquipmentMapper.findListForTree"/>
     </resultMap>
 
     <sql id="lineLocationWhere">
         is_deleted = false
         <if test="name != null and name != ''">
             AND name Like CONCAT('%', #{name}, '%')
+        </if>
+        <if test="line != null and line.id != null">
+            AND line_id = #{line.id}
         </if>
     </sql>
 
@@ -27,7 +30,7 @@
           and id = #{id}
     </select>
 
-    <select id="getForEquipment" resultMap="SysLineLocation">
+    <select id="getForEquipment" resultMap="SysLineLocationForEquipment">
         SELECT *
         FROM sys_line_location
         where is_deleted = false
@@ -35,6 +38,22 @@
     </select>
 
     <select id="findList" resultMap="SysLineLocation">
+        SELECT *
+        FROM sys_line_location
+        <where>
+            <include refid="lineLocationWhere"/>
+        </where>
+
+        <if test="page != null and page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
+
+        <if test="page != null and page.first >= 0 and page.pageSize > 0">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
+    </select>
+
+    <select id="findListForEquipment" resultMap="SysLineLocationForEquipment">
         SELECT *
         FROM sys_line_location
         <where>

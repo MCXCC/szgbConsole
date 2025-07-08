@@ -2,17 +2,17 @@ package org.szgb.console.config;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.Data;
 import lombok.NonNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
-import org.szgb.console.utils.TokenUtil;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Objects;
+import org.szgb.console.utils.TokenUtil;
 
 /**
  * 登录检查
@@ -23,9 +23,18 @@ import java.util.Objects;
  */
 @Slf4j
 @Component
+@Data
 public class LoginInterceptor implements HandlerInterceptor {
-    @Autowired
+
     private Environment env;
+    @Value("${debug}")
+    private boolean isDebug;
+
+    @Autowired
+    public LoginInterceptor(Environment env) {
+        this.env = env;
+    }
+
     /**
      * 目标方法执行之前
      * 登录检查写在这里，如果没有登录，就不执行目标方法
@@ -38,6 +47,8 @@ public class LoginInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull Object handler) throws Exception {
+        // 如果是debug模式，则直接放行
+        if (isDebug) return true;
         // 如果是OPTIONS请求，直接放行
         if (HttpMethod.OPTIONS.toString().equals(request.getMethod())) {
             return true;
@@ -56,7 +67,7 @@ public class LoginInterceptor implements HandlerInterceptor {
             // 验证token的有效性
             if (TokenUtil.verifyToken(token)) {
                 // 从token中提取uid
-                Integer uid = TokenUtil.getUid(token);
+                String uid = TokenUtil.getUid(token);
                 // 将uid存储在request中，以便后续处理使用
                 request.setAttribute("uid", uid);
                 // 已登录，放行

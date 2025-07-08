@@ -23,7 +23,7 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
     }
 
     @Transactional(readOnly = true)
-    protected T get(int id) {
+    protected T get(String id) {
         return mapper.get(id);
     }
 
@@ -90,14 +90,8 @@ public abstract class BaseService<M extends BaseMapper<T>, T extends BeanEntity<
         String[] id = ids.split(",");
         // 遍历每个ID，逐个执行删除操作
         for (String s : id) {
-            // 将字符串ID转换为整数，并调用mapper的删除方法进行删除
-            delete(Integer.parseInt(s));
+            mapper.delete(s);
         }
-    }
-
-    @Transactional(readOnly = false)
-    protected void delete(int id) {
-        mapper.delete(id);
     }
 
     @Transactional(readOnly = false)
