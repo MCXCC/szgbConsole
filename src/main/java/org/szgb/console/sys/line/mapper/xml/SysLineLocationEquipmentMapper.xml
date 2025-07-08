@@ -13,8 +13,6 @@
     <resultMap id="SysLineLocationEquipmentForTree" type="org.szgb.console.sys.line.entity.SysLineLocationEquipment"
                autoMapping="true">
         <id property="id" column="id"/>
-        <association property="equipment" javaType="SysEquipment" column="{id=equipment_id}"
-                     select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.get"/>
     </resultMap>
 
     <sql id="lineLocationEquipmentWhere">
