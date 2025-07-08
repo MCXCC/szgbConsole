@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.szgb.console.cxht.mapper.CxhtLocationFormMapper">
+    <resultMap id="CxhtLocationForm" type="org.szgb.console.cxht.entity.CxhtLocationForm" autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="equipment" javaType="SysEquipment" column="{id=equipment_id}"
+                     select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.get"/>
+        <association property="equipment" javaType="SysEquipment" column="{id=equipment_id}"
+                     select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.get"/>
+        <association property="equipment" javaType="SysEquipment" column="{id=equipment_id}"
+                     select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.get"/>
+    </resultMap>
+
+    <sql id="CxhtLocationFormWhere">
+        is_deleted
+        = false
+        <if test="equipment != null and equipment.id != null">
+            AND equipment_id = #{equipment.id}
+        </if>
+    </sql>
+
+    <select id="get" resultMap="CxhtLocationForm">
+        SELECT *
+        FROM cxht_form
+        where is_deleted = false
+        and id = #{id}
+    </select>
+
+    <select id="findList" resultMap="CxhtLocationForm">
+        SELECT *
+        FROM cxht_form
+        <where>
+            <include refid="CxhtLocationFormWhere"/>
+        </where>
+
+        <if test="page != null and page.orderBy != null and page.orderBy != ''">
+            ORDER BY ${page.orderBy}
+        </if>
+
+        <if test="page != null and page.first >= 0 and page.pageSize > 0">
+            LIMIT #{page.first}, #{page.pageSize}
+        </if>
+    </select>
+
+    <select id="getCount" resultType="int">
+        SELECT COUNT(*)
+        FROM cxht_form
+        <where>
+            <include refid="CxhtLocationFormWhere"/>
+        </where>
+    </select>
+
+    <insert id="insert" parameterType="org.szgb.console.cxht.entity.CxhtLocationForm" useGeneratedKeys="true"
+            keyProperty="id">
+        INSERT INTO cxht_form
+        (equipment_id,
+        edition,
+        created_by,
+        updated_by)
+        VALUES (#{equipment.id},
+        #{edition},
+        #{createdBy.id},
+        #{updatedBy.id})
+    </insert>
+
+    <update id="update" parameterType="org.szgb.console.cxht.entity.CxhtLocationForm">
+        UPDATE cxht_form
+        <set>
+            <if test="equipment != null and equipment.id != null">
+                equipment_id=#{equipment.id},
+            </if>
+            <if test="edition != null">
+                edition=#{edition},
+            </if>
+            <if test="updatedBy != null and updatedBy.id != null">
+                updated_by=#{updatedBy.id},
+            </if>
+            <if test="isDeleted != null">
+                is_deleted=#{isDeleted},
+            </if>
+            <if test="version != null">
+                version=#{version}
+            </if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <update id="delete">
+        UPDATE cxht_form
+        SET is_deleted= TRUE
+        where id = #{id}
+    </update>
+</mapper>

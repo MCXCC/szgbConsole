@@ -3,9 +3,8 @@
 <mapper namespace="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper">
     <resultMap id="SysEquipment" type="org.szgb.console.sys.equipment.entity.SysEquipment" autoMapping="true">
         <id property="id" column="id"/>
-        <result property="line.id" column="line_id"/>
-        <collection property="line" column="{line.id=id}" ofType="SysLine"
-                    select="org.szgb.console.sys.line.mapper.SysLineMapper.get"/>
+        <association property="line" javaType="SysLine" column="{line_id=id}"
+                     select="org.szgb.console.sys.line.mapper.SysLineMapper.getDefault"/>
     </resultMap>
 
     <sql id="equipmentWhere">
