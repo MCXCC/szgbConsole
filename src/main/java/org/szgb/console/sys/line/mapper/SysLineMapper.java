@@ -11,4 +11,5 @@ import java.util.List;
 @Repository
 public interface SysLineMapper extends BaseMapper<SysLine> {
     List<SysLine> findListForEquipment(SysLine sysLine);
+    SysLine getDefault(String id);
 }

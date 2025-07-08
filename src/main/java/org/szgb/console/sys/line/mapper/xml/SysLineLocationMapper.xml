@@ -3,6 +3,9 @@
 <mapper namespace="org.szgb.console.sys.line.mapper.SysLineLocationMapper">
     <resultMap id="SysLineLocation" type="org.szgb.console.sys.line.entity.SysLineLocation" autoMapping="true">
         <id property="id" column="id"/>
+        <association property="line" javaType="SysLine" column="{id=line_id}"
+                     select="org.szgb.console.sys.line.mapper.SysLineMapper.getDefault">
+        </association>
     </resultMap>
 
     <resultMap id="SysLineLocationForEquipment" type="org.szgb.console.sys.line.entity.SysLineLocation"
