@@ -8,4 +8,5 @@ import org.szgb.core.base.mapper.BaseMapper;
 @Mapper
 @Repository
 public interface CxhtFormMapper extends BaseMapper<CxhtForm> {
+    CxhtForm getForItemByEquipment(String equipmentId);
 }

@@ -5,6 +5,11 @@
         <id property="id" column="id"/>
         <association property="equipment" javaType="SysEquipment" column="{id=equipment_id}"
                      select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.get"/>
+    </resultMap>
+    <resultMap id="CxhtFormForItem" type="org.szgb.console.cxht.entity.CxhtForm" autoMapping="true">
+        <id property="id" column="id"/>
+        <association property="equipment" javaType="SysEquipment" column="{id=equipment_id}"
+                     select="org.szgb.console.sys.equipment.mapper.SysEquipmentMapper.get"/>
         <collection property="cxhtFormItemList" ofType="org.szgb.console.cxht.entity.CxhtFormItem"
                     column="{form_id=id}"
                     select="org.szgb.console.cxht.mapper.CxhtFormItemMapper.findList"/>
@@ -23,6 +28,14 @@
         FROM cxht_form
         where is_deleted = false
           and id = #{id}
+    </select>
+
+    <select id="getForItemByEquipment" resultMap="CxhtFormForItem">
+        SELECT *
+        FROM cxht_form
+        where is_deleted = false
+          and equipment_id = #{equipmentId}
+        limit 1
     </select>
 
     <select id="findList" resultMap="CxhtForm">
